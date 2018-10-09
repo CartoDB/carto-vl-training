@@ -24,6 +24,7 @@
             <section>
                 <div id="controls">
                     <div id="content"></div>
+                    <ul id="content-legend"></ul>
                 </div>
             </section>
             <footer class="js-footer"></footer>
@@ -46,6 +47,7 @@
         const source = new carto.source.Dataset('million_walks_central_park');
         const viz = new carto.Viz(`
             width: ramp(clusterSum($velocity)/clusterCount(), [0, 0.5])
+            color: ramp(clusterMode($travel_mode), bold)
             strokeWidth: 0
             resolution: 0.25
         `);
@@ -58,6 +60,24 @@
         function updateRenderedFeatured() {
             document.querySelector('#content').innerText = layer.getNumFeatures().toLocaleString();
         }
+
+        layer.on('loaded', () => {
+            const colorLegend = layer.viz.color.getLegendData();
+            let colorLegendList = '';
+             function rgbToHex(color) {
+                return "#" + ((1 << 24) + (color.r << 16) + (color.g << 8) + color.b).toString(16).slice(1);
+            }
+            colorLegend.data.forEach((legend, index) => {
+                const color = legend.value
+                    ? rgbToHex(legend.value)
+                    : 'white'
+                 if (color) {
+                    colorLegendList +=
+                        `<li><span class="point-mark" style="background-color:${color}; border: 1px solid black;"></span><span>${legend.key.replace('CARTO_VL_OTHERS', 'Other causes')}</span></li>\n`;
+                }
+            });
+             document.getElementById('content-legend').innerHTML = colorLegendList;
+        });
     </script>
 </body>
 
