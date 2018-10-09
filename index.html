@@ -47,7 +47,7 @@
 
         const viz = new carto.Viz(`
             color: green
-            width: 20
+            width: 10
         `);
         const layer = new carto.Layer('cities', citiesSource, viz);
 
@@ -71,7 +71,7 @@
         const officeSource = new carto.source.GeoJSON(office);
         const officeViz = new carto.Viz(`
             color: red
-            width: 50
+            width: 20
         `);
 
         const officeLayer = new carto.Layer('office', officeSource, officeViz);
