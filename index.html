@@ -21,8 +21,7 @@
                 <h1>Events</h1>
             </header>
             <section>
-                <p id="desc"></p>
-                <p id="layer-desc"></p>
+                <ul id="features"></ul>
             </section>
         </div>
     </aside>
@@ -43,25 +42,23 @@
         const source = new carto.source.Dataset('populated_places');
         const viz = new carto.Viz(`
             @total_pop: viewportSum($pop_max)
+            @name: $name
+            @pop_max: $pop_max
             color: grey
             width: 6
         `);
         const layer = new carto.Layer('layer', source, viz);
 
-        function desc() {
-            const center = map.getCenter();
-            const longitude = center.lng.toFixed(6);
-            const latitude = center.lat.toFixed(6);
-            const bearing = map.getBearing().toFixed(0);
-            const zoom = map.getZoom().toFixed(2);
-            document.querySelector('#desc').innerHTML = `Center: [${longitude}, ${latitude}]<br/>Zoom: ${zoom}<br/>Bearing: ${bearing}º`;
-        }
+        const interactivity = new carto.Interactivity(layer);
 
-        map.on('load', desc);
-        map.on('move', desc);
-
-        layer.on('updated', function() {
-            document.querySelector('#layer-desc').innerText = `Population for cities in viewport: ${viz.variables.total_pop.value.toLocaleString()}.`;
+        interactivity.on('featureClick', featureEvent => {
+            const features = document.querySelector('#features');
+            features.innerHTML = '';
+            featureEvent.features.forEach((feature) => {
+                const name = feature.variables.name.value;
+                const pop_max = feature.variables.pop_max.value;
+                features.innerHTML += `<li>${name}: ${pop_max.toLocaleString()}</li>`;
+            });
         });
 
         layer.addTo(map);
