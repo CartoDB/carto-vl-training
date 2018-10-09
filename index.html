@@ -31,8 +31,8 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: carto.basemaps.voyager,
-            center: [5.1977, 47.6660],
-            zoom: 4
+            center: [-3.6908, 40.4297],
+            zoom: 11
         });
 
         carto.setDefaultAuth({
@@ -40,54 +40,14 @@
             apiKey: 'default_public'
         });
 
-        const citiesSource = new carto.source.Dataset('populated_places', {
-            username: 'documentation',
-            apiKey: 'default_public'
-        });
-
+        const source = new carto.source.Dataset('madrid_listings');
         const viz = new carto.Viz(`
-            color: green
-            width: 10
+            width: 8
+            color: red
         `);
-        const layer = new carto.Layer('cities', citiesSource, viz);
+        const layer = new carto.Layer('layer', source, viz);
 
         layer.addTo(map);
-
-        const office = {
-            "type": "FeatureCollection",
-            "features": [
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [-3.70379, 40.416775]
-                    },
-                    "properties": {
-                        "address": "Madrid, Spain"
-                    }
-                }
-            ]
-        };
-        const officeSource = new carto.source.GeoJSON(office);
-        const officeViz = new carto.Viz(`
-            color: red
-            width: 25
-        `);
-
-        const officeLayer = new carto.Layer('office', officeSource, officeViz);
-        officeLayer.addTo(map);
-
-        const megacitiesSource = new carto.source.SQL('SELECT * FROM populated_places WHERE megacity = 1');
-
-        const megacitiesViz = new carto.Viz(`
-            color: blue
-            width: 15
-        `);
-
-        const megacitiesLayer = new carto.Layer('megacities', megacitiesSource, megacitiesViz);
-
-        megacitiesLayer.addTo(map);
-
     </script>
 </body>
 
