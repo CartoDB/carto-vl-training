@@ -75,6 +75,20 @@
                 .addTo(map);
         });
 
+        interactivity.on('featureEnter', featureEvent => {
+            featureEvent.features.forEach((feature) => {
+                feature.color.blendTo('rgba(0, 255, 0, 0.8)', 100);
+                feature.width.blendTo(12, 100);
+            });
+        });
+
+        interactivity.on('featureLeave', featureEvent => {
+            featureEvent.features.forEach((feature) => {
+                feature.color.reset();
+                feature.width.reset();
+            });
+        });
+
         layer.addTo(map);
     </script>
 </body>
