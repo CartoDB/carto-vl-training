@@ -11,9 +11,6 @@
     <!-- CARTO VL JS -->
     <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
     <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
-    <!-- Airship -->
-    <link rel="stylesheet" href="https://libs.cartocdn.com/airship-style/v1.0.0-beta.0/airship.css">
-    <script src="https://libs.cartocdn.com/airship-components/v1.0.0-beta.0/airship.js"></script>
 </head>
 
 <body>
@@ -22,9 +19,13 @@
     <aside class="toolbox">
         <div class="box">
             <header>
-                <h1>Price</h1>
+                <h1>Rendered features</h1>
             </header>
-            <as-category-widget/>
+            <section>
+                <div id="controls">
+                    <div id="content"></div>
+                </div>
+            </section>
             <footer class="js-footer"></footer>
         </div>
     </aside>
@@ -33,8 +34,8 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: carto.basemaps.darkmatter,
-            center: [-3.6908, 40.4297],
-            zoom: 11
+            center: [-73.9684, 40.7828],
+            zoom: 1
         });
 
         carto.setDefaultAuth({
@@ -42,33 +43,17 @@
             apiKey: 'default_public'
         });
 
-        const source = new carto.source.Dataset('madrid_listings');
-        const viz = new carto.Viz(`
-            @histogram: viewportHistogram($room_type, 1, 5)
-            width: sqrt(ramp($price, [4, 25^2]))
-            strokeWidth: 0.5
-            color: red
-            filter: $price < 500
-        `);
+        const source = new carto.source.Dataset('million_walks_central_park');
+        const viz = new carto.Viz();
         const layer = new carto.Layer('layer', source, viz);
 
         layer.addTo(map);
+        layer.on('loaded', updateRenderedFeatured);
+        layer.on('updated', updateRenderedFeatured);
 
-        layer.on('loaded', drawHistogram);
-        layer.on('updated', drawHistogram);
-
-        function drawHistogram() {
-            var categoryWidget = document.querySelector('as-category-widget');
-            const histogram = layer.viz.variables.histogram.value;
-            var categoryWidget = document.querySelector('as-category-widget');
-            categoryWidget.categories = histogram.map(entry => {
-                return {
-                    name: entry.x,
-                    value: entry.y
-                }
-            });
+        function updateRenderedFeatured() {
+            document.querySelector('#content').innerText = layer.getNumFeatures().toLocaleString();
         }
-
     </script>
 </body>
 
