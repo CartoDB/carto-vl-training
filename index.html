@@ -46,7 +46,7 @@
 
         const source = new carto.source.Dataset('million_walks_central_park');
         const viz = new carto.Viz(`
-            width: ramp(clusterSum($velocity)/clusterCount(), [0, 0.5])
+            width: scaled(ramp(clusterSum($velocity)/clusterCount(), [0, 0.5]), 13)
             color: ramp(clusterMode($travel_mode), bold)
             strokeWidth: 0
             resolution: 0.25
