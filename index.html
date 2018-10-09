@@ -42,6 +42,7 @@
 
         const source = new carto.source.Dataset('populated_places');
         const viz = new carto.Viz(`
+            @currentFeatures: viewportFeatures()
             color: grey
             width: 6
         `);
@@ -59,8 +60,9 @@
         map.on('load', desc);
         map.on('move', desc);
 
-        layer.on('loaded', function() {
-            document.querySelector('#layer-desc').innerText = `Layer loaded!`;
+        layer.on('updated', function() {
+            const numberOfFeatures = viz.variables.currentFeatures.value.length;
+            document.querySelector('#layer-desc').innerText = `Now you can see ${numberOfFeatures} cities`;
         });
 
         layer.addTo(map);
