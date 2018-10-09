@@ -31,8 +31,8 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: carto.basemaps.darkmatter,
-            center: [0, 40],
-            zoom: 1
+            center: [-96, 41],
+            zoom: 3
         });
 
         carto.setDefaultAuth({
@@ -40,11 +40,11 @@
             apiKey: 'default_public'
         });
 
-        const source = new carto.source.Dataset('pop_density_points');
+        const source = new carto.source.Dataset('dot_rail_safety_data');
         const viz = new carto.Viz(`
-            width: 2
-            color: ramp($dn, temps)
-            strokeWidth: 0
+            width: ramp($total_damage, [0, 50])
+            strokeWidth: 0.2
+            color: ramp(top($accident_type, 3), [#3969AC, #F2B701, #E73F74], #A5AA99)
         `);
         const layer = new carto.Layer('layer', source, viz);
 
