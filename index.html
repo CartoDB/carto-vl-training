@@ -59,6 +59,20 @@
                 const pop_max = feature.variables.pop_max.value;
                 features.innerHTML += `<li>${name}: ${pop_max.toLocaleString()}</li>`;
             });
+
+            const feature = featureEvent.features[0];
+            if (!feature) {
+                return;
+            }
+            const coords = featureEvent.coordinates;
+            const html = `
+                <h1>${feature.variables.name.value}</h1>
+                <p>Population: ${feature.variables.pop_max.value.toLocaleString()}</p>
+            `;
+            new mapboxgl.Popup()
+                .setLngLat([coords.lng, coords.lat])
+                .setHTML(html)
+                .addTo(map);
         });
 
         layer.addTo(map);
