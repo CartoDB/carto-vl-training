@@ -35,7 +35,7 @@
             container: 'map',
             style: carto.basemaps.darkmatter,
             center: [-73.9684, 40.7828],
-            zoom: 1
+            zoom: 13
         });
 
         carto.setDefaultAuth({
@@ -44,7 +44,10 @@
         });
 
         const source = new carto.source.Dataset('million_walks_central_park');
-        const viz = new carto.Viz();
+        const viz = new carto.Viz(`
+            width: 0.5
+            strokeWidth: 0
+        `);
         const layer = new carto.Layer('layer', source, viz);
 
         layer.addTo(map);
