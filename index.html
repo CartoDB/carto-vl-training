@@ -20,7 +20,7 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: carto.basemaps.voyager,
-            center: [-15, 36],
+            center: [-5, 35],
             zoom: 2.8
         });
 
@@ -31,7 +31,11 @@
 
         const source = new carto.source.Dataset('bird_journey');
         const viz = new carto.Viz(`
-            filter: animation($date_time, 10, fade(0, 0.5))
+            @animation: animation($date_time, 10, fade(0, 0.5))
+            filter: @animation
+            color: ramp(buckets($bird_name, ["Sanne", "Eric", "Nico"]), bold)
+            width: 2
+            strokeWidth: 0
         `);
         const layer = new carto.Layer('layer', source, viz);
 
