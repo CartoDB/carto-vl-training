@@ -30,9 +30,9 @@
     <script>
         const map = new mapboxgl.Map({
             container: 'map',
-            style: carto.basemaps.voyager,
-            center: [-3.6908, 40.4297],
-            zoom: 11
+            style: carto.basemaps.darkmatter,
+            center: [-3, 54.8],
+            zoom: 4.5
         });
 
         carto.setDefaultAuth({
@@ -40,16 +40,10 @@
             apiKey: 'default_public'
         });
 
-        const source = new carto.source.Dataset('madrid_listings');
+        const source = new carto.source.Dataset('uk_elections');
         const viz = new carto.Viz(`
-            width: 8 + 16
-            // Option A
-            color: rgba(255, 0, 0, 0.25)
-            // Option B
-            // color: opacity(rgb(255, 0, 0) 0.25)
-            // Option C
-            // color: red
-            // filter: 0.25
+            color: ramp(buckets($winner, ["Conservative Party", "Labour Party"]), [blue, red])
+            strokeColor: opacity(white, 0.6)
         `);
         const layer = new carto.Layer('layer', source, viz);
 
