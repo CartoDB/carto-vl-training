@@ -31,8 +31,8 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: carto.basemaps.voyager,
-            center: [-3.6908, 40.4297],
-            zoom: 11
+            center: [5.1977, 47.6660],
+            zoom: 4
         });
 
         carto.setDefaultAuth({
@@ -40,12 +40,16 @@
             apiKey: 'default_public'
         });
 
-        const source = new carto.source.Dataset('madrid_listings');
+        const citiesSource = new carto.source.Dataset('populated_places', {
+            username: 'documentation',
+            apiKey: 'default_public'
+        });
+
         const viz = new carto.Viz(`
             color: green
             width: 20
         `);
-        const layer = new carto.Layer('layer', source, viz);
+        const layer = new carto.Layer('layer', citiesSource, viz);
 
         layer.addTo(map);
     </script>
