@@ -11,6 +11,9 @@
     <!-- CARTO VL JS -->
     <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
     <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
+    <!-- Airship -->
+    <link rel="stylesheet" href="https://libs.cartocdn.com/airship-style/v1.0.0-beta.0/airship.css">
+    <script src="https://libs.cartocdn.com/airship-components/v1.0.0-beta.0/airship.js"></script>
 </head>
 
 <body>
@@ -19,13 +22,9 @@
     <aside class="toolbox">
         <div class="box">
             <header>
-                <h1>Type of accident</h1>
+                <h1>Price</h1>
             </header>
-            <section>
-                <div id="controls">
-                    <ul id="content"></ul>
-                </div>
-            </section>
+            <as-histogram-widget/>
             <footer class="js-footer"></footer>
         </div>
     </aside>
@@ -34,8 +33,8 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: carto.basemaps.darkmatter,
-            center: [-96, 41],
-            zoom: 3
+            center: [-3.6908, 40.4297],
+            zoom: 11
         });
 
         carto.setDefaultAuth({
@@ -43,34 +42,31 @@
             apiKey: 'default_public'
         });
 
-        const source = new carto.source.Dataset('dot_rail_safety_data');
+        const source = new carto.source.Dataset('madrid_listings');
         const viz = new carto.Viz(`
-            width: sqrt(ramp($total_damage, [0, 50^2]))
-            strokeWidth: 0.2
-            color: ramp(top($accident_type, 3), [#3969AC, #F2B701, #E73F74], #A5AA99)
-            symbol: ramp(top($accident_type, 3), [star, triangle, square])
+            @histogram: viewportHistogram($price, 1, 5)
+            width: sqrt(ramp($price, [4, 25^2]))
+            strokeWidth: 0.5
+            color: red
         `);
         const layer = new carto.Layer('layer', source, viz);
 
         layer.addTo(map);
 
-        layer.on('loaded', () => {
-            const colorLegend = layer.viz.color.getLegendData();
-            let colorLegendList = '';
-             function rgbToHex(color) {
-                return "#" + ((1 << 24) + (color.r << 16) + (color.g << 8) + color.b).toString(16).slice(1);
-            }
-            colorLegend.data.forEach((legend, index) => {
-                const color = legend.value
-                    ? rgbToHex(legend.value)
-                    : 'white'
-                 if (color) {
-                    colorLegendList +=
-                        `<li><span class="point-mark" style="background-color:${color}; border: 1px solid black;"></span><span>${legend.key.replace('CARTO_VL_OTHERS', 'Other causes')}</span></li>\n`;
+        layer.on('loaded', drawHistogram);
+
+        function drawHistogram() {
+            var histogramWidget = document.querySelector('as-histogram-widget');
+            const histogram = layer.viz.variables.histogram.value;
+            histogramWidget.data = histogram.map(entry => {
+                return {
+                    start: entry.x[0],
+                    end: entry.x[1],
+                    value: entry.y
                 }
             });
-             document.getElementById('content').innerHTML = colorLegendList;
-        });
+        }
+
     </script>
 </body>
 
