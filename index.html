@@ -71,11 +71,22 @@
         const officeSource = new carto.source.GeoJSON(office);
         const officeViz = new carto.Viz(`
             color: red
-            width: 20
+            width: 25
         `);
 
         const officeLayer = new carto.Layer('office', officeSource, officeViz);
         officeLayer.addTo(map);
+
+        const megacitiesSource = new carto.source.SQL('SELECT * FROM populated_places WHERE megacity = 1');
+
+        const megacitiesViz = new carto.Viz(`
+            color: blue
+            width: 15
+        `);
+
+        const megacitiesLayer = new carto.Layer('megacities', megacitiesSource, megacitiesViz);
+
+        megacitiesLayer.addTo(map);
 
     </script>
 </body>
