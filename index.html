@@ -52,6 +52,31 @@
         const layer = new carto.Layer('cities', citiesSource, viz);
 
         layer.addTo(map);
+
+        const office = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-3.70379, 40.416775]
+                    },
+                    "properties": {
+                        "address": "Madrid, Spain"
+                    }
+                }
+            ]
+        };
+        const officeSource = new carto.source.GeoJSON(office);
+        const officeViz = new carto.Viz(`
+            color: red
+            width: 50
+        `);
+
+        const officeLayer = new carto.Layer('office', officeSource, officeViz);
+        officeLayer.addTo(map);
+
     </script>
 </body>
 
