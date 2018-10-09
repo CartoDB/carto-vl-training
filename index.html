@@ -31,8 +31,8 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: carto.basemaps.darkmatter,
-            center: [0, 40],
-            zoom: 1
+            center: [-3, 54.8],
+            zoom: 4.5
         });
 
         carto.setDefaultAuth({
@@ -40,11 +40,10 @@
             apiKey: 'default_public'
         });
 
-        const source = new carto.source.Dataset('pop_density_points');
+        const source = new carto.source.Dataset('uk_elections');
         const viz = new carto.Viz(`
-            width: 1.5
-            color: ramp(globalQuantiles($dn, 3), [green, yellow, red])
-            strokeWidth: 0
+            color: ramp(buckets($winner, ["Conservative Party", "Labour Party"]), [blue, red], white)
+            strokeColor: opacity(white, 0.6)
         `);
         const layer = new carto.Layer('layer', source, viz);
 
