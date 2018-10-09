@@ -42,8 +42,8 @@
 
         const source = new carto.source.Dataset('pop_density_points');
         const viz = new carto.Viz(`
-            width: 2
-            color: ramp(linear($dn, globalMin($dn), globalMax($dn)), [green, yellow, red])
+            width: 1.5
+            color: ramp(globalQuantiles($dn, 3), [green, yellow, red])
             strokeWidth: 0
         `);
         const layer = new carto.Layer('layer', source, viz);
