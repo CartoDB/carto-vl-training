@@ -15,6 +15,20 @@
 
 <body>
     <div id="map"></div>
+    <aside class="toolbox">
+        <div class="box">
+            <header>
+                <h1>Animation controls</h1>
+            </header>
+            <section>
+                <p>Progress <input disabled="disabled" type="range" id="js-progress-range" min="0" max="1" step="0.01"></p>
+            </section>
+            <section>
+                <button id="js-play-button" class="toolbox-button">Play</button>
+                <button id="js-pause-button" class="toolbox-button">Pause</button>
+            </section>
+        </div>
+    </aside>
 
     <script>
         const map = new mapboxgl.Map({
@@ -38,6 +52,23 @@
             strokeWidth: 0
         `);
         const layer = new carto.Layer('layer', source, viz);
+
+        // Get animation control elements
+        const $progressRange = document.getElementById('js-progress-range');
+        const $playButton = document.getElementById('js-play-button');
+        const $pauseButton = document.getElementById('js-pause-button');
+        // Listen to interaction events
+        $playButton.addEventListener('click', () => {
+            viz.variables.animation.play();
+        });
+        $pauseButton.addEventListener('click', () => {
+            viz.variables.animation.pause();
+        });
+        // Update progress each 100 milliseconds
+        function updateProgress() {
+            $progressRange.value = viz.variables.animation.getProgressPct();
+        }
+        setInterval(updateProgress, 100);
 
         layer.addTo(map);
     </script>
