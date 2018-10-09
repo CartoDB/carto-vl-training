@@ -31,9 +31,18 @@
 
         const source = new carto.source.Dataset('ne_10m_populated_places_simple');
         const viz = new carto.Viz(`
-            color: ramp(globalQuantiles($pop_max, 5), temps)
+            width: scaled(1)
+            color: ramp(globalQuantiles($pop_max, 7), temps)
             strokeWidth: 0
-            filter: zoom() > 3 or $pop_max > 1000000
+
+            // Show largest (greater than percentile 99th) cities on zoom level 0
+            // Show large (grater than percentile 75th) cities on zoom level 3
+            // Show every city on the dataset at zoom level 6
+            filter: ramp(zoomrange(
+                [                  0                    ,                   3                    ,   6 ]),
+                //                 ^                                        ^                        ^
+                [$pop_max>globalPercentile($pop_max, 99), $pop_max>globalPercentile($pop_max, 75), true]
+            )
         `);
         const layer = new carto.Layer('layer', source, viz);
 
