@@ -42,7 +42,7 @@
 
         const source = new carto.source.Dataset('populated_places');
         const viz = new carto.Viz(`
-            @currentFeatures: viewportFeatures()
+            @total_pop: viewportSum($pop_max)
             color: grey
             width: 6
         `);
@@ -61,8 +61,7 @@
         map.on('move', desc);
 
         layer.on('updated', function() {
-            const numberOfFeatures = viz.variables.currentFeatures.value.length;
-            document.querySelector('#layer-desc').innerText = `Now you can see ${numberOfFeatures} cities`;
+            document.querySelector('#layer-desc').innerText = `Population for cities in viewport: ${viz.variables.total_pop.value.toLocaleString()}.`;
         });
 
         layer.addTo(map);
