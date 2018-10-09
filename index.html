@@ -45,9 +45,9 @@
 
         const source = new carto.source.Dataset('bird_journey');
         const viz = new carto.Viz(`
-            @animation: animation($date_time, 10, fade(0, 0.5))
+            @animation: animation(linear($date_time, time('2014-03-30T20:24:25Z'), time('2014-04-24T23:52:14Z')), 10)
             filter: @animation
-            color: ramp(buckets($bird_name, ["Sanne", "Eric", "Nico"]), bold)
+            color: ramp(@animation, Oryel)
             width: 2
             strokeWidth: 0
         `);
