@@ -10,22 +10,25 @@
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
     <!-- CARTO VL JS -->
     <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #map {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
 </head>
 
 <body>
     <div id="map"></div>
+
+    <aside class="toolbox">
+        <div class="box">
+            <header>
+                <h1>Type of accident</h1>
+            </header>
+            <section>
+                <div id="controls">
+                    <ul id="content"></ul>
+                </div>
+            </section>
+            <footer class="js-footer"></footer>
+        </div>
+    </aside>
 
     <script>
         const map = new mapboxgl.Map({
@@ -50,6 +53,24 @@
         const layer = new carto.Layer('layer', source, viz);
 
         layer.addTo(map);
+
+        layer.on('loaded', () => {
+            const colorLegend = layer.viz.color.getLegendData();
+            let colorLegendList = '';
+             function rgbToHex(color) {
+                return "#" + ((1 << 24) + (color.r << 16) + (color.g << 8) + color.b).toString(16).slice(1);
+            }
+            colorLegend.data.forEach((legend, index) => {
+                const color = legend.value
+                    ? rgbToHex(legend.value)
+                    : 'white'
+                 if (color) {
+                    colorLegendList +=
+                        `<li><span class="point-mark" style="background-color:${color}; border: 1px solid black;"></span><span>${legend.key.replace('CARTO_VL_OTHERS', 'Other causes')}</span></li>\n`;
+                }
+            });
+             document.getElementById('content').innerHTML = colorLegendList;
+        });
     </script>
 </body>
 
