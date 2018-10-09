@@ -43,7 +43,13 @@
         const source = new carto.source.Dataset('madrid_listings');
         const viz = new carto.Viz(`
             width: 8 + 16
-            color: rgb(239, 0, 0) + rgb(0, 239, 0)
+            // Option A
+            color: rgba(255, 0, 0, 0.25)
+            // Option B
+            // color: opacity(rgb(255, 0, 0) 0.25)
+            // Option C
+            // color: red
+            // filter: 0.25
         `);
         const layer = new carto.Layer('layer', source, viz);
 
