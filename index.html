@@ -55,6 +55,7 @@
         layer.addTo(map);
 
         layer.on('loaded', drawHistogram);
+        layer.on('updated', drawHistogram);
 
         function drawHistogram() {
             var histogramWidget = document.querySelector('as-histogram-widget');
