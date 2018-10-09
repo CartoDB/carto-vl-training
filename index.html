@@ -31,7 +31,7 @@
 
         const source = new carto.source.Dataset('bird_journey');
         const viz = new carto.Viz(`
-            filter: animation($date_time)
+            filter: animation($date_time, 10, fade(0, 0.5))
         `);
         const layer = new carto.Layer('layer', source, viz);
 
