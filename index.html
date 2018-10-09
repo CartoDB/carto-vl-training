@@ -45,6 +45,7 @@
             width: sqrt(ramp($total_damage, [0, 50^2]))
             strokeWidth: 0.2
             color: ramp(top($accident_type, 3), [#3969AC, #F2B701, #E73F74], #A5AA99)
+            symbol: ramp(top($accident_type, 3), [star, triangle, square])
         `);
         const layer = new carto.Layer('layer', source, viz);
 
