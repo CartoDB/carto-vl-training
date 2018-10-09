@@ -48,6 +48,7 @@
             width: sqrt(ramp($price, [4, 25^2]))
             strokeWidth: 0.5
             color: red
+            filter: $price < 500
         `);
         const layer = new carto.Layer('layer', source, viz);
 
