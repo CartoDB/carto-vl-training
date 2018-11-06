@@ -78,7 +78,7 @@ ___
     
     *Now you should see this:*
    
-    ![screen shot 2018-10-30 at 4 14 34 pm](https://user-images.githubusercontent.com/1779444/47747540-ef9ed300-dc5e-11e8-9b2c-66a0c012519b.png)
+    ![basemap-only](images/training-v2-01-bmapOnly.png)
     
 ### Add Credentials
 *To add other layers on top of the basemap we need access to CARTO datasets. In this example we will use [public](https://carto.com/help/building-maps/privacy-settings-for-protecting-maps-and-data/) data from a CARTO account.*
@@ -97,3 +97,49 @@ ___
     * `username` is the name of the CARTO account that contains our data.
     * The `default_public` key gives a CARTO VL app access to all of an account's public datasets.
     * You can add a code block like this to your app more than once, so you can pull data from more than one CARTO account into the same map.
+
+### Pull in Data and Style it
+
+*Now that we have access to a CARTO account we can use it's data in this map by defining a `source`. CARTO VL provides a few ways to bring data into your map that we will demonstrate in the next section. One of those methods gets an entire dataset by name:*
+
+5. Add this line beneath the `setDefaultAuth` block:
+
+    `const source = new carto.source.Dataset('madrid_listings');`
+
+    * You can add more than once source to a map.
+      * Make sure to give each source `const` a unique name
+
+*This data won't show up on the map until we tell the browser how to render it. We do that by defining style properties inside a [Viz object](https://carto.com/developers/carto-vl/reference/#cartoviz).*
+
+*When the `Viz object` is empty like this, our system will apply default styles:*
+
+6. Add this line beneath the source:
+
+    `const viz = new carto.Viz();`
+
+    * If you are using multiple sources, you need to create a separate Viz object for each one.
+      * Make sure the Viz object `const` are named uniquely.
+
+### Add the Data Layer to Your Map
+
+*Now we can create a new map layer using the data source and style definitions:*
+
+7. Add this beneath the viz definition:
+
+    `const layer = new carto.Layer('layer', source, viz);`
+
+    * There can only be one source and Viz object per layer, but you can create more than one layer. Just define a new carto.Layer `const` for each and make sure they are named uniquely.
+    * The first function parameter defines a layer's name. You can use whatever name you'd like, here we're using `'layer'`
+    * The second parameter is always the name of the source `const` you defined previously, and the third parameter is always the name of the Viz object `const`.
+
+8. Add the layer to the map object:
+
+    `layer.addTo(map);`
+
+    * Notice we're using the mapboxgl.Map object's `const` name, not the containing div element's `"map"` id.
+
+    *When you save these changes in your code editor and refresh your browser, the map should look like this:*
+
+
+
+
