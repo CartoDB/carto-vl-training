@@ -70,10 +70,8 @@ ___
     * `style: carto.basemaps.voyager` defines which basemap to use. You also have two other basemaps to choose from:
       * `carto.basemaps.positron`
       * `carto.basemaps.darkmatter`
-    * `center: [0, 0]` will center your map on these coordinates.
-    * `zoom: 0` displays the map at this default zoom level when it loads.
-    * `scrollZoom: false`: by default you can zoom your map with your trackpad or mouse's scroll wheel. Add this parameter and set it to `false` to disable that. 
-      * We won't need it since we are adding zoom control buttons with `new mapboxgl.NavigationControl`
+    * `center: [-3.6908, 40.4297]` will center your map on these coordinates.
+    * `zoom: 11` displays the map at this default zoom level when it loads.
     
 2. Save this file as `index.html` on your computer.
 3. Open index.html in your web browser.
