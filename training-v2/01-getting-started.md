@@ -7,7 +7,7 @@
 ___
 
 ## Getting Started
-Take the next steps to set up a basic CARTO VL map & view it in your browser.*
+*Take the next steps to set up a basic CARTO VL map & view it in your browser.*
 *For more help check out our Developer Center's Getting Started documentation [here](https://carto.com/developers/carto-vl/guides/getting-started/).*
 
 ### Create a Basic Map
@@ -16,22 +16,22 @@ Take the next steps to set up a basic CARTO VL map & view it in your browser.*
     ```html
     <!DOCTYPE html>
     <html>
+
     <head>
-      <title>CARTO VL Training</title>
+      <title>CARTO VL training</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta charset="UTF-8">
-      <!-- Include CARTO VL JS -->
-      <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.js"></script>
-      <!-- Include Mapbox GL JS -->
-      <script src="https://libs.cartocdn.com/mapbox-gl/v0.48.0-carto1/mapbox-gl.js"></script>
-      <!-- Include Mapbox GL CSS -->
-      <link href="https://libs.cartocdn.com/mapbox-gl/v0.48.0-carto1/mapbox-gl.css" rel="stylesheet" />
-      <!-- Basic CSS styles for map's container -->
-      <style type="text/css">
+      <!-- Mapbox GL -->
+      <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.css" rel="stylesheet" />
+      <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
+      <!-- CARTO VL JS -->
+      <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
+      <style>
         body {
           margin: 0;
           padding: 0;
         }
+
         #map {
           position: absolute;
           width: 100%;
@@ -39,27 +39,20 @@ Take the next steps to set up a basic CARTO VL map & view it in your browser.*
         }
       </style>
     </head>
+
     <body>
       <div id="map"></div>
+
       <script>
-
-      // Define a map object and add it to the container div
-      const map = new mapboxgl.Map({
-        container: 'map',
-        style: carto.basemaps.voyager, 
-        center: [0, 0],
-        zoom: 0,
-        scrollZoom: false,
-      });
-
-      // Add zoom buttons but not compass button
-      const nav = new mapboxgl.NavigationControl({
-        showCompass: false
-      });
-      map.addControl(nav, 'top-left');
-
-    </script>
+        const map = new mapboxgl.Map({
+          container: 'map',
+          style: carto.basemaps.voyager,
+          center: [-3.6908, 40.4297],
+          zoom: 11
+        });
+      </script>
     </body>
+
     </html>
     ```
   
