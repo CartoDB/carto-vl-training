@@ -140,6 +140,31 @@ ___
 
     *When you save these changes in your code editor and refresh your browser, the map should look like this:*
 
+    ![default-style](images/training-v2-01-defaultStyle.png)
 
+9. Let's change the default style by adding our own style rules. 
 
+    CARTO VL offers powerful data-driven styling with expressions, which we will cover later. For now we can make simple marker size and color changes by adding properties to the Viz object:
 
+    ```
+    const viz = new carto.Viz(`
+      color: green
+      width: 20
+    `);
+    ```
+
+    * In CARTO.js or Builder maps styles are defined differently, because they require CartoCSS. For example, to change a point's color you would use:
+
+      `marker-fill: "green";`
+
+      To change a polygon's color with CartoCSS you would use:
+
+      `polygon-fill: "green";`
+
+      Notice that we don't need to use geometry-specific properties in CARTO VL.
+    * CARTO uses two types of Visualization API's to define our Viz properties: String and JavaScript. Learn more about those [here](https://carto.com/developers/carto-vl/guides/style-with-expressions/#the-string-and-javascript-visualization-apis).
+      * The back-ticks we're using inside the Viz function indicate we're using the String Visualization API in this map.
+
+    *Now when you save the latest changes and refresh, the map should look like this:*
+
+    ![basic-style](images/training-v2-01-basicStyle.png)
