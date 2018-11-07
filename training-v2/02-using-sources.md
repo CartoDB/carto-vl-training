@@ -121,13 +121,24 @@
     };
     ``` 
 
+    We've put the GeoJSON into a `const` variable. Now we can use it as a source when we add code like this:
+
+    `const officeSource = new carto.source.GeoJSON(office);`
+
 5. Now add styles for the GeoJSON source and create a layer with them. Add the layer to your map object.
 
     ```
+    const officeViz = new carto.Viz(`
+      color: red
+      width: 50
+    `);
 
+    const officeLayer = new carto.Layer('office', officeSource, officeViz);
+
+    officeLayer.addTo(map);
     ```
 
     *When you save these changes and open your code document in a browser, your map should look like this:*
 
-
+    ![two-sources](images/training-v2-02-srcs.png)
 
