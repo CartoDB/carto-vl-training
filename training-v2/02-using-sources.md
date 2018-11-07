@@ -62,6 +62,7 @@
     </html>
     ```
 
+### Add Data from a Second Account
 2. One powerful feature of CARTO VL is that you can use data from a few different sources in the same map. 
 
     Replace the existing `source` with a dataset from a different CARTO account:
@@ -77,11 +78,13 @@
       * We have already defined default authorization in the `setDefaultAuth` function, but this second parameter authorizes this map to use the `populated_places` dataset from a different CARTO account.
       * The Dataset source actually accepts three parameters, find out more [here](https://carto.com/developers/carto-vl/reference/#cartosourcedataset).
 
-    Make sure to update the layer definition with the new source name:
+3. Make sure to update the layer definition with the new source name:
 
     `const layer = new carto.Layer('layer', citiesSource, viz);`
 
-3. CARTO VL also provides other ways to pull in source data.
+### Add a Different Type of Source
+
+4. CARTO VL also provides other ways to pull in source data.
 
     For example you can use a [SQL source](https://carto.com/developers/carto-vl/reference/#cartosourcesql) like this:
 
@@ -117,6 +120,14 @@
       ]
     };
     ``` 
+
+5. Now add styles for the GeoJSON source and create a layer with them. Add the layer to your map object.
+
+    ```
+
+    ```
+
+    *When you save these changes and open your code document in a browser, your map should look like this:*
 
 
 
