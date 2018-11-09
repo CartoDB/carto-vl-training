@@ -118,20 +118,25 @@ Notice how we don't need to specify buckets below. When we don't specify buckets
     `);
     ```
 
-    ![election-polys](images/training-v2-04-poly-election.png)
+    ![pop-density-2](images/training-v2-04-density-ramp.png)
 
     * The points with lowest population density are colored black, and the points with highest population density are colored yellow.
     * But since this is an unclassed map, most points have values that fall between the lowest number and highest number. They are assigned a color that falls on a gradient between black and yellow. That's why we see gray points, and dark yellow points. 
 
 ### Improve the Style
 
-    ```
-    const viz = new carto.Viz(`
-      width: 2
-      color: ramp($dn, [green, yellow, red])
-      strokeWidth: 0
-    `);
-    ```
+Our points with low population density are hard to see, since they are about the same color as the basemap. We can make them more legible by changing our color ramp's first value. 
+
+We can also make it easier to see the places with mid-range population density by defining a third color in our ramp (you can define as many colors as you'd like).
+
+5. Replace the color property in your `viz` with this:
+
+    `color: ramp($dn, [green, yellow, red])`
+
+    Notice the difference:
+
+    ![pop-density-3](images/training-v2-04-density-ramp-3.png)
+
 
 ### Classify a Numeric Property for Better Perception
 
@@ -225,5 +230,3 @@ Notice how we don't need to specify buckets below. When we don't specify buckets
       symbol: ramp(top($accident_type, 3), [star, triangle, square])
     `);
     ```
-
-
