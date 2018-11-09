@@ -1,5 +1,6 @@
 ## Using data in your visualization with Sources
 
+Sources are the basis for your map. They provide the data that you will vizualize. In this section we'll demonstrate a few different ways to use them. For more information check our [Add Data Sources guide](https://carto.com/developers/carto-vl/guides/add-data-sources/).
 
 1. Let's start with the map we made in the Getting Started section. Open it in your code editor.
 
@@ -62,7 +63,7 @@
     </html>
     ```
 
-### Add Data from a Second Account
+### Dataset Source with Custom Credentials
 2. One powerful feature of CARTO VL is that you can use data from a few different sources in the same map. 
 
     Replace the existing `source` with a dataset from a different CARTO account:
@@ -82,7 +83,7 @@
 
     `const layer = new carto.Layer('layer', citiesSource, viz);`
 
-### Add a Different Type of Source
+### Add a GeoJSON Source and Layer
 
 4. CARTO VL also provides other ways to pull in source data.
 
