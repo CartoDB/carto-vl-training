@@ -1,6 +1,8 @@
 ## Introduction to Ramps and Data-Driven Visualizations
 
+The main goal when styling your map is to illustrate an insight from your data. You can do that by changing a feature's properties according to the data it represents. For example, you can change a feature's color or size according to one (or more) data attributes.
 
+CARTO VL offers functions that do the work of styling features according to attribute behind-the-scenes. In this section we'll demonstrate how, but for more detailed information see our Data Driven Styling guides [Part 1](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/) and [Part 2](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-2/).
 
 ### Create a Basic Map
 1. For this section let's start with a map of UK elections. Leave the `viz` object empty for this step:
@@ -59,6 +61,35 @@
     </html>
     ```
 
+    Now your map should show UK polygons in default CARTO styles:
+
+    ![base-polys](images/training-v2-04-poly-default.png)
+
+This is election data, and we'd like to show which party won the election in each area. 
+  * Our dataset contains a string-type column named `winner`. 
+  * For each polygon, the `winner` column lists the name of the political party that won there.
+
+Since we know the names of the parties in that column, we can use them as categories. To show our map viewers who won, we can make a *classed* map: define a bucket (or bin) for each category and then classify each polygon according to the bucket it belongs to.
+
+CARTO VL offers [a ramp() function](https://carto.com/developers/carto-vl/reference/#cartoexpressionsramp) that will assign colors to categories for us. We just need to define the categories and colors first, using the [buckets() function](https://carto.com/developers/carto-vl/reference/#cartoexpressionsbuckets). Then we can use both functions inside an expression to define our map layer's color property.
+
+2. Add a color and strokeColor to your `viz`:
+
+    ```
+    const viz = new carto.Viz(`
+      color: ramp(buckets($winner, ["Conservative Party", "Labour Party"]), [blue, red])
+      strokeColor: opacity(white, 0.6)
+    `);
+    ```
+
+    * the first parameter in the buckets function is the column name, which needs to be prepended with a $.
+    * the second parameter is an array of category names. Since we're working with text values they need to be enclosed in quotes.
+    * the last parameter is an array of colors. Their order corresponds with the order of categories, so `Conservative Party` polygons will be blue.
+      * We don't need quotes around [named colors](https://htmlcolorcodes.com/color-names/). 
+
+    Now our map should look like this:
+
+    ![election-polys](images/training-v2-04-poly-election.png)
 
 ### Ramp and Numeric Properties
 
