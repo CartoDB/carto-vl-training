@@ -18,7 +18,7 @@ Check [this guide](https://carto.com/developers/carto-vl/guides/style-with-expre
 
 In this section we're going to demonstrate a few kinds of expressions.
 
-### Create a Basic Map
+### Create a Basic Viz with Custom Styles
 1. Let's create a new map. Replace all of the code in your index.html file with this:
 
     ```
@@ -78,16 +78,20 @@ In this section we're going to demonstrate a few kinds of expressions.
     </html>
     ```
 
+    If we used an empty `viz` like this `const viz = new carto.Viz();` the map would render with default CARTO styles.
+
+    Since we're defining a color and width property inside the `viz` object, we're adding custom styles.
+
     When you open this in a browser, your map should look like this:
 
     ![base-style](images/training-v2-03-base.png)
 
 
-### Define Width with an Expression Function
+### Add an Expression Function
 
 Take a look at how width is defined in the `viz` object. It's telling our system to draw point markers that are 8 pixels wide.
 
-We can use an expression function here instead.
+We can use an *expression function* here instead.
 
 2. Replace the current width property with this:
 
@@ -97,7 +101,7 @@ We can use an expression function here instead.
 
     ![width-expression](images/training-v2-03-width-exp.png)
 
-### Define Color with an Expression Function
+### Add a Color Expression Function
 
 CARTO VL offers [a few ways to define color using different expressions](https://carto.com/developers/carto-vl/guides/style-with-expressions/#color-expressions). One type of expression is a `color constructor`, which is a function that defines a color by the components of its [color space](https://photo.stackexchange.com/questions/48984/what-is-the-difference-or-relation-between-a-color-model-and-a-color-space). 
 
@@ -114,7 +118,7 @@ Just like with other expressions, we can combine `color constructor` expressions
 
     ![rgb-expression](images/training-v2-03-color-exp.png)
 
-### Using Expressions for Transparency
+### Opacity
 
 Sometimes you might want to make your map features semi-transparent, so overlapped features or basemap details can appear underneath. This is also possible with expressions. 
 
