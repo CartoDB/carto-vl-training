@@ -140,6 +140,10 @@ We can also make it easier to see the places with mid-range population density b
 
 ### Classify a Numeric Property for Better Perception
 
+What if we do want to put our categories into buckets, but we also want to make sure they're bucketed by a statistical classification method? The ramp function can do that automatically for us too. 
+
+6. Replace your `viz` with this:
+
     ```
     const viz = new carto.Viz(`
       width: 1.5
@@ -147,6 +151,18 @@ We can also make it easier to see the places with mid-range population density b
       strokeWidth: 0
     `);
     ```
+
+    * Notice we're using a function for the ramp function's first parameter: `globalQuantiles($dn, 3)`
+    * The [globalQuantiles function](https://carto.com/developers/carto-vl/reference/#cartoexpressionsglobalquantiles) takes two parameters: the column containing the data, and the number of buckets you want to divide the data into.
+    * `global` is important here. That means all of the data in this map is being considered during the classification calculation. That's different than [viewportQuantiles](https://carto.com/developers/carto-vl/reference/#cartoexpressionsviewportquantiles). 
+      * The `viewportQuantiles` function only uses a subset of your data. 
+        * The subset is can be all of the data in your map's viewport, which means that your data gets re-bucketed as you zoom in and out of the map, because on zoom more or less data is contained in the viewport.
+        * You can also define the subset of data using [filter](https://carto.com/developers/carto-vl/reference/#cartoexpressionsclustertime).
+
+    Once we save these changes our map looks like this:
+
+    ![global-quantiles](images/training-v2-04-global-quantiles.png)
+
 
 ### The `Others` Category
 
