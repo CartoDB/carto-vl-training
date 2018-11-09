@@ -122,7 +122,7 @@ Just like with other expressions, we can combine `color constructor` expressions
 
 Sometimes you might want to make your map features semi-transparent, so overlapped features or basemap details can appear underneath. This is also possible with expressions. 
 
-####OPTION A
+#### OPTION A
 
 One way is to use a color constructor that contains a value for the alpha channel, like this:
 
@@ -140,7 +140,7 @@ One way is to use a color constructor that contains a value for the alpha channe
 
     ![opacity-a](images/training-v2-03-optA.png)
 
-####OPTION B
+#### OPTION B
 
 We can get the same effect using a CARTO VL function: [opacity()](https://carto.com/developers/carto-vl/reference/#cartoexpressionsopacity).
 
@@ -151,7 +151,7 @@ We can get the same effect using a CARTO VL function: [opacity()](https://carto.
     ![opacity-b](images/training-v2-03-optB.png)
 
 
-####OPTION C
+#### OPTION C
 
 Another option is to use a CARTO VL property called [filter](https://carto.com/developers/carto-vl/reference/#cartoexpressions). Filter is a method we use to set a condition. In the example below it's being used to set the map layer's features to 25% opacity.
 
