@@ -101,7 +101,52 @@ We need an HTML element for JavaScript to draw our map in.
   * `center: [-3.6908, 40.4297]` will center your map on these coordinates.
   * `zoom: 11` displays the map at this default zoom level when it loads.
 
-6. Save this file as `index.html` on your computer.
+6. Save this file as `index.html` on your computer. 
+
+    At this point your code should look like this:
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+      <title>CARTO VL training</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="UTF-8">
+      <!-- Mapbox GL -->
+      <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.css" rel="stylesheet" />
+      <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
+      <!-- CARTO VL JS -->
+      <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
+      <style>
+        body {
+          margin: 0;
+          padding: 0;
+        }
+
+        #map {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
+      </style>
+    </head>
+
+    <body>
+      <div id="map"></div>
+
+      <script>
+        const map = new mapboxgl.Map({
+          container: 'map',
+          style: carto.basemaps.voyager,
+          center: [-3.6908, 40.4297],
+          zoom: 11
+        });
+      </script>
+    </body>
+
+    </html>
+    ```
 7. Open index.html in your web browser.
     
     *Now you should see this:*
@@ -174,7 +219,7 @@ Now we can create a new map layer using the data source and style definitions:
 
     * Notice we're using the mapboxgl.Map object's `const` name, not the containing div element's `"map"` id.
 
-    *When you save these changes in your code editor and refresh your browser, the map should look like this:*
+    When you save these changes in your code editor and refresh your browser, the map should look like this:
 
     ![default-style](images/training-v2-01-defaultStyle.png)
 
@@ -203,6 +248,6 @@ Now we can create a new map layer using the data source and style definitions:
     * CARTO uses two types of Visualization API's to define our Viz properties: String and JavaScript. Learn more about those [here](https://carto.com/developers/carto-vl/guides/style-with-expressions/#the-string-and-javascript-visualization-apis).
       * The back-ticks we're using inside the Viz function indicate we're using the String Visualization API in this map.
 
-    *Now when you save the latest changes and refresh, the map should look like this:*
+    Now when you save the latest changes and refresh, the map should look like this:
 
     ![basic-style](images/training-v2-01-basicStyle.png)
