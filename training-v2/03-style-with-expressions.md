@@ -96,4 +96,90 @@ Now when you save and refresh the map, the points should be 24 pixels wide:
 
 ![width-expression](images/training-v2-03-width-exp.png)
 
-CARTO VL has a lot of ways to define color using different expressions. They even let you use a few different [color spaces](https://photo.stackexchange.com/questions/48984/what-is-the-difference-or-relation-between-a-color-model-and-a-color-space), like [CIELab](https://carto.com/developers/carto-vl/reference/#cartoexpressionspalettes), [HSL]() and [RGB]()
+### Define Color with an Expression Function
+
+CARTO VL offers [a few ways to define color using different expressions](https://carto.com/developers/carto-vl/guides/style-with-expressions/#color-expressions). One type of expression is a `color constructor`, which is a function that defines a color by the components of its [color space](https://photo.stackexchange.com/questions/48984/what-is-the-difference-or-relation-between-a-color-model-and-a-color-space). 
+
+For example, this [RGB](https://carto.com/developers/carto-vl/reference/#cartoexpressionsrgb) color constructor specifies values for red, green and blue color channels that result in the color <span style="color:#885cff">purple</span>: `rgb(136, 92, 255)`. You can find constructors for other color spaces in [our documentation](https://carto.com/developers/carto-vl/reference/), like [CIELab](https://carto.com/developers/carto-vl/reference/#cartoexpressionscielab) and [HSL](https://carto.com/developers/carto-vl/reference/#cartoexpressionshsl).
+
+Just like with other expressions, we can combine color constructor expressions together with an expression function.
+
+3. Replace your viz object's current color property with this:
+
+`color: rgb(239, 0, 0) + rgb(0, 239, 0)`
+
+The color channel values get added together, so the final result is `rgb(239, 239, 0)`. That makes our markers yellow:
+
+![rgb-expression](images/training-v2-03-color-exp.png)
+
+### Using Expressions for Transparency
+
+Sometimes you might want to make your map features semi-transparent, so overlapped features or basemap details can appear underneath. This is also possible with expressions. 
+
+*OPTION A*
+One way is to use a color constructor that contains a value for the alpha channel, like this:
+
+4. Put two forward slashes in front of the color property you just used. This "comments out" that code line, so it's not read when the page loads.
+
+`//color: rgb(239, 0, 0) + rgb(0, 239, 0)`
+
+5. In a new line underneath the comment, type this:
+
+`color: rgba(255, 0, 0, 0.25)`
+
+The fourth parameter defines how transparent the color is when it renders. 
+* A value of 1 is completely opaque.
+* A value of 0 is completely transparent.
+
+![opacity-a](images/training-v2-03-optA.png)
+
+*OPTION B*
+We can get the same effect using a CARTO VL function: [opacity()](https://carto.com/developers/carto-vl/reference/#cartoexpressionsopacity).
+
+6. Comment out the code line you just implemented, and write this underneath:
+
+`color: opacity(rgb(255, 0, 0) 0.25)`
+
+![opacity-b](images/training-v2-03-optB.png)
+
+
+*OPTION C:
+Another option is to use a CARTO VL property called [filter](https://carto.com/developers/carto-vl/reference/#cartoexpressions). Filter is a method we use to set a condition. In the example below it's being used to set the map layer's features to 25% opacity.
+
+6. Comment out the last code line and add the `color` and `filter` properties shown below:
+
+```
+const viz = new carto.Viz(`
+    width: 8 + 16
+            
+    // Option A
+    color: rgba(255, 0, 0, 0.25)
+            
+    // Option B
+    // color: opacity(rgb(255, 0, 0) 0.25)
+            
+    // Option C
+    color: red
+    filter: 0.25
+`);
+
+```
+
+![opacity-c](images/training-v2-03-optC.png)
+
+What's the difference between using `filter` and the other opacity methods? 
+* Filter changes opacity for the whole layer. 
+* The opacity function or a color expression alpha channel can do that too, but they can also be applied to specific features. 
+  * That means for example you can have the whole layer at 80% opacity, but at the same time you can make a point marker's fill color less transparent than it's stroke color. 
+
+  ```
+  const viz = new carto.Viz(`
+    width: 15
+    color: rgba(RGB(240, 128, 128), 0.2)
+    strokeColor: salmon
+    strokeWidth: 3
+    filter: 0.5
+  `);
+  ```
+
+We'll learn more about styling features differently from each other in the next section.
