@@ -1,6 +1,6 @@
 ## Using data in your visualization with Sources
 
-Sources are the basis for your map. They provide the data that you will vizualize. In this section we'll demonstrate a few different ways to use them. For more information check our [Add Data Sources guide](https://carto.com/developers/carto-vl/guides/add-data-sources/).
+Sources are the basis for your map. They provide the data that you will visualize. In this section we'll demonstrate a few different ways to use them. For more information check our [Add Data Sources guide](https://carto.com/developers/carto-vl/guides/add-data-sources/).
 
 1. Let's start with the map we made in the Getting Started section. Open it in your code editor.
 
