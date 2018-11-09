@@ -248,6 +248,65 @@ Now we can create a new map layer using the data source and style definitions:
     * CARTO uses two types of Visualization API's to define our Viz properties: String and JavaScript. Learn more about those [here](https://carto.com/developers/carto-vl/guides/style-with-expressions/#the-string-and-javascript-visualization-apis).
       * The back-ticks we're using inside the Viz function indicate we're using the String Visualization API in this map.
 
+    At this point your code shoult look like this:
+
+    ```
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+      <title>CARTO VL training</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="UTF-8">
+      <!-- Mapbox GL -->
+      <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.css" rel="stylesheet" />
+      <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
+      <!-- CARTO VL JS -->
+      <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
+      <style>
+        body {
+          margin: 0;
+          padding: 0;
+        }
+
+        #map {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
+      </style>
+    </head>
+
+    <body>
+      <div id="map"></div>
+
+      <script>
+        const map = new mapboxgl.Map({
+          container: 'map',
+          style: carto.basemaps.voyager,
+          center: [-3.6908, 40.4297],
+          zoom: 11
+        });
+
+        carto.setDefaultAuth({
+          user: 'cartovl',
+          apiKey: 'default_public'
+        });
+
+        const source = new carto.source.Dataset('madrid_listings');
+        const viz = new carto.Viz(`
+          color: green
+          width: 20
+        `);
+        const layer = new carto.Layer('layer', source, viz);
+
+        layer.addTo(map);
+      </script>
+    </body>
+
+    </html>
+    ```
+
     Now when you save the latest changes and refresh, the map should look like this:
 
     ![basic-style](images/training-v2-01-basicStyle.png)
