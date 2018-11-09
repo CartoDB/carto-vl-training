@@ -82,9 +82,10 @@ CARTO VL offers [a ramp() function](https://carto.com/developers/carto-vl/refere
     `);
     ```
 
-    * the first parameter in the buckets function is the column name, which needs to be prepended with a $.
-    * the second parameter is an array of category names. Since we're working with text values they need to be enclosed in quotes.
-    * the last parameter is an array of colors. Their order corresponds with the order of categories, so `Conservative Party` polygons will be blue.
+    * The first parameter in the buckets function is the column name, which needs to be prepended with a $.
+    * The second buckets parameter is an array of category names. Since we're working with text values they need to be enclosed in quotes.
+    * The ramp function takes the whole buckets function as it's first parameter. 
+    * The second ramp parameter is an array of colors. Their order corresponds with the order of our bucket categories, so `Conservative Party` polygons will be blue.
       * We don't need quotes around [named colors](https://htmlcolorcodes.com/color-names/). 
 
     Now our map should look like this:
@@ -92,6 +93,20 @@ CARTO VL offers [a ramp() function](https://carto.com/developers/carto-vl/refere
     ![election-polys](images/training-v2-04-poly-election.png)
 
 ### Ramp and Numeric Properties
+
+What happens if you want to color your features by category, but you have a large dataset and don't immediately know all of the different categories it's column contains?
+
+Ramp can find the categories for you. 
+
+In this case we have numeric data: a column named `dn` that contains a population density value for each of it's point locations. 
+
+Notice how we don't need to specify buckets below. When we don't specify buckets, we're creating an *unclassed map*. Each point is colored according to how much of an attribute it contains, instead being put into a discrete category and given that category's assigned color.
+
+3. Change your map object's settings:
+
+
+
+4. Replace your `source` and `viz` with this:
 
     ```
     const source = new carto.source.Dataset('pop_density_points');
@@ -102,6 +117,11 @@ CARTO VL offers [a ramp() function](https://carto.com/developers/carto-vl/refere
       strokeWidth: 0
     `);
     ```
+
+    ![election-polys](images/training-v2-04-poly-election.png)
+
+    * The points with lowest population density are colored black, and the points with highest population density are colored yellow.
+    * But since this is an unclassed map, most points have values that fall between the lowest number and highest number. They are assigned a color that falls on a gradient between black and yellow. That's why we see gray points, and dark yellow points. 
 
 ### Improve the Style
 
