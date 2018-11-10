@@ -153,6 +153,7 @@ What if we do want to put our categories into buckets, but we also want to make 
     ```
 
     * Notice we're using a function for the ramp function's first parameter: `globalQuantiles($dn, 3)`
+      * check our documentation for other available classification types, like Standard Deviation: [globalStandardDev](https://carto.com/developers/carto-vl/reference/#cartoexpressionsglobalstandarddev)
     * The [globalQuantiles function](https://carto.com/developers/carto-vl/reference/#cartoexpressionsglobalquantiles) takes two parameters: the column containing the data, and the number of buckets you want to divide the data into.
     * `global` is important here. That means all of the data in this map is being considered during the classification calculation. That's different than [viewportQuantiles](https://carto.com/developers/carto-vl/reference/#cartoexpressionsviewportquantiles). 
       * The `viewportQuantiles` function only uses a subset of your data. 
