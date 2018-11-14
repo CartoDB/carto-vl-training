@@ -350,15 +350,25 @@ In addition to color, we can use size to illustrate a second attribute. Let's ma
 
 ### Size Perception
 
-    ```
-    const viz = new carto.Viz(`
-      width: sqrt(ramp($total_damage, [0, 50^2]))
-      strokeWidth: 0.2
-      color: ramp(top($accident_type, 3), [#3969AC, #F2B701, #E73F74], #A5AA99)
-    `);
-    ```
+In our map now there's a huge difference between the points with highest damage and the rest of the markers. We can make this look better by applying this expression:
+
+17. Replace the `viz` width property with this:
+
+   `width: sqrt(ramp($total_damage, [0, 50^2]))`
+
+    * 50^2 = 50 squared.
+    * ramp is interpolating linearly from 0 to the square root of 50, which represents area as opposed to width.
+    * When we wrap the ramp inside a sqrt expression, an intermediate value with half the damage of the worst accident will get half the area of the worst damage value(50²/2), but not half its width.
+
+    Now the sizes appear more normalized:
+
+    ![size-perception](images/training-v2-04-size-perception.png)
 
 ### Introducing Symbols and Images
+
+Point markers don't need to be circles! You can use images instead. 
+
+18. Add a `symbol` property to your `viz` like this:
 
     ```
     const viz = new carto.Viz(`
@@ -368,3 +378,10 @@ In addition to color, we can use size to illustrate a second attribute. Let's ma
       symbol: ramp(top($accident_type, 3), [star, triangle, square])
     `);
     ```
+
+    * Just like in the other ramp functions we saw, the second parameter is an array of values. This time instead of colors we are using key words for [maki icons](https://www.mapbox.com/maki-icons/). 
+    * Instead of maki icons key words you can use custom image urls. 
+      * The url needs to point to a publicly available .jpg, .png or .svg file.
+      * Put each url inside quotes.
+
+    ![image-icons](images/training-v2-04-image-icons.png)
