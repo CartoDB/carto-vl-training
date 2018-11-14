@@ -92,11 +92,13 @@ CARTO VL offers [a ramp() function](https://carto.com/developers/carto-vl/refere
 
     ![election-polys](images/training-v2-04-poly-election.png)
 
+Check [this guide](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#categorical-data) for more information about creating data-driven visualizations with categorical data.
+
 ### Ramp and Numeric Properties
 
 What happens if you want to color your features by category, but you have a large dataset and don't immediately know all of the different categories it's column contains?
 
-Ramp can find the categories for you. 
+[Ramp can find the categories for you](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#what-is-a-ramp). 
 
 In this case we have numeric data: a column named `dn` that contains a population density value for each of it's point locations. 
 
@@ -130,6 +132,10 @@ Notice how we don't need to specify buckets below. When we don't specify buckets
 
     * The points with lowest population density are colored black, and the points with highest population density are colored yellow.
     * But since this is an unclassed map, most points have values that fall between the lowest number and highest number. They are assigned a color that falls on a gradient between black and yellow. That's why we see gray points, and dark yellow points. 
+
+Check [this guide](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#numeric-data) for more information about using ramp with numeric data.
+
+We're using named colors in this expression, but you can use [other color formats for data-driven styling](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-2/#color-values).
 
 ### Improve the Style
 
@@ -350,14 +356,19 @@ In addition to color, we can use size to illustrate a second attribute. Let's ma
 
 ### Size Perception
 
-In our map now there's a huge difference between the points with highest damage and the rest of the markers. We can make this look better by applying this expression:
+Right now our circle sizes are scaling up linearly. 
 
-17. Replace the `viz` width property with this:
+For example, if the lowest `total_damage` is 0, and the highest is 100, a point with `total_damage` of 150 is halfway between them. 
 
-   `width: sqrt(ramp($total_damage, [0, 50^2]))`
+Since lowest-damage points get a width of 0 and highest-damage points get a width is 50, the point with `total_damage` exactly halfway between those gets a width halfway between 0 and 100, or 50.
+
+There's an issue with linear scaling though: we perceive changes in area, not changes in width. For a more detailed explanation see the `Size Perception` section [in this guide](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-2/#numeric-values).
+
+17. We can make the differences between point damage values easier to recognize by changing the area, using an expression like this:
+
+    `width: sqrt(ramp($total_damage, [0, 50^2]))`
 
     * 50^2 = 50 squared.
-    * ramp is interpolating linearly from 0 to the square root of 50, which represents area as opposed to width.
     * When we wrap the ramp inside a sqrt expression, an intermediate value with half the damage of the worst accident will get half the area of the worst damage value(50²/2), but not half its width.
 
     Now the sizes appear more normalized:
@@ -366,7 +377,7 @@ In our map now there's a huge difference between the points with highest damage 
 
 ### Introducing Symbols and Images
 
-Point markers don't need to be circles! You can use images instead. 
+Point markers don't need to be circles! You can use images instead. We have a guide for that [here](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-2/#image-values).
 
 18. Add a `symbol` property to your `viz` like this:
 
