@@ -2,6 +2,8 @@
 
 Previously in the CARTO platform you've been able to animate points. Now with CARTO VL we can animate lines and polygons also. In this section we'll set up a basic animated map and add controls so our viewers can play or pause the animation, and set it's duration.
 
+
+
 ### Create a Basic Map
 
 Let's create a new map using bird migration data.
@@ -128,11 +130,11 @@ Let's also use a color expression to visualize birds by category while we animat
 
     ![animation-categories](images/training-v2-08-animation-categories.gif)
 
-    Check [this section of our guides](https://carto.com/developers/carto-vl/guides/animated-visualizations/#style-and-configure-the-animation) for more details about animation styling.
+    Check [this section of our guides](https://carto.com/developers/carto-vl/guides/animated-visualizations/#style-and-configure-the-animation) for more details about the animation expression and it's options.
 
 ### Control Your Animation
 
-Let's add animation controls, so our map viewers can play or pause the animation. 
+Let's add animation controls, so our map viewers can play or pause the animation. The control elements and their functionality are also explained [here](https://carto.com/developers/carto-vl/guides/animated-visualizations/#animation-controls).
 
 5. We will use the HTML elements below to create an overlay that contains buttons and a slider. Add this code block underneath `<div id="map"></div>`:
 
@@ -192,7 +194,7 @@ Now our map should look like this:
 
 ### Advanced Animation
 
-We've been using the `date_time` column's whole time range in this animation. We can use an expression as an input instead, to only animate a part of that time range.
+We've been using the `date_time` column's whole time range in this animation. We can use an expression as an input instead, to only animate a part of that time range. Check [this guide section](https://carto.com/developers/carto-vl/guides/animated-visualizations/#taking-it-further) for more details.
 
 9. Replace your current `@animation` variable with this:
 
@@ -206,9 +208,7 @@ We can also take our whole animation expression and assign it to a sequential [C
 
     `color: ramp(@animation, Oryel)`
 
-    The `Oryel` palette swatches progress linearly from light yellow to orange-red. When we map those colors to our linear animation, the bird's current location at that time is yellow, and the previous locations become orange to orange-red as they transition out (orange-red is the "oldest").
-
-Here's our final animation, with controls:
+    The `Oryel` palette swatches progress from light yellow to orange-red. Check out how the bird locations are mapped to those colors over time in our final animation:
 
     ![animation-colors](images/training-v2-08-animation-colors.gif)
 
