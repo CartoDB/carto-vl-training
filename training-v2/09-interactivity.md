@@ -117,6 +117,7 @@ CARTO VL can detect events that happen in the map object.
 
     ![map-events](images/training-v2-09-map-events.gif)
 
+For more information about map events check [this section](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#map-events) of our *Add interactivity and events* guide.
 
 ### Basic Layer Events
 
@@ -135,9 +136,11 @@ Events that happen in certain layers in your map are also detectable. We use CAR
 
     ![layer-loaded](images/training-v2-09-layer-loaded.gif)
 
+Layer events are described in [this guide section](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#layer-events).
+
 ### Exposing Properties and Features with Variables
 
-Let's use a Layer Event to get useful information about our layer's data.
+Let's use a Layer Event to get useful information about our layer's data. To do that we're going to use variables, [as explained in this guide](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#using-variables).
 
 6. Add a variable to our `viz` that retrieves our layer's features:
 
@@ -206,6 +209,8 @@ So far we've listened for events from our map, and from it's layer. We can also 
 
 The first step to using feature events is to enable your map layer to capture user actions. We do that in CARTO VL by adding an [interactivity object](https://carto.com/developers/carto-vl/reference/#cartointeractivity). 
 
+Find a list of Feature Events you can use [here](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#feature-events).
+
 10. Paste this underneath `const layer = new carto.Layer('layer', source, viz);`:
 
     ```
@@ -255,7 +260,9 @@ The first step to using feature events is to enable your map layer to capture us
 
 ### Adding Mapbox GL Pop-Ups
 
-We can use a feature event to open a Pop-Up window, to display useful information about that feature. Since we're using a Mapbox GL map object, we can use a [Mapbox GL Pop-Up](https://www.mapbox.com/mapbox-gl-js/api/#popup) for this.
+We can use a feature event to open a Pop-Up window, to display useful information about that feature. Since we're using a Mapbox GL map object, we can use a [Mapbox GL Pop-Up](https://www.mapbox.com/mapbox-gl-js/api/#popup) for this. 
+
+Review [this guide section](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#adding-pop-ups) for more information about adding Pop-Ups.
 
 13. We are going to add new code underneath the `forEach` function we used in the last step. Use this for your `featureClick` code block:
 
@@ -293,11 +300,13 @@ We can use a feature event to open a Pop-Up window, to display useful informatio
 
     ![click-popup](images/training-v2-09-click-popup.gif)
 
-### Interactivity-Based Styling
+### Interactive-Based Styling
 
 In addition to displaying useful information about a feature when a user interacts with it, we can change what the feature looks like to highlight it.
 
-For our last map we will use layer events that capture when a user rolls over a feature, and rolls out.
+For our last map we will use layer events that capture when a user rolls over a feature, and rolls out. Check out another example with an explanation [in this guide](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#interactive-based-styling).
+
+
 
 14. Under your `featureClick` code block, add this:
 
