@@ -19,7 +19,7 @@ ___
     <html>
 
     <head>
-      <title>CARTO VL training</title>
+      <title>CARTO VL Training</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta charset="UTF-8">
     </head>
@@ -37,11 +37,13 @@ We need to add JavaScript libraries to our HTML document in order to build our m
 2. Add these lines of code nested in your `head` element, under `<meta charset="UTF-8">`:
 
     ```html
-    <!-- Mapbox GL -->
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.css" rel="stylesheet" />
-    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
-    <!-- CARTO VL JS -->
-    <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
+    <!-- Include CARTO VL JS from the CARTO CDN-->
+    <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+    <!-- Include Mapbox GL from the Mapbox CDN-->
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+    <!-- Include CARTO styles-->
+    <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
     ```
 
     **WHY MAPBOX GL?**
@@ -111,14 +113,16 @@ We need an HTML element for JavaScript to draw our map in.
     <html>
 
     <head>
-      <title>CARTO VL training</title>
+      <title>CARTO VL Training</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta charset="UTF-8">
-      <!-- Mapbox GL -->
-      <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.css" rel="stylesheet" />
-      <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
-      <!-- CARTO VL JS -->
-      <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
+      <!-- Include CARTO VL JS from the CARTO CDN-->
+      <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+      <!-- Include Mapbox GL from the Mapbox CDN-->
+      <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+      <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+      <!-- Include CARTO styles-->
+      <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
       <style>
         body {
           margin: 0;

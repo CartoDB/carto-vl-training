@@ -11,25 +11,27 @@
     <html>
 
     <head>
-      <title>CARTO VL training</title>
+      <title>CARTO VL Training</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta charset="UTF-8">
-      <!-- Mapbox GL -->
-      <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.css" rel="stylesheet" />
-      <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
-      <!-- CARTO VL JS -->
-      <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
+      <!-- Include CARTO VL JS from the CARTO CDN-->
+      <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+      <!-- Include Mapbox GL from the Mapbox CDN-->
+      <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+      <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+      <!-- Include CARTO styles-->
+      <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
       <style>
         body {
-            margin: 0;
-            padding: 0;
+          margin: 0;
+          padding: 0;
         }
 
         #map {
           position: absolute;
           width: 100%;
           height: 100%;
-         }
+        }
       </style>
     </head>
 
@@ -45,17 +47,15 @@
         });
 
         carto.setDefaultAuth({
-          username: 'cartovl',
+          user: 'cartovl',
           apiKey: 'default_public'
         });
 
         const source = new carto.source.Dataset('madrid_listings');
-
         const viz = new carto.Viz(`
           color: green
           width: 20
         `);
-        
         const layer = new carto.Layer('layer', source, viz);
 
         layer.addTo(map);
@@ -92,7 +92,7 @@
     For example you can use a [SQL source](https://carto.com/developers/carto-vl/reference/#cartosourcesql) like this:
 
     ```
-    const citiesSource = new carto.source.SQL('SELECT * FROM populated_places WHERE pop_max > 10000000', {
+    const citiesSource = new carto.source.SQL('SELECT * FROM populated_places WHERE pop_max > 1000000', {
       username: 'documentation',
       apiKey: 'default_public'
     });
@@ -102,7 +102,7 @@
     * you only want to use part of a dataset.
     * you want to manipulate the original data with [PostgreSQL](https://carto.com/help/working-with-data/easy-sql/) or [PostGIS](https://carto.com/help/diy/postgis/) and use the results in your map.
 
-    Our `citiesSource` query is letting us use only large cities from the `populated_places` dataset. That's happening because our query contains a WHERE clause that will only select cities with a maximum population of more than ten million people.
+    Our `citiesSource` query is letting us use only large cities from the `populated_places` dataset. That's happening because our query contains a WHERE clause that will only select cities with a maximum population of more than one million people.
 
     See which kinds of sources you can use and example code [here](https://carto.com/developers/carto-vl/reference/#cartosource) in our documentation.
 
@@ -143,7 +143,7 @@
     officeLayer.addTo(map);
     ```
 
-    *When you save these changes and open your code document in a browser, your map should show a red point for the city of Madrid, and a green point for the CARTO office, like this:*
+    *When you save these changes and open your code document in a browser, your map should show a green point for the city of Madrid, and a red point for the CARTO office, like this:*
 
     ![two-sources](images/training-v2-02-srcs.png)
 
