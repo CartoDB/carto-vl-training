@@ -7,7 +7,8 @@
 ___
 
 ## Getting Started
-*Take the next steps to set up a basic CARTO VL map & view it in your browser.*
+*In this section we're going to create a basic CARTO VL map. Take the next steps to set up a basemap and data layer, & view them in your browser.*
+
 *For more help check out our Developer Center's Getting Started documentation [here](https://carto.com/developers/carto-vl/guides/getting-started/).*
 
 ### Create a Basic HTML Template
@@ -152,14 +153,16 @@ We need an HTML element for JavaScript to draw our map in.
     *Now you should see this:*
    
     ![basemap-only](images/training-v2-01-bmapOnly.png)
+
+    To see another example of the steps above, check [this Basic setup guide](https://carto.com/developers/carto-vl/guides/getting-started/#basic-setup).
     
 ### Define the User
 
-To add other layers on top of the basemap we need access to CARTO datasets. In this example we will use [public](https://carto.com/help/building-maps/privacy-settings-for-protecting-maps-and-data/) data from a CARTO account.
+To add other layers on top of the basemap we need access to CARTO datasets. In this example we will use a CARTO account's [public](https://carto.com/help/building-maps/privacy-settings-for-protecting-maps-and-data/) dataset of Madrid rental listings.
 
 Because data privacy is important at CARTO, authentication is required. We use api keys for that. Find out more about how CARTO authentication works [here](https://carto.com/developers/fundamentals/authorization/). 
 
-In this step we will define a user account to get data from, and specify the API key that gives us account access.
+In this step we will [define a user](https://carto.com/developers/carto-vl/guides/getting-started/#define-user) account to get data from, and specify the API key that gives us account access.
 
 8. Add this code block beneath `map.addControl(nav, 'top-left');`
 
@@ -176,7 +179,7 @@ In this step we will define a user account to get data from, and specify the API
 
 ### Define the Source
 
-Now that we have access to a CARTO account we can use it's data in this map by defining a `source`. 
+Now that we have access to a CARTO account we can use it's data in this map by [defining a `source`](https://carto.com/developers/carto-vl/guides/getting-started/#create-source). 
 
 CARTO VL provides a few ways to bring data into your map that we will demonstrate in the next section. One of those methods gets an entire dataset by name:
 
@@ -184,7 +187,7 @@ CARTO VL provides a few ways to bring data into your map that we will demonstrat
 
     `const source = new carto.source.Dataset('madrid_listings');`
 
-    * You can add more than once source to a map.
+    * You can add more than one source to a map.
       * Make sure to give each source `const` a unique name
 
 ### Define the Viz
@@ -195,13 +198,13 @@ This data won't show up on the map until we tell the browser how to render it. W
 
     `const viz = new carto.Viz();`
 
-    * When the `Viz object` is empty like this, our system will apply default styles.
+    * When the [Viz object](https://carto.com/developers/carto-vl/guides/getting-started/#create-viz-object) is empty like this, our system will apply default styles.
     * If you are using multiple sources, you need to create a separate Viz object for each one.
       * Make sure the Viz object `const` are named uniquely.
 
 ### Define the Layer
 
-Now we can create a new map layer using the data source and style definitions:
+Now we can [create a new map layer](https://carto.com/developers/carto-vl/guides/getting-started/#create-map-layer) using the data source and style definitions:
 
 11. Add this beneath the viz definition:
 
@@ -213,7 +216,7 @@ Now we can create a new map layer using the data source and style definitions:
 
 ### Add the Layer to the Map
 
-12. Add the layer to the map object this way:
+12. [Add the layer](https://carto.com/developers/carto-vl/guides/getting-started/#add-map-layer) to the map object this way:
 
     `layer.addTo(map);`
 
@@ -225,7 +228,7 @@ Now we can create a new map layer using the data source and style definitions:
 
 ### Start Playing with the Visualization
 
-13. Let's change the default style by adding our own style rules. 
+13. Let's change the default style by [adding our own style rules](https://carto.com/developers/carto-vl/guides/getting-started/#defining-a-custom-style-for-the-viz-object). 
 
     CARTO VL offers powerful data-driven styling with expressions, which we will cover later. For now we can make simple marker size and color changes by adding properties to the Viz object:
 
@@ -248,7 +251,7 @@ Now we can create a new map layer using the data source and style definitions:
     * CARTO uses two types of Visualization API's to define our Viz properties: String and JavaScript. Learn more about those [here](https://carto.com/developers/carto-vl/guides/style-with-expressions/#the-string-and-javascript-visualization-apis).
       * The back-ticks we're using inside the Viz function indicate we're using the String Visualization API in this map.
 
-    At this point your code shoult look like this:
+    At this point your code should look like this:
 
     ```
     <!DOCTYPE html>
@@ -307,6 +310,10 @@ Now we can create a new map layer using the data source and style definitions:
     </html>
     ```
 
-    Now when you save the latest changes and refresh, the map should look like this:
+    Now when you save the latest changes and refresh, you should see larger green markers representing your points.
+
+    *One of the benefits of using CARTO VL is that you can use fractional zoom levels. We modified the map object's zoom level to 16.2, then refreshed to see this:*
 
     ![basic-style](images/training-v2-01-basicStyle.png)
+
+    For another code example of a basic map, check [this section](https://carto.com/developers/carto-vl/guides/getting-started/#all-together) of our Developer Center guide.
