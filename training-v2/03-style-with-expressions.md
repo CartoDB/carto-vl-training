@@ -1,6 +1,6 @@
 ## Styling Properties Using Expressions
 
-*Every feature in your map's data layer has properties like width and/or color. [Check out all of the properties available](https://carto.com/developers/carto-vl/reference/#cartoexpressions).*
+*Every feature in your map's data layer has properties like width and/or color. Check out all of the properties available, and which of them apply to points, lines or polygons [here](https://carto.com/developers/carto-vl/reference/#cartoexpressions). We also have an interactive map to let you explore property differences between geometries [in this guide](https://carto.com/developers/carto-vl/guides/style-with-expressions/).*
 
 *How you choose to style these has a big effect on how legible your map is. CARTO VL offers great flexibility for defining your styles, because it allows you to use expressions.*
 
@@ -78,11 +78,11 @@ In this section we're going to demonstrate a few kinds of expressions.
     </html>
     ```
 
-    If we used an empty `viz` like this `const viz = new carto.Viz();` the map would render with default CARTO styles.
+    If we used an empty `viz` like this: `const viz = new carto.Viz();` the map would render with default CARTO styles.
 
     Since we're defining a color and width property inside the `viz` object, we're adding custom styles.
 
-    When you open this in a browser, your map should look like this:
+    *When you open this in a browser, your map should look like this:*
 
     ![base-style](images/training-v2-03-base.png)
 
@@ -97,9 +97,10 @@ We can use an *expression function* here instead.
 
     `width: 8 + 16`
 
-    Now when you save and refresh the map, the points should be 24 pixels wide:
+    *Now when you save and refresh the map, the points should be 24 pixels wide. We zoomed into level 16 in this screenshot:*
 
     ![width-expression](images/training-v2-03-width-exp.png)
+
 
 ### Add a Color Expression Function
 
@@ -114,7 +115,9 @@ Just like with other expressions, we can combine `color constructor` expressions
 
     `color: rgb(239, 0, 0) + rgb(0, 239, 0)`
 
-    The color channel values get added together, so the final result is `rgb(239, 239, 0)`. That makes our markers yellow:
+    The color channel values get added together, so the final result is `rgb(239, 239, 0)`. That makes our markers yellow.
+
+    *We zoomed into level 17 in this screenshot. Notice how the point size stays 24 pixels wide no matter which zoom level you're at.*
 
     ![rgb-expression](images/training-v2-03-color-exp.png)
 
@@ -185,11 +188,13 @@ Another option is to use a CARTO VL property called [filter](https://carto.com/d
       ```
       const viz = new carto.Viz(`
         width: 15
-        color: rgba(RGB(240, 128, 128), 0.2)
+        color: rgba(240, 128, 128, 0.2)
         strokeColor: salmon
         strokeWidth: 3
         filter: 0.5
       `);
       ```
+
+    ![rgba-filter](images/training-v2-03-rgba-filter.png)
 
 We'll learn more about styling features differently from each other in the next section.

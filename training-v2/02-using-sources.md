@@ -1,4 +1,4 @@
-## Using data in your visualization with Sources
+## Using Data in Your Visualization with Sources
 
 *Sources are the basis for your map. They provide the data that you will visualize. In this section we'll demonstrate a few different ways to use them.*
 
