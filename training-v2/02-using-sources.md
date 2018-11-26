@@ -1,6 +1,8 @@
 ## Using data in your visualization with Sources
 
-Sources are the basis for your map. They provide the data that you will visualize. In this section we'll demonstrate a few different ways to use them. For more information check our [Add Data Sources guide](https://carto.com/developers/carto-vl/guides/add-data-sources/).
+*Sources are the basis for your map. They provide the data that you will visualize. In this section we'll demonstrate a few different ways to use them.*
+
+*For more information check our [Add Data Sources guide](https://carto.com/developers/carto-vl/guides/add-data-sources/).*
 
 1. Let's start with the map we made in the Getting Started section. Open it in your code editor.
 
@@ -97,12 +99,14 @@ Sources are the basis for your map. They provide the data that you will visualiz
     ```
 
     This is useful if:
-    * you only want to use part of a dataset
-    * you want to manipulate the original data with [PostgreSQL](https://carto.com/help/working-with-data/easy-sql/) or [PostGIS](https://carto.com/help/diy/postgis/) and use the results in your map
+    * you only want to use part of a dataset.
+    * you want to manipulate the original data with [PostgreSQL](https://carto.com/help/working-with-data/easy-sql/) or [PostGIS](https://carto.com/help/diy/postgis/) and use the results in your map.
+
+    Our `citiesSource` query is letting us use only large cities from the `populated_places` dataset. That's happening because our query contains a WHERE clause that will only select cities with a maximum population of more than ten million people.
 
     See which kinds of sources you can use and example code [here](https://carto.com/developers/carto-vl/reference/#cartosource) in our documentation.
 
-    In this map let's add a second layer that uses a GeoJSON source. Add this to your code:
+    In this map let's add a second layer that uses a GeoJSON source. We want this layer to show CARTO's Madrid office location. Add this to your code:
 
     ```
     const office = {
@@ -139,7 +143,7 @@ Sources are the basis for your map. They provide the data that you will visualiz
     officeLayer.addTo(map);
     ```
 
-    *When you save these changes and open your code document in a browser, your map should look like this:*
+    *When you save these changes and open your code document in a browser, your map should show a red point for the city of Madrid, and a green point for the CARTO office, like this:*
 
     ![two-sources](images/training-v2-02-srcs.png)
 
