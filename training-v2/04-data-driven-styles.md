@@ -130,10 +130,11 @@ Notice how we don't need to specify buckets in the color property's expression.
 
 When we don't specify buckets, we're creating an *unclassed map*. Each point is colored according to how much of an attribute it contains, instead of being put into a discrete category and given that category's assigned color.
 
-    ![pop-density-2](images/training-v2-04-density-ramp.png)
+  ![pop-density-2](images/training-v2-04-density-ramp.png)
+  
 
-    * The points with lowest population density are colored black, and the points with highest population density are colored yellow.
-    * But since this is an unclassed map, most points have values that fall between the lowest number and highest number. They are assigned a color that falls on a gradient between black and yellow. That's why we see gray points, and dark yellow points. 
+  * The points with lowest population density are colored black, and the points with highest population density are colored yellow.
+  * But since this is an unclassed map, most points have values that fall between the lowest number and highest number. They are assigned a color that falls on a gradient between black and yellow. That's why we see gray points, and dark yellow points. 
 
 Check [this guide](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#numeric-data) for more information about using `ramp` with numeric data.
 
