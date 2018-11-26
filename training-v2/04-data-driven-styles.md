@@ -12,50 +12,52 @@
     <html>
 
     <head>
-        <title>CARTO VL training</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="UTF-8">
-        <!-- Mapbox GL -->
-        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.css" rel="stylesheet" />
-        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
-        <!-- CARTO VL JS -->
-        <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-            }
+      <title>CARTO VL Training</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="UTF-8">
+      <!-- Include CARTO VL JS from the CARTO CDN-->
+      <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+      <!-- Include Mapbox GL from the Mapbox CDN-->
+      <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+      <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+      <!-- Include CARTO styles-->
+      <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
+      <style>
+        body {
+          margin: 0;
+          padding: 0;
+        }
 
-            #map {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-            }
-        </style>
+        #map {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
+      </style>
     </head>
 
     <body>
-        <div id="map"></div>
+      <div id="map"></div>
 
-        <script>
-            const map = new mapboxgl.Map({
-                container: 'map',
-                style: carto.basemaps.darkmatter,
-                center: [-3, 54.8],
-                zoom: 4.5
-            });
+      <script>
+        const map = new mapboxgl.Map({
+          container: 'map',
+          style: carto.basemaps.darkmatter,
+          center: [-3, 54.8],
+          zoom: 4.5
+        });
 
-            carto.setDefaultAuth({
-                user: 'cartovl',
-                apiKey: 'default_public'
-            });
+        carto.setDefaultAuth({
+          user: 'cartovl',
+          apiKey: 'default_public'
+        });
 
-            const source = new carto.source.Dataset('uk_elections');
-            const viz = new carto.Viz();
-            const layer = new carto.Layer('layer', source, viz);
+        const source = new carto.source.Dataset('uk_elections');
+        const viz = new carto.Viz();
+        const layer = new carto.Layer('layer', source, viz);
 
-            layer.addTo(map);
-        </script>
+        layer.addTo(map);
+      </script>
     </body>
 
     </html>
@@ -106,10 +108,10 @@ To demonstrate this we'll make a new map. The new dataset we're using has numeri
 
     ```
     const map = new mapboxgl.Map({
-        container: 'map',
-        style: carto.basemaps.darkmatter,
-        center: [0, 40],
-        zoom: 1
+      container: 'map',
+      style: carto.basemaps.darkmatter,
+      center: [0, 40],
+      zoom: 1
     });
     ```
 
