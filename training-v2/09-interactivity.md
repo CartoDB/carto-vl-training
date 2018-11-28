@@ -244,7 +244,81 @@ Find a list of Feature Events you can use [here](https://carto.com/developers/ca
 
     Now let's set up a function that detects when a user clicks on a point in our layer.
 
-13. Add this code block under `const interactivity = new carto.Interactivity(layer);`
+13. Let's change our code, so we can display a new piece of information about our map when a feature is clicked on. We'll also get rid of code we won't be using in this step. Make sure your document looks like this:
+
+    ```
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>CARTO VL training</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <!-- Include CARTO VL JS from the CARTO CDN-->
+        <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+        <!-- Include Mapbox GL from the Mapbox CDN-->
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+        <!-- Include CARTO styles-->
+        <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="map"></div>
+        <aside class="toolbox">
+            <div class="box">
+                <header>
+                    <h1>Events</h1>
+                </header>
+                <section>
+                    <ul id="features"></ul>
+                </section>
+            </div>
+        </aside>
+
+        <script>
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: carto.basemaps.voyager,
+                center: [0, 40],
+                zoom: 1
+            });
+
+            carto.setDefaultAuth({
+                user: 'cartovl',
+                apiKey: 'default_public'
+            });
+
+            const source = new carto.source.Dataset('populated_places');
+            const viz = new carto.Viz(`
+                @total_pop: viewportSum($pop_max)
+                @name: $name
+                @pop_max: $pop_max
+                color: grey
+                width: 6
+            `);
+            const layer = new carto.Layer('layer', source, viz);
+
+            const interactivity = new carto.Interactivity(layer);
+
+            interactivity.on('featureClick', featureEvent => {
+                const features = document.querySelector('#features');
+                features.innerHTML = '';
+                featureEvent.features.forEach((feature) => {
+                    const name = feature.variables.name.value;
+                    const pop_max = feature.variables.pop_max.value;
+                    features.innerHTML += `<li>${name}: ${pop_max.toLocaleString()}</li>`;
+                });
+            });
+
+            layer.addTo(map);
+        </script>
+    </body>
+
+    </html>
+    ```
+
+    Notice we added this listener that runs a function when our users click on a point:
 
     ```
     interactivity.on('featureClick', featureEvent => {
@@ -264,6 +338,8 @@ Find a list of Feature Events you can use [here](https://carto.com/developers/ca
         * Then it finds the `name` and `pop_max` variable values for that feature and displays them in our overlay.
 
     ![feature-click](images/training-v2-09-feature-click.gif)
+
+    Reload you map and click on a point!
 
 ### Adding Mapbox GL Pop-Ups
 
@@ -307,7 +383,7 @@ Review [this guide section](https://carto.com/developers/carto-vl/guides/add-int
 
     ![click-popup](images/training-v2-09-click-popup.gif)
 
-### Interactive-Based Styling
+### Interactive Styling
 
 In addition to displaying useful information about a feature when a user interacts with it, we can change what the feature looks like to highlight it.
 
