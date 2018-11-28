@@ -235,6 +235,8 @@ CARTO's [Airship](https://carto.com/developers/airship/) library already provide
 
     For more details about how Airship Histogram Widget Components work, see [this documentation](https://carto.com/developers/airship/reference/#/components/histogram-Widget).
 
+    Check [this guide section](https://carto.com/developers/carto-vl/guides/add-widgets/#scalars-what-is-the-total-of--what-is-the-average-of--what-is-the-maximum-) to learn more about how to find averages, totals, min, max or percentiles for your entire dataset vs. features in your map's viewport.
+
     Now we just need to call the drawHistogram function to draw the histogram on our map. 
 
 8. Paste this line into your code under `layer.addTo(map);`:
@@ -480,3 +482,6 @@ We can get the room type data in histogram format, but instead of displaying it 
     Now when you save & refresh your map we can see that the most common rentals are for entire homes or apartments. Zoom in on your map to check how the Category Widget changes.
 
     ![category-widget](images/training-v2-05-category.gif)
+
+    For more information about numeric Histogram Widgets vs. Category histogram Widgets check [this guide section](https://carto.com/developers/carto-vl/guides/add-widgets/#numeric-histograms-what-is-the-distribution-of-the-price).
+
