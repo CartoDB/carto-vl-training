@@ -479,4 +479,4 @@ We can get the room type data in histogram format, but instead of displaying it 
 
     Now when you save & refresh your map we can see that the most common rentals are for entire homes or apartments. Zoom in on your map to check how the Category Widget changes.
 
-    ![category-widget](images/training-v2-05-category.png)
+    ![category-widget](images/training-v2-05-category.gif)
