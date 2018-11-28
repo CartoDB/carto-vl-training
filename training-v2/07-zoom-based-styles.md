@@ -4,7 +4,7 @@ In the last section we sized points proportionally according to total velocity /
 
 ![no-zoom-styles](images/training-v2-07-no-zoom-styles.gif)
 
-We can make the points much easier to see at different zoom levels when we use CARTO VL's [scaled](https://carto.com/developers/carto-vl/reference/#cartoexpressionsscaled) expression. See more detail about it [in this guide](https://carto.com/developers/carto-vl/guides/zoom-based-styles/).
+We can make the points much easier to see at different zoom levels when we use CARTO VL's [scaled](https://carto.com/developers/carto-vl/reference/#cartoexpressionsscaled) expression. Learn more about why and how you should use it [in this guide](https://carto.com/developers/carto-vl/guides/zoom-based-styles/).
 
 ### Create a Basic Map
 
@@ -20,11 +20,12 @@ Let's continue with our Central Park map from the last section.
         <title>CARTO VL training</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <!-- Mapbox GL -->
-        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.css" rel="stylesheet" />
-        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
-        <!-- CARTO VL JS -->
-        <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
+        <!-- Include CARTO VL JS from the CARTO CDN-->
+        <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+        <!-- Include Mapbox GL from the Mapbox CDN-->
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+        <!-- Include CARTO styles-->
         <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
     </head>
 
@@ -101,6 +102,8 @@ Let's continue with our Central Park map from the last section.
 
 ### Scale the Symbol Size
 
+We want to make sure our points stay legible and keep an appropriate size as we zoom in and out on this map. To see more about why that's important check [this guide section](https://carto.com/developers/carto-vl/guides/zoom-based-styles/#scale-symbol-size).  
+
 2. Wrap your width expression in a `scaled` function, like this:
 
     `width: scaled(ramp(clusterSum($velocity)/clusterCount(), [0, 0.5]), 13)`
@@ -172,6 +175,8 @@ If you only want to make a map with a part of your data, you can always use a SQ
       * Since all of those cities fall in our highest quantiles bin, they are all colored light red.
 
     ![zoom-filter](images/training-v2-07-zoom-filter.gif)
+
+    Learn more about setting feature visibility according to zoom level [in this guide](https://carto.com/developers/carto-vl/guides/zoom-based-styles/#set-feature-visibility-by-zoom).
 
 ### Combine Zoom, Properties, and Ramp
 
