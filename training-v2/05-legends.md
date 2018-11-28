@@ -310,7 +310,92 @@ We can get the room type data in histogram format, but instead of displaying it 
     * The Category Widget is [another kind of Airship Component](https://carto.com/developers/airship/reference/#/components/category-widget).
     * We are still taking the data from our `viz` `viewportHistogram` function, but now it's working with strings instead of numbers.
 
-    Now when you save & refresh your map we can see that the most common rentals are for entire homes or apartments. There are about 10,700 of those.
+    At this point your final code should look like this:
+
+    ```
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>CARTO VL training</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- Mapbox GL -->
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+        <!-- CARTO VL -->
+        <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+        <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
+        <!-- Include Airship CSS  -->
+        <link rel="stylesheet" href="https://libs.cartocdn.com/airship-style/v1.0.2/airship.css">
+        <!-- Include Airship Icons -->
+        <link rel="stylesheet" href="https://libs.cartocdn.com/airship-icons/v1.0.2/icons.css">
+        <!-- Include Airship Web Components -->
+        <script src="https://libs.cartocdn.com/airship-components/v1.0.2/airship.js"></script>
+    </head>
+
+    <body>
+        <div id="map"></div>
+
+        <aside class="toolbox">
+            <div class="box">
+                <header>
+                    <h1>Price</h1>
+                </header>
+                <as-category-widget/>
+                <footer class="js-footer"></footer>
+            </div>
+        </aside>
+
+        <script>
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: carto.basemaps.darkmatter,
+                center: [-3.6908, 40.4297],
+                zoom: 11
+            });
+
+            carto.setDefaultAuth({
+                user: 'cartovl',
+                apiKey: 'default_public'
+            });
+
+            const source = new carto.source.Dataset('madrid_listings');
+            const viz = new carto.Viz(`
+                @histogram: viewportHistogram($room_type, 1, 5)
+                width: sqrt(ramp($price, [4, 25^2]))
+                strokeWidth: 0.5
+                color: red
+                filter: $price < 500
+            `);
+            const layer = new carto.Layer('layer', source, viz);
+
+            layer.addTo(map);
+
+            layer.on('loaded', drawHistogram);
+            layer.on('updated', drawHistogram);
+
+            function drawHistogram() {
+                var categoryWidget = document.querySelector('as-category-widget');
+                const histogram = layer.viz.variables.histogram.value;
+                var categoryWidget = document.querySelector('as-category-widget');
+                categoryWidget.categories = histogram.map(entry => {
+                    return {
+                        name: entry.x,
+                        value: entry.y
+                    }
+                });
+            }
+
+        </script>
+    </body>
+
+    </html>
+
+    ```
+
+    Now when you save & refresh your map we can see that the most common rentals are for entire homes or apartments. Zoom in on your map to check how the Category Widget changes.
 
     ![category-widget](images/training-v2-05-category.png)
 
