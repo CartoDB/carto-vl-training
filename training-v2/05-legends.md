@@ -241,6 +241,88 @@ CARTO's [Airship](https://carto.com/developers/airship/) library already provide
 
     `layer.on('loaded', drawHistogram);`
 
+    At this point your code should look like this:
+
+    ```
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>CARTO VL training</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- Mapbox GL -->
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+        <!-- CARTO VL -->
+        <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+        <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
+        <!-- Include Airship CSS  -->
+        <link rel="stylesheet" href="https://libs.cartocdn.com/airship-style/v1.0.2/airship.css">
+        <!-- Include Airship Icons -->
+        <link rel="stylesheet" href="https://libs.cartocdn.com/airship-icons/v1.0.2/icons.css">
+        <!-- Include Airship Web Components -->
+        <script src="https://libs.cartocdn.com/airship-components/v1.0.2/airship.js"></script>
+    </head>
+
+    <body>
+      <div id="map"></div>
+
+      <aside class="toolbox">
+        <div class="box">
+            <header>
+                <h1>Price</h1>
+            </header>
+            <as-histogram-widget/>
+            <footer class="js-footer"></footer>
+        </div>
+      </aside>
+
+      <script>
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: carto.basemaps.darkmatter,
+            center: [-3.6908, 40.4297],
+            zoom: 11
+        });
+
+        carto.setDefaultAuth({
+            user: 'cartovl',
+            apiKey: 'default_public'
+        });
+
+        const source = new carto.source.Dataset('madrid_listings');
+        const viz = new carto.Viz(`
+            @histogram: viewportHistogram($price, 5, 1)
+            width: sqrt(ramp($price, [4, 25^2]))
+            strokeWidth: 0.5
+            color: red
+        `);
+        const layer = new carto.Layer('layer', source, viz);
+
+        layer.addTo(map);
+
+        layer.on('loaded', drawHistogram);
+        layer.on('updated', drawHistogram);
+
+        function drawHistogram() {
+            var histogramWidget = document.querySelector('as-histogram-widget');
+            const histogram = layer.viz.variables.histogram.value;
+            histogramWidget.data = histogram.map(entry => {
+                return {
+                    start: entry.x[0],
+                    end: entry.x[1],
+                    value: entry.y
+                }
+            });
+        }
+
+      </script>
+    </body>
+
+    </html>
+    ```
+
     Now when our map layer loads the histogram will automatically be rendered.
 
     ![airship-histogram](images/training-v2-05-histogram.png)
@@ -253,7 +335,7 @@ There's quite a lot of data in our Madrid Listings $price column. What if we're 
 
     ```
     const viz = new carto.Viz(`
-      @histogram: viewportHistogram($price, 1, 5)
+      @histogram: viewportHistogram($price, 5, 1)
       width: sqrt(ramp($price, [4, 25^2]))
       strokeWidth: 0.5
       color: red
@@ -398,6 +480,3 @@ We can get the room type data in histogram format, but instead of displaying it 
     Now when you save & refresh your map we can see that the most common rentals are for entire homes or apartments. Zoom in on your map to check how the Category Widget changes.
 
     ![category-widget](images/training-v2-05-category.png)
-
-
-
