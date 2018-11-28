@@ -1,8 +1,10 @@
 ## Create a Basic Visualization with 350k Points
 
-When your map has to render a large number points that can impact performance. To make sure your maps perform efficiently CARTO VL performs auto-aggregation. 
+*When your map has to render a large number points that can impact performance. To make sure your maps perform efficiently CARTO VL performs auto-aggregation.*
 
-For example, at zoom levels where you wouldn't be able to see all of your points render properly because they overlap too closely, our system automatically aggregates the points so not all of them need to render. As you zoom in though more points are revealed.
+*For example, at zoom levels where you wouldn't be able to see all of your points render properly because they overlap too closely, our system automatically aggregates the points so not all of them need to render. As you zoom in though more points are revealed.*
+
+*In this section we will create a map from a large dataset, to check how auto-aggregation works.*
 
 ### Create a Basic Map
 
@@ -18,11 +20,12 @@ Let's create a new map that uses anonymized data from over a million people that
         <title>CARTO VL training</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <!-- Mapbox GL -->
-        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.css" rel="stylesheet" />
-        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
-        <!-- CARTO VL JS -->
-        <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
+        <!-- Include CARTO VL JS from the CARTO CDN-->
+        <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+        <!-- Include Mapbox GL from the Mapbox CDN-->
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+        <!-- Include CARTO styles-->
         <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
     </head>
 
@@ -138,6 +141,8 @@ You can control the size of this invisible grid. Use the the `resolution` proper
 
     ![resolution](images/training-v2-06-resolution.gif)
 
+    To learn more about resolution check [this section of our guides](https://carto.com/developers/carto-vl/guides/aggregation-and-data-summaries/#resolution).
+
 ### Improve Using Cluster Method
 
 When we aggregate points, we are "combining" them by location, or spatially aggregating them. 
@@ -183,7 +188,7 @@ We have another column in this dataset that describes the visitor's travel mode.
       resolution: 0.25
     `);
     ```
-    * `clusterMode` finds the most common values in each set of points that are getting aggregated into a single marker. Here it's finding the most common travel mode.
+    * [clusterMode](https://carto.com/developers/carto-vl/reference/#cartoexpressionsclustermode) finds the most common values in each set of points that are getting aggregated into a single marker. Here it's finding the most common travel mode.
     * We are using a CARTOColors palette to map our common categories to a unique color: [Bold](https://carto.com/carto-colors/). We're making sure to use a Qualitative palette, since there's no heirarchy to these categories.
 
 This is a good way to explore our data. Since we have a large amount of data it would take a long time to identify the unique travel modes if we didn't already know what they were. Let's add a Legend to our map so we can see what our feature colors represent.
