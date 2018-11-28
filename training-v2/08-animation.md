@@ -1,12 +1,11 @@
 ## Animation
 
-Previously in the CARTO platform you've been able to animate points. Now with CARTO VL we can animate lines and polygons also. In this section we'll set up a basic animated map and add controls so our viewers can play or pause the animation, and set it's duration.
-
-
+*In this section we'll set up a basic animated map of points. We will also add controls so our viewers can play or pause the animation, and set it's duration.*
 
 ### Create a Basic Map
 
 Let's create a new map using bird migration data.
+  * We're animating points in this map, but one important feature of CARTO VL is that we can also animate polygons and lines.
 
 1. Paste this into your index.html document:
 
@@ -18,11 +17,12 @@ Let's create a new map using bird migration data.
         <title>CARTO VL training</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <!-- Mapbox GL -->
-        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.css" rel="stylesheet" />
-        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
-        <!-- CARTO VL JS -->
-        <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
+        <!-- Include CARTO VL JS from the CARTO CDN-->
+        <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+        <!-- Include Mapbox GL from the Mapbox CDN-->
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+        <!-- Include CARTO styles-->
         <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
     </head>
 
@@ -91,7 +91,7 @@ Duration lets you specify how long the whole animation will last.
 
 Fade lets you specify how long it takes for a point to fade in and fade out.
 
-You can use both parameters like this...
+You can use both parameters to fine-tune your animation. Find out more in [this guide](https://carto.com/developers/carto-vl/guides/animated-visualizations/#style-and-configure-the-animation).
 
 3. Replace your current filter with this:
 
@@ -211,6 +211,3 @@ We can also take our whole animation expression and assign it to a sequential [C
     The `Oryel` palette swatches progress from light yellow to orange-red. Check out how the bird locations are mapped to those colors over time in our final animation:
 
     ![animation-colors](images/training-v2-08-animation-colors.gif)
-
-
-
