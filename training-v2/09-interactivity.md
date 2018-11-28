@@ -1,6 +1,8 @@
 ## Intro to Interactivity and Events
 
-One of the most useful features of CARTO maps is that they're interactive. When users click on a map, or pan it, or hover over it's features, we can cause another action to happen in the map. For example, we can open a Pop-Up window, or change the color of a feature to highlight it. In this section we will cover different types of interactivity and how you can use them to highlight your data. We also have a guide for this [here](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/).
+*One of the most useful features of CARTO maps is that they're interactive. When users click on a map, or pan it, or hover over it's features, we can cause another action to happen in the map. For example, we can open a Pop-Up window, or change the color of a feature to highlight it.* 
+
+*In this section we will cover different types of interactivity and how you can use them to highlight your data. We also have a guide for this [here](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/).*
 
 ### Create a Basic Map
 
@@ -16,11 +18,12 @@ Let's create a new map using world population data.
         <title>CARTO VL training</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <!-- Mapbox GL -->
-        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.css" rel="stylesheet" />
-        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0-beta.1/mapbox-gl.js"></script>
-        <!-- CARTO VL JS -->
-        <script src="https://libs.cartocdn.com/carto-vl/v0.9.1/carto-vl.min.js"></script>
+        <!-- Include CARTO VL JS from the CARTO CDN-->
+        <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+        <!-- Include Mapbox GL from the Mapbox CDN-->
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+        <!-- Include CARTO styles-->
         <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
     </head>
 
