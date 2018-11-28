@@ -126,7 +126,11 @@ For more information about map events check [this section](https://carto.com/dev
 
 Events that happen in certain layers in your map are also detectable. We use CARTO VL library functions for this, as opposed to Mapbox-specific functions.
 
-5. Add this code block underneath `map.on('move', desc);`
+5. Add this line into your `<aside></aside>` block, underneath `<p id="desc"></p>`:
+
+    `<p id="layer-desc"></p>`
+
+6. Add this code block underneath `map.on('move', desc);`
 
     ```
     layer.on('loaded', function() {
@@ -145,7 +149,7 @@ Layer events are described in [this guide section](https://carto.com/developers/
 
 Let's use a Layer Event to get useful information about our layer's data. To do that we're going to use variables, [as explained in this guide](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#using-variables).
 
-6. Add a variable to our `viz` that retrieves our layer's features:
+7. Add a variable to our `viz` that retrieves our layer's features:
 
     ```
     const viz = new carto.Viz(`
@@ -159,7 +163,7 @@ Let's use a Layer Event to get useful information about our layer's data. To do 
 
     Since the variable returns a list, we can count how many items are in the list. That means we can display our layer's feature count in our overlay.
 
-7. Replace your `layer.on('loaded'` code block with this:
+8. Replace your `layer.on('loaded'` code block with this:
 
     ```
     layer.on('updated', function() {
@@ -181,7 +185,7 @@ We can get more information from our layer besides a list of features. CARTO VL 
 
 You can find a list of viewport-based functions [here](https://carto.com/developers/carto-vl/reference/#cartoexpressionsviewportavg).
 
-8. Make a new variable in your `viz`, like this:
+9. Make a new variable in your `viz`, like this:
 
     ```
     const viz = new carto.Viz(`
@@ -194,7 +198,7 @@ You can find a list of viewport-based functions [here](https://carto.com/develop
     * We have a column in our dataset that contains a maximum population number for each point: `pop_max`.
     * `viewportSum` is finding the pop_max values for each point that falls inside the map's bounds, and adding those together.
 
-9. Replace your `layer.on('updated'` function with this:
+10. Replace your `layer.on('updated'` function with this:
 
     ```
     layer.on('updated', function() {
@@ -214,7 +218,7 @@ The first step to using feature events is to enable your map layer to capture us
 
 Find a list of Feature Events you can use [here](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#feature-events).
 
-10. Paste this underneath `const layer = new carto.Layer('layer', source, viz);`:
+11. Paste this underneath `const layer = new carto.Layer('layer', source, viz);`:
 
     ```
     const interactivity = new carto.Interactivity(layer);
@@ -224,7 +228,7 @@ Find a list of Feature Events you can use [here](https://carto.com/developers/ca
 
     Let's add `viz` variables to contain useful information about the features our users will interact with.
 
-11. Replace your `viz` with this:
+12. Replace your `viz` with this:
 
     ```
     const viz = new carto.Viz(`
@@ -240,7 +244,7 @@ Find a list of Feature Events you can use [here](https://carto.com/developers/ca
 
     Now let's set up a function that detects when a user clicks on a point in our layer.
 
-12. Add this code block under `const interactivity = new carto.Interactivity(layer);`
+13. Add this code block under `const interactivity = new carto.Interactivity(layer);`
 
     ```
     interactivity.on('featureClick', featureEvent => {
@@ -267,7 +271,7 @@ We can use a feature event to open a Pop-Up window, to display useful informatio
 
 Review [this guide section](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#adding-pop-ups) for more information about adding Pop-Ups.
 
-13. We are going to add new code underneath the `forEach` function we used in the last step. Use this for your `featureClick` code block:
+14. We are going to add new code underneath the `forEach` function we used in the last step. Use this for your `featureClick` code block:
 
     ```
     interactivity.on('featureClick', featureEvent => {
@@ -311,7 +315,7 @@ For our last map we will use layer events that capture when a user rolls over a 
 
 
 
-14. Under your `featureClick` code block, add this:
+15. Under your `featureClick` code block, add this:
 
     ```
     interactivity.on('featureEnter', featureEvent => {
@@ -328,7 +332,7 @@ For our last map we will use layer events that capture when a user rolls over a 
         * The [blendTo function](https://carto.com/developers/carto-vl/reference/#expressionblendto) transitions the feature from it's current color and width to the new color and width we're defining with expressions. 
         * `100` is the time it takes for that transition to happen, in milliseconds.
 
-15. Underneath the block we just added, add another block to transition the feature back to it's original state when the user's cursor leaves it:
+16. Underneath the block we just added, add another block to transition the feature back to it's original state when the user's cursor leaves it:
 
     ```
     interactivity.on('featureLeave', featureEvent => {
