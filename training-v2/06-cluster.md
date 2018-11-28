@@ -215,4 +215,93 @@ This is a good way to explore our data. Since we have a large amount of data it 
     });
     ```
 
+    At this point your document should look like this:
+
+    ```
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>CARTO VL training</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <!-- Include CARTO VL JS from the CARTO CDN-->
+        <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+        <!-- Include Mapbox GL from the Mapbox CDN-->
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+        <!-- Include CARTO styles-->
+        <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
+      </head>
+
+    <body>
+      <div id="map"></div>
+
+      <aside class="toolbox">
+        <div class="box">
+          <header>
+            <h1>Rendered features</h1>
+          </header>
+          <section>
+            <div id="controls">
+              <div id="content"></div>
+              <ul id="content-legend"></ul>
+            </div>
+          </section>
+          <footer class="js-footer"></footer>
+        </div>
+      </aside>
+
+      <script>
+        const map = new mapboxgl.Map({
+          container: 'map',
+          style: carto.basemaps.darkmatter,
+          center: [-73.9684, 40.7828],
+          zoom: 13
+        });
+
+        carto.setDefaultAuth({
+          user: 'cartovl',
+          apiKey: 'default_public'
+        });
+
+        const source = new carto.source.Dataset('million_walks_central_park');
+        const viz = new carto.Viz(`
+          width: ramp(clusterSum($velocity)/clusterCount(), [0, 0.5])
+          color: ramp(clusterMode($travel_mode), bold)
+          strokeWidth: 0
+          resolution: 0.25
+        `);
+        const layer = new carto.Layer('layer', source, viz);
+
+        layer.addTo(map);
+        layer.on('loaded', updateRenderedFeatured);
+        layer.on('updated', updateRenderedFeatured);
+
+        function updateRenderedFeatured() {
+          document.querySelector('#content').innerText = layer.getNumFeatures().toLocaleString();
+        }
+
+        layer.on('loaded', () => {
+          const colorLegend = layer.viz.color.getLegendData();
+          let colorLegendList = '';
+          function rgbToHex(color) {
+            return "#" + ((1 << 24) + (color.r << 16) + (color.g << 8) + color.b).toString(16).slice(1);
+          }
+          colorLegend.data.forEach((legend, index) => {
+            const color = legend.value
+            ? rgbToHex(legend.value)
+            : 'white'
+            if (color) {
+              colorLegendList +=
+              `<li><span class="point-mark" style="background-color:${color}; border: 1px solid black;"></span><span>${legend.key.replace('CARTO_VL_OTHERS', 'Other causes')}</span></li>\n`;
+            }
+          });
+          document.getElementById('content-legend').innerHTML = colorLegendList;
+        });
+      </script>
+    </body>
+
+    </html>
+    ```
+
     ![cluster-mode](images/training-v2-06-cluster-mode.png)
