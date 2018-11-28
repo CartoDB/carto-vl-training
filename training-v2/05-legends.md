@@ -140,9 +140,19 @@ For example, we previously created a Madrid Listings rental real estate map that
 
 CARTO's [Airship](https://carto.com/developers/airship/) library already provides an interface component we can customize for this Widget.
 
-4. Add this code beneath the other libraries you've already included between the `<head></head>` elements:
+4. In this step we will add links to Airship's libraries. Make sure the code between your `<head></head>` elements looks like this:
 
     ```
+    <title>CARTO VL training</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Mapbox GL -->
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css" rel="stylesheet" />
+    <!-- CARTO VL -->
+    <script src="https://libs.cartocdn.com/carto-vl/v1.0.0/carto-vl.min.js"></script>
+    <link href="https://carto.com/developers/carto-vl/examples/maps/style.css" rel="stylesheet">
     <!-- Include Airship CSS  -->
     <link rel="stylesheet" href="https://libs.cartocdn.com/airship-style/v1.0.2/airship.css">
     <!-- Include Airship Icons -->
@@ -151,52 +161,52 @@ CARTO's [Airship](https://carto.com/developers/airship/) library already provide
     <script src="https://libs.cartocdn.com/airship-components/v1.0.2/airship.js"></script>
     ```
 
-5. Delete your `<aside></aside>` code block, then replace all of the code between the body `<script></script>' elements with this to create our election map.
+5. Add this class to your body element:
+
+    `<body class="as-app-body">`
+
+6. Use this code for your `<aside></aside>` block:
+
+    ```
+    <aside class="toolbox">
+        <div class="box">
+            <header>
+                <h1>Price</h1>
+            </header>
+            <as-histogram-widget/>
+            <footer class="js-footer"></footer>
+        </div>
+    </aside>
+    ```
+
+7. Now replace all of the code between the body `<script></script>' elements with this to create our election map.
 
     ```
     const map = new mapboxgl.Map({
-      container: 'map',
-      style: carto.basemaps.darkmatter,
-      center: [-3.6908, 40.4297],
-      zoom: 11
+        container: 'map',
+        style: carto.basemaps.darkmatter,
+        center: [-3.6908, 40.4297],
+        zoom: 11
     });
 
     carto.setDefaultAuth({
-      user: 'cartovl',
-      apiKey: 'default_public'
+        user: 'cartovl',
+        apiKey: 'default_public'
     });
 
     const source = new carto.source.Dataset('madrid_listings');
     const viz = new carto.Viz(`
-      width: sqrt(ramp($price, [4, 25^2]))
-      strokeWidth: 0.5
-      color: red
-      filter: $price < 500
+        @histogram: viewportHistogram($price, 5, 1)
+        width: sqrt(ramp($price, [4, 25^2]))
+        strokeWidth: 0.5
+        color: red
     `);
     const layer = new carto.Layer('layer', source, viz);
 
     layer.addTo(map);
-    ```
 
-6. Add this to your `viz` above the `width` property:
-
-    `@histogram: viewportHistogram($price, 1, 5)`
-
-    * [viewportHistogram](https://carto.com/developers/carto-vl/reference/) means we are only using the data that is inside the map view bounds.
-    * `$price` is the attribute we are illustrating in this histogram. It is a number-type column in our dataset.
-      * `viewportHistogram` can also take an expression as it's first parameter.
-    * `1` is the "size" of our histogram. It defines the number of histogram bars.
-      * This is an optional parameter. If you don't use it, the histogram will divide the price data into 20 bars by default.
-    * `5` means this histogram function is going to weight each occurrence differently based on the number 5.
-      * This is also an optional parameter. It's default is `1`, which is an unweighted count.
-
-    This line defines our histogram, but we still have to draw it.
-
-7. Paste this into your code underneath `layer.addTo(map);`:
-
-    ```
     function drawHistogram() {
-      var histogramWidget = document.querySelector('as-histogram-Widget');
+      var histogramWidget = document.querySelector('as-histogram-widget');
       const histogram = layer.viz.variables.histogram.value;
       histogramWidget.data = histogram.map(entry => {
         return {
@@ -208,9 +218,20 @@ CARTO's [Airship](https://carto.com/developers/airship/) library already provide
     }
     ```
 
-    * The `var histogramWidget` line creates an Airship histogram Widget.
-    * The `const histogram` line reads values from the `viewportHistogram` function in our `viz`.
-    * The `histogramWidget.data` line maps the values to our histogram. 
+    Notice we've added `@histogram: viewportHistogram($price, 5, 1)` to our `viz`.
+      * [viewportHistogram](https://carto.com/developers/carto-vl/reference/) means we are only using the data that is inside the map view bounds.
+      * `$price` is the attribute we are illustrating in this histogram. It is a number-type column in our dataset.
+        * `viewportHistogram` can also take an expression as it's first parameter.
+      * `5` is the "size" of our histogram. It defines the number of histogram bars.
+        * This is an optional parameter. If you don't use it, the histogram will divide the price data into 20 bars by default.
+      * The second parameter is used to weight each occurrence differently based on the number you define here.
+        * `1` means this is an unweighted count. 
+        * This is also an optional parameter. We're defining `1` for demonstration purposes, but `1` is also actually the default so it doesn't need to be specified.
+
+    This line defines our histogram, but we still have to draw it. That happens inside the `drawHistogram` function we just added.
+      * The `var histogramWidget` line creates an Airship histogram Widget.
+      * The `const histogram` line reads values from the `viewportHistogram` function in our `viz`.
+      * The `histogramWidget.data` line maps the values to our histogram. 
 
     For more details about how Airship Histogram Widget Components work, see [this documentation](https://carto.com/developers/airship/reference/#/components/histogram-Widget).
 
