@@ -174,7 +174,7 @@ Use this code for your `<aside></aside>` block:
 </aside>
 ```
 
-Now replace all of the code between the body `<script></script>' elements with this to create our election map.
+Now replace all of the code between the body `<script></script>` elements with this to create our election map.
 
 ```javascript
 const map = new mapboxgl.Map({
