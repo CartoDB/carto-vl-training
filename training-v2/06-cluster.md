@@ -1,6 +1,6 @@
 # Create a Basic Visualization with 350k Points
 
-*When your map has to render a large number of points that can impact performance. To make sure your maps perform efficiently CARTO VL performs auto-aggregation.*
+*When your map has to render a large number of points that can impact it's performance. To make sure your maps perform efficiently CARTO VL performs auto-aggregation.*
 
 *For example, at zoom levels where you wouldn't be able to see all of your points render properly because they overlap too closely, our system automatically aggregates the points so not all of them need to render. As you zoom in though more points are revealed.*
 
@@ -76,18 +76,18 @@ Notice we've added an overlay that will show us how many features are being rend
 Add this under `layer.addTo(map);`:
 
 ```javascript
-layer.on('loaded', updateRenderedFeatured);
-layer.on('updated', updateRenderedFeatured);
+layer.on('loaded', updateRenderedFeatures);
+layer.on('updated', updateRenderedFeatures);
 
-function updateRenderedFeatured() {
+function updateRenderedFeatures() {
   document.querySelector('#content').innerText = layer.getNumFeatures().toLocaleString();
 }
 ```
 
-* The `updateRenderedFeatured` function is using `getNumFeatures` to count the number of points being rendered.
+* The `updateRenderedFeatures` function is using `getNumFeatures` to count the number of points being rendered.
 * It's making that number into text, and displaying the text in our overlay box.
 * The feature count will appear in the box initially when the map is loaded.
-* It will also update on zoom because we're calling `updateRenderedFeatured` again when the layer gets updated.
+* It will also update on zoom because we're calling `updateRenderedFeatures` again when the layer gets updated.
 
 Now this will show us how many features are being rendered. Save and refresh your map. Notice how we are only rendering one point when we are at zoom level 1. That's because if we rendered all of the original points they would not be visually distinguishable at this zoom level.
 
@@ -180,7 +180,7 @@ const viz = new carto.Viz(`
 * [clusterMode](https://carto.com/developers/carto-vl/reference/#cartoexpressionsclustermode) finds the most common values in each set of points that are getting aggregated into a single marker. Here it's finding the most common travel mode.
 * We are using a CARTOColors palette to map our common categories to a unique color: [Bold](https://carto.com/carto-colors/). We're making sure to use a Qualitative palette, since there's no hierarchy to these categories.
 
-This is a good way to explore our data. Since we have a large amount of data it would take a long time to identify the unique travel modes if we didn't already know what they were. Let's add a Legend to our map so we can see what our feature colors represent. Add this under the `updateRenderedFeatured` function:
+This is a good way to explore our data. Since we have a large amount of data it would take a long time to identify the unique travel modes if we didn't already know what they were. Let's add a Legend to our map so we can see what our feature colors represent. Add this under the `updateRenderedFeatures` function:
 
 ```javascript
 layer.on('loaded', () => {
@@ -261,10 +261,10 @@ At this point your document should look like this:
       const layer = new carto.Layer('layer', source, viz);
 
       layer.addTo(map);
-      layer.on('loaded', updateRenderedFeatured);
-      layer.on('updated', updateRenderedFeatured);
+      layer.on('loaded', updateRenderedFeatures);
+      layer.on('updated', updateRenderedFeatures);
 
-      function updateRenderedFeatured() {
+      function updateRenderedFeatures() {
         document.querySelector('#content').innerText = layer.getNumFeatures().toLocaleString();
       }
 

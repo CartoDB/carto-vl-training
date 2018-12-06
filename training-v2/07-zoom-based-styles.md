@@ -106,7 +106,7 @@ width: scaled(ramp(clusterSum($velocity)/clusterCount(), [0, 0.5]), 13)
 ```
 
 * `Scaled` takes a width as it's first parameter. This width can be a number or an expression.
-* It's second parameter is a zoom level: 13. You should choose the zoom level at which your map looks best with the current styles. CARTO VL will automatically base the other zoom level styles on zoom 13, just scaled so they are sized appropriately for the current zoom. After applying this you should check what your map looks like at all zoom levels, and make adjustments to the style or base zoom level number as needed.
+* It's second parameter is a zoom level: 13. CARTO VL will automatically base the other zoom level styles on zoom 13, just scaled so they are sized appropriately for the current zoom. You should choose the zoom level at which your map looks best with the current styles. After applying this you should check what your map looks like at all zoom levels, and make adjustments to the style or base zoom level number as needed.
 
 *Now check out how the map appears when we zoom in:*
 
@@ -147,7 +147,9 @@ Let's say we'd like to focus on just the larger cities in this map. We can add a
 filter: $pop_max > 1000000
 ```
 
-* [filter](https://carto.com/developers/carto-vl/reference/#cartoexpressions) sets up a condition. If any features don't meet that condition they will not be included in the visualization. In this case, any cities with max populations of less than one million people will not show up in our map. Notice the classification has been recalculated to just include the features with max populations over 1,000,000.
+* [filter](https://carto.com/developers/carto-vl/reference/#cartoexpressions) sets up a condition. If any features don't meet that condition they will not be included in the visualization. In this case, any cities with max populations of one million people or less will not show up in our map. 
+
+*Notice the classification has been recalculated to just include the features with max populations over 1,000,000.*
 
 ![popmax-filter](images/training-v2-07-popmax-filter.png)
 
@@ -157,7 +159,7 @@ We can use more than one condition for a filter. Add this zoom condition to the 
 filter: zoom() > 3 or $pop_max > 1000000
 ```
 
-*At zoom levels less than 3, only cities that have a max population of more than 1 million people will render. Since all of those cities fall in our highest quantiles bin, they are all colored light red.*
+*At zoom levels 3 or less, only cities that have a max population of more than 1 million people will render. Since all of those cities fall in our highest quantiles bin, they are all colored light red.*
 
 ![zoom-filter](images/training-v2-07-zoom-filter.gif)
 

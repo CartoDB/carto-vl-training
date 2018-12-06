@@ -191,15 +191,13 @@ const viz = new carto.Viz(`
 `);
 ```
 
-Notice that we've only specified blue and red colors in the `color` expression. That works for identifying the polygons where Labour and Conservative Party won, but we have some polygons where neither party won (or there wasn't any winning party data). 
+Notice that we've only specified blue and red colors in the `color` expression. That works for identifying the polygons where the Labour Party or the Conservative Party won, but we have some polygons where neither of those parties won (or there wasn't any winning party data). 
 
-Our system categorizes these polygons as "Other", and automatically gives them a gray color. We can change that though. Update the `color` property to this:
+Our system categorizes these polygons as "Other", and automatically gives them a gray color. We can change that though. You can use an optional third parameter in the buckets function to pick a color for the "Other" category, like white. Update the `color` property to this:
 
 ```javascript
 color: ramp(buckets($winner, ["Conservative Party", "Labour Party"]), [blue, red], white)
 ```
-
-*You can use an optional third parameter in the buckets function to pick a color for the "Other" category, like white:*
 
 ![other-category](images/training-v2-04-election-other.png)
 
@@ -231,8 +229,8 @@ const viz = new carto.Viz(`
 
 We're not specifying categories by name here, since we don't know ahead of time what types of accidents are in this dataset. We don't need to! The top function takes two parameters:
 * The name of the column containing our categories, prepended with a `$`.
-* How many top categories we want to find. Here we're finding the top 3 most common railroad accidents.
-* The `ramp` function takes the top function as it's first parameter. The other two `ramp` function parameters are ones we saw earlier: 
+* The number of top categories we want to find. Here we're finding the top 3 most common railroad accidents.
+* The `ramp` function takes the `top` function as it's first parameter. The other two `ramp` function parameters are ones we saw earlier: 
   * An array of colors, one for each of our 3 categories
   * A color for our "Other" category. All categories that are not one of the top 3 are considered "Other".
 
@@ -376,6 +374,6 @@ Instead of maki icon key words you can use custom image urls.
 * The url needs to point to a publicly available .jpg, .png or .svg file.
 * Put each url inside quotes.
 
-*Here's what our map using maki icon key word symbols should look like (we zoomed into North Carolina):*
+*Here's what our map using maki icon key word symbols should look like (we zoomed into Montana):*
 
 ![image-icons](images/training-v2-04-image-icons.png)

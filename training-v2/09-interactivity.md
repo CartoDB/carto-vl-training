@@ -6,7 +6,7 @@
 
 ## Create a Basic Map
 
-Let's create a new map using world population data. Paste this into your index.html document:
+Let's create a new map using world population data. Paste this into your `index.html` document:
 
 ```html
 <!DOCTYPE html>

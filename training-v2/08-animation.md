@@ -4,7 +4,7 @@
 
 ## Create a Basic Map
 
-Let's create a new map using bird migration data. We're animating points in this map, but one important feature of CARTO VL is that we can also animate polygons and lines. Paste this into your index.html document:
+Let's create a new map using bird migration data. We're animating points in this map, but one important feature of CARTO VL is that we can also animate polygons and lines. Paste this into your `index.html` document:
 
 ```html
 <!DOCTYPE html>

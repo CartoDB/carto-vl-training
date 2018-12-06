@@ -80,7 +80,7 @@ Define styles for the container by pasting this inside the `head` element. This 
 </style>
 ```
 
-## Setup a Basemap with carto.basemaps
+## Set Up a Basemap with carto.basemaps
 
 Add this script element under your container `div`:
 
@@ -150,7 +150,7 @@ Save this file as `index.html` on your computer. At this point your code should 
 </html>
 ```
 
-Open `index.html` in your web browser. Now you should see this:
+*Open `index.html` in your web browser. Now you should see this:*
 
 ![basemap-only](images/training-v2-01-bmapOnly.png)
 
@@ -162,7 +162,7 @@ To add other layers on top of the basemap we need access to CARTO datasets. In t
 
 Because data privacy is important at CARTO, authentication is required. We use api keys for that. Find out more about how CARTO authentication works [here](https://carto.com/developers/fundamentals/authorization/).
 
-In this step we will [define a user](https://carto.com/developers/carto-vl/guides/getting-started/#define-user) account to get data from, and specify the API key that gives us account access. Add this code block beneath `map.addControl(nav, 'top-left');`
+In this step we will [define a user](https://carto.com/developers/carto-vl/guides/getting-started/#define-user) account to get data from, and specify the API key that gives us account access. Add this code block beneath `map.addControl(nav, 'top-left');`:
 
 ```javascript
 carto.setDefaultAuth({
@@ -235,7 +235,7 @@ const viz = new carto.Viz(`
 `);
 ```
 
-In CARTO.js or Builder maps styles are defined differently, because they require CartoCSS. For example, to change a point's color you would use:
+In CARTO.js and Builder maps styles are defined differently. Builder maps require CartoCSS. For example, to change a point's color you would use:
 
 ```css
 marker-fill: "green";
@@ -247,7 +247,7 @@ To change a polygon's color with CartoCSS you would use:
 polygon-fill: "green";
 ```
 
-  Notice that we don't need to use geometry-specific properties in CARTO VL.
+Notice that we don't need to use geometry-specific properties in CARTO VL.
 
 CARTO uses two types of Visualization API's to define our Viz properties: String and JavaScript. Learn more about those [here](https://carto.com/developers/carto-vl/guides/style-with-expressions/#the-string-and-javascript-visualization-apis). The back-ticks we're using inside the Viz function indicate we're using the String Visualization API in this map.
 

@@ -1,6 +1,6 @@
 # Using Legends
 
-*There's one thing missing from our maps so far: Legends. Every good map should use a legend that explains it's features at a glance.*
+*There's one thing missing from our maps so far: legends. Every good map should use a legend that explains it's features at a glance.*
 
 ## Create a Basic Map
 Let's use our map from the last section, from the step before we added image symbols:
@@ -70,7 +70,7 @@ Let's use our map from the last section, from the step before we added image sym
 
 ## Add a Legend
 
-Add an HTML element that will contain our Legend, by pasting this into your code under `<div id="map"></div>`:
+Add an HTML element that will contain our legend, by pasting this into your code under `<div id="map"></div>`:
 
 ```html
 <aside class="toolbox">
@@ -94,12 +94,12 @@ Add an HTML element that will contain our Legend, by pasting this into your code
 
 Notice there's not much content related to the actual map features yet. At this point we're just setting up a container.
 * [`aside`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside) is an HTML element used as a container for content that's considered separate from the page's main content.
-* We're also using a CARTO-specific `box` class to define styles for the Legend container...basically making it a white box with round edges.
-* The [`header` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header) is where we're storing our Legend title. We're using default [`h1`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements) tags to define the font style for our title. You can modify this to use other [section heading elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements) or text styles as needed.
+* We're also using a CARTO-specific `box` class to define styles for the legend container...basically making it a white box with round edges.
+* The [`header` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header) is where we're storing our legend title. We're using default [`h1`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements) tags to define the font style for our title. You can modify this to use other [section heading elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements) or text styles as needed.
 * [`section`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section) is an HTML element that's used to group content. 
 * Find out more about the footer element [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer).
 
-One of the great things about CARTO VL is that it provides a function to auto-detect our map layer's data and styles: [`getLegendData()`](https://carto.com/developers/carto-vl/reference/#expressionsrampgetlegenddata). We can use that to create our Legend elements. Paste this under `layer.addTo(map);`:
+One of the great things about CARTO VL is that it provides a function to auto-detect our map layer's data and styles: [`getLegendData()`](https://carto.com/developers/carto-vl/reference/#expressionsrampgetlegenddata). We can use that to create our legend elements. Paste this under `layer.addTo(map);`:
 
 ```javascript
 layer.on('loaded', () => {
@@ -125,15 +125,15 @@ layer.on('loaded', () => {
 
 ![legend-content](images/training-v2-05-legend-content.png)
 
-After the map layer's feature colors are retrieved using `getLegendData`, `rgbToHex()` converts them to [hexadecimal notation](https://developer.mozilla.org/en-US/docs/Web/HTML/Applying_color#RGB_values). The next function creates a Legend item containing a color icon and a label. It uses the information retrieved by `getLegendData` to generate the proper color and label for each type of map feature.
+After the map layer's feature colors are retrieved using `getLegendData`, `rgbToHex()` converts them to [hexadecimal notation](https://developer.mozilla.org/en-US/docs/Web/HTML/Applying_color#RGB_values). The next function creates a legend item containing a color icon and a label. It uses the information retrieved by `getLegendData` to generate the proper color and label for each type of map feature.
 
 ## Add a Histogram using Airship
 
-Another way to explain your visualization is to use a Widget. Legends explain the attributes you're already highlighting via feature styles, but Widgets can show additional attributes.
+Another way to explain your visualization is to use a widget. Legends explain the attributes you're already highlighting via feature styles, but widgets can show additional attributes.
 
-For example, we previously created a Madrid Listings rental real estate map that styled points according to room price. We can add a Histogram Widget to show more information about the prices overall. 
+For example, we previously created a Madrid rental listings map that styled points according to room price. We can add a Histogram widget to show more information about the prices overall. 
 
-CARTO's [Airship](https://carto.com/developers/airship/) library already provides an interface component we can customize for this Widget. In this step we will add links to Airship's libraries. Make sure the code between your `<head></head>` elements looks like this:
+CARTO's [Airship](https://carto.com/developers/airship/) library already provides an interface component we can customize for this widget. In this step we will add links to Airship's libraries. Make sure the code between your `<head></head>` elements looks like this:
 
 ```html
 <title>CARTO VL training</title>
@@ -201,9 +201,9 @@ const layer = new carto.Layer('layer', source, viz);
 layer.addTo(map);
 
 function drawHistogram() {
-  var histogramWidget = document.querySelector('as-histogram-widget');
+  var histogramwidget = document.querySelector('as-histogram-widget');
   const histogram = layer.viz.variables.histogram.value;
-  histogramWidget.data = histogram.map(entry => {
+  histogramwidget.data = histogram.map(entry => {
     return {
       start: entry.x[0],
       end: entry.x[1],
@@ -221,11 +221,11 @@ Notice we've added `@histogram: viewportHistogram($price, 5, 1)` to our `viz`.
 * The second parameter is used to weight each occurrence differently based on the number you define here. `1` means this is an unweighted count. This is also an optional parameter. We're defining `1` for demonstration purposes, but `1` is also actually the default so it doesn't need to be specified.
 
 This line defines our histogram, but we still have to draw it. That happens inside the `drawHistogram` function we just added.
-* The `var histogramWidget` line creates an Airship histogram Widget.
+* The `var histogramwidget` line creates an Airship histogram widget.
 * The `const histogram` line reads values from the `viewportHistogram` function in our `viz`.
-* The `histogramWidget.data` line maps the values to our histogram. 
+* The `histogramwidget.data` line maps the values to our histogram. 
 
-For more details about how Airship Histogram Widget Components work, see [this documentation](https://carto.com/developers/airship/reference/#/components/histogram-Widget). Check [this guide section](https://carto.com/developers/carto-vl/guides/add-widgets/#scalars-what-is-the-total-of--what-is-the-average-of--what-is-the-maximum-) to learn more about how to find averages, totals, min, max or percentiles for your entire dataset vs. features in your map's viewport.
+For more details about how Airship Histogram widget Components work, see [this documentation](https://carto.com/developers/airship/reference/#/components/histogram-widget). Check [this guide section](https://carto.com/developers/carto-vl/guides/add-widgets/#scalars-what-is-the-total-of--what-is-the-average-of--what-is-the-maximum-) to learn more about how to find averages, totals, min, max or percentiles for your entire dataset vs. features in your map's viewport.
 
 Now we just need to call the drawHistogram function to draw the histogram on our map. Paste this line into your code under `layer.addTo(map);`:
 
@@ -298,9 +298,9 @@ At this point your code should look like this:
   layer.on('updated', drawHistogram);
 
   function drawHistogram() {
-    var histogramWidget = document.querySelector('as-histogram-widget');
+    var histogramwidget = document.querySelector('as-histogram-widget');
     const histogram = layer.viz.variables.histogram.value;
-    histogramWidget.data = histogram.map(entry => {
+    histogramwidget.data = histogram.map(entry => {
       return {
         start: entry.x[0],
         end: entry.x[1],
@@ -320,7 +320,7 @@ At this point your code should look like this:
 
 ## Filter Outliers for a Better Histogram
 
-There's quite a lot of data in our Madrid Listings $price column. What if we're only interested in the smaller listings? We can visualize smaller values only using a CARTO VL [filter](https://carto.com/developers/carto-vl/reference/) expression. Add a `filter` line to your `viz` like this:
+There's quite a lot of data in our Madrid listings `price` column. What if we're only interested in the smaller listings? We can visualize smaller values only using a CARTO VL [filter](https://carto.com/developers/carto-vl/reference/) expression. Add a `filter` line to your `viz` like this:
 
 ```javascript
 const viz = new carto.Viz(`
@@ -332,7 +332,7 @@ const viz = new carto.Viz(`
 `);
 ```
 
-Notice when you refresh the map that the Histogram Widget refreshes also. 
+Notice when you refresh the map that the Histogram widget refreshes also. 
 
 *Now we're only looking at values less than 500:*
 
@@ -340,9 +340,9 @@ Notice when you refresh the map that the Histogram Widget refreshes also.
 
 ## Update Histogram on Viewport Changes
 
-Right now if you zoom in or out on the map, the Histogram Widget won't change even though we're supposed to be taking into account only the data inside the viewport. 
+Right now if you zoom in or out on the map, the Histogram widget won't change even though we're supposed to be taking into account only the data inside the viewport. 
 
-The reason the Widget isn't changing is because it's not aware that the amount of data in the viewport is changing when we zoom. We can detect the change though and then update the Widget with another line of code. Paste this into your code, underneath the `layer.on('loaded', drawHistogram);` line:
+The reason the widget isn't changing is because it's not aware that the amount of data in the viewport is changing when we zoom. We can detect the change though and then update the widget with another line of code. Paste this into your code, underneath the `layer.on('loaded', drawHistogram);` line:
 
 ```javascript
 layer.on('updated', drawHistogram);
@@ -352,9 +352,9 @@ layer.on('updated', drawHistogram);
 
 ![histogram-update](images/training-v2-05-update.gif)
 
-## Create an Airship Category Widget using a Histogram
+## Create an Airship Category widget using a Histogram
 
-Another useful Widget Airship offers is a Category Widget. This will let us work with string-type values. For example, what if you wanted to see how many of these listing are for Private rooms?
+Another useful widget Airship offers is a Category widget. This will let us work with string-type values. For example, what if you wanted to see how many of these listing are for Private rooms?
 
 We can get the room type data in histogram format, but instead of displaying it as a bar chart we can display the bars by category. Change your `viz` histogram line to this:
 
@@ -366,10 +366,10 @@ Now we are getting information from a different column named `room_type`. This i
 
 ```javascript
 function drawHistogram() {
-  var categoryWidget = document.querySelector('as-category-widget');
+  var categorywidget = document.querySelector('as-category-widget');
   const histogram = layer.viz.variables.histogram.value;
-  var categoryWidget = document.querySelector('as-category-widget');
-  categoryWidget.categories = histogram.map(entry => {
+  var categorywidget = document.querySelector('as-category-widget');
+  categorywidget.categories = histogram.map(entry => {
     return {
       name: entry.x,
       value: entry.y
@@ -378,7 +378,7 @@ function drawHistogram() {
 }
 ```
 
-The Category Widget is [another kind of Airship Component](https://carto.com/developers/airship/reference/#/components/category-widget). We are still taking the data from our `viz` `viewportHistogram` function, but now it's working with strings instead of numbers. 
+The Category widget is [another kind of Airship Component](https://carto.com/developers/airship/reference/#/components/category-widget). We are still taking the data from our `viz` `viewportHistogram` function, but now it's working with strings instead of numbers. 
 
 At this point your final code should look like this:
 
@@ -447,10 +447,10 @@ At this point your final code should look like this:
     layer.on('updated', drawHistogram);
 
     function drawHistogram() {
-      var categoryWidget = document.querySelector('as-category-widget');
+      var categorywidget = document.querySelector('as-category-widget');
       const histogram = layer.viz.variables.histogram.value;
-      var categoryWidget = document.querySelector('as-category-widget');
-      categoryWidget.categories = histogram.map(entry => {
+      var categorywidget = document.querySelector('as-category-widget');
+      categorywidget.categories = histogram.map(entry => {
         return {
           name: entry.x,
           value: entry.y
@@ -463,8 +463,8 @@ At this point your final code should look like this:
 </html>
 ```
 
-*Now when you save & refresh your map we can see that the most common rentals are for entire homes or apartments. Zoom in on your map to check how the Category Widget changes.*
+*Now when you save & refresh your map we can see that the most common rentals are for entire homes or apartments. Zoom in on your map to check how the Category widget changes.*
 
 ![category-widget](images/training-v2-05-category.gif)
 
-For more information about numeric Histogram Widgets vs. Category histogram Widgets check [this guide section](https://carto.com/developers/carto-vl/guides/add-widgets/#numeric-histograms-what-is-the-distribution-of-the-price).
+For more information about numeric Histogram widgets vs. Category histogram widgets check [this guide section](https://carto.com/developers/carto-vl/guides/add-widgets/#numeric-histograms-what-is-the-distribution-of-the-price).

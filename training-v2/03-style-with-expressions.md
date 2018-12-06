@@ -5,7 +5,7 @@
 *How you choose to style these has a big effect on how legible your map is. CARTO VL offers great flexibility for defining your styles, because it allows you to use expressions.*
 
 ## Expressions
-Expressions can be static values, like `red`. 
+Expressions can be static values, like `red` or `#63ECF0`.
 
 Expressions can also be functions. Functions take an input, use it in some kind of calculation or transformation, and output another value. This value is used to define your style. Some of these are math functions that you might have heard of before, like `sqrt()`.
 
@@ -20,7 +20,7 @@ Check [this guide](https://carto.com/developers/carto-vl/guides/style-with-expre
 In this section we're going to demonstrate a few kinds of expressions.
 
 ## Create a Basic Viz with Custom Styles
-Let's create a new map. Replace all of the code in your index.html file with this:
+Let's create a new map. Replace all of the code in your `index.html` file with this:
 
 ```html
 <!DOCTYPE html>
