@@ -171,7 +171,9 @@ const viz = new carto.Viz(`
 
 
 ## The `Others` Category
-Sometimes you might only be interested in showing some categories, instead of all of them. CARTO VL lets you specify the categories you want, and bucket the rest into an "Other" category. "Other" is also helpful if you have some null values in your data. Let's use the election data again. Change your map object's zoom and center, change your source, and apply the style we used previously:
+Sometimes you might only be interested in showing some categories, instead of all of them. CARTO VL lets you specify the categories you want, and bucket the rest into an "Other" category. "Other" is also helpful if you have some null values in your data. 
+
+Let's use the election data again to illustrate this. Change your map object's zoom and center, change your source, and apply the style we used previously:
 
 ```javascript
 const map = new mapboxgl.Map({
@@ -197,7 +199,7 @@ Our system categorizes these polygons as "Other", and automatically gives them a
 color: ramp(buckets($winner, ["Conservative Party", "Labour Party"]), [blue, red], white)
 ```
 
-You can use an optional third parameter in the buckets function to pick a color for the "Other" category, like white:
+*You can use an optional third parameter in the buckets function to pick a color for the "Other" category, like white:*
 
 ![other-category](images/training-v2-04-election-other.png)
 
@@ -243,13 +245,13 @@ We're not specifying categories by name here, since we don't know ahead of time 
 
 You can also use CARTO VL to explore all the categories that are in your attribute column, instead of just the top ones. Change your `color` property to this:
 
-```javascript
+```css
 color: ramp($accident_type, [#7F3C8D, #11A579, #3969AC, #F2B701, #E73F74, #80BA5A])
 ```
 
 Notice we don't need to specify an accident type or the number of categories we want to visualize. The number of categories is taken from the number of colors we define in the `ramp` function's second parameter. This will detect the six categories, and any others will be bucketed into "Other". 
 * We haven't defined a color for "Other", so it will be gray by default. 
-* These categories have no heirarchy. They are also not necessarily the most common.
+* These categories have no hierarchy. They are also not necessarily the most common.
 
 ![six-categories](images/training-v2-04-six-cat.png)
 
@@ -274,7 +276,7 @@ const map = new mapboxgl.Map({
 const source = new carto.source.Dataset('pop_density_points');
 ```
 
-13. Change your `viz` to this:
+Change your `viz` to this:
 
 ```javascript
 const viz = new carto.Viz(`
@@ -284,7 +286,7 @@ const viz = new carto.Viz(`
 `);
 ```
 
-Temps is the name of one of our Diverging CARTOColor schemes.
+**Temps** is the name of one of our Diverging CARTOColor schemes.
 
 ![temps](images/training-v2-04-temps.png)
 
@@ -324,11 +326,11 @@ width: ramp($total_damage, [0, 50])
 
 There's a number-type column named `total_damage` in the rail safety dataset. It contains the amount of damage the accident caused in dollars.
 
-We're using `ramp` again, but here it sizes each point by how much $ damage it's accident caused. The more costly the damage the larger the point will be. The `ramp` function's second parameter is an array that defines our range of point sizes. 
+We're using `ramp` again, but here it sizes each point by how much damage (in dollars) it's accident caused. The more costly the damage the larger the point will be. The `ramp` function's second parameter is an array that defines our range of point sizes. 
 * Accidents with the lowest amount of damage get a marker width of 0 pixels.
 * Accidents with the highest amount of damage get a marker width of 50 pixels.
 
-*Here's what map looks when we zoom into North Carolina:*
+*Here's what the map looks when we zoom into North Carolina:*
 
 ![ramp-width](images/training-v2-04-ramp-width.png)
 
@@ -374,6 +376,6 @@ Instead of maki icon key words you can use custom image urls.
 * The url needs to point to a publicly available .jpg, .png or .svg file.
 * Put each url inside quotes.
 
-*Here's what our map using maki icon key word symbols should look like (we zoomed into Nebraska):*
+*Here's what our map using maki icon key word symbols should look like (we zoomed into North Carolina):*
 
 ![image-icons](images/training-v2-04-image-icons.png)

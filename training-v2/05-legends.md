@@ -88,7 +88,7 @@ Add an HTML element that will contain our Legend, by pasting this into your code
 </aside>
 ```
 
-When you save this and open your HTML file in a browser, it should look like this:
+*When you save this and open your HTML file in a browser, it should look like this:*
 
 ![legend-container](images/training-v2-05-legend-container.png)
 
@@ -121,7 +121,7 @@ layer.on('loaded', () => {
 });
 ```
 
-Now our legend contains icons representing our map features, and a label to let our viewers identify what they represent.
+*Now our legend contains icons representing our map features, and a label to let our viewers identify what they represent.*
 
 ![legend-content](images/training-v2-05-legend-content.png)
 
@@ -332,7 +332,9 @@ const viz = new carto.Viz(`
 `);
 ```
 
-Notice when you refresh the map that the Histogram Widget refreshes also. Now we're only looking at values less than 500:
+Notice when you refresh the map that the Histogram Widget refreshes also. 
+
+*Now we're only looking at values less than 500:*
 
 ![filter-histogram](images/training-v2-05-filter.png)
 
@@ -346,7 +348,7 @@ The reason the Widget isn't changing is because it's not aware that the amount o
 layer.on('updated', drawHistogram);
 ```
 
-Now when an update is detected in our layer we're re-running the function that draws our histogram. It will automatically re-draw using only the data in the viewport at that time.
+*Now when an update is detected in our layer we're re-running the function that draws our histogram. It will automatically re-draw using only the data in the viewport at that time.*
 
 ![histogram-update](images/training-v2-05-update.gif)
 

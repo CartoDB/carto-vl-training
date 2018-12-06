@@ -50,6 +50,8 @@ Let's create a new map using bird migration data. We're animating points in this
 </html>
 ```
 
+## Animate It
+
 Add this line to your `viz`:
 
 ```javascript
@@ -73,7 +75,7 @@ How CARTO knows which points to show at which time:
 
 For a more detailed explanation see [this guide](https://carto.com/developers/carto-vl/guides/animated-visualizations/#create-a-basic-animation).
 
-Here's what your map should look like now:
+*Here's what your map should look like now:*
 
 ![basic-animation](images/training-v2-08-basic-animation.gif)
 
@@ -99,7 +101,7 @@ filter: animation($date_time, 10, fade(0, 0.5))
 * `0` is the time it takes for a point to fade in. In this case we want the point to appear immediately without fading.
 * `0.5` is the time it takes for a point to fade out, in seconds. In this case it will take half a second to become invisible.
 
-We already had a 10 second duration in the last map, but notice how the fade in and fade out have changed. In the last map we didn't define fade in our out, so they defaulted to 0.15 seconds each.
+*We already had a 10 second duration in the last map, but notice how the fade in and fade out have changed. In the last map we didn't define fade in our out, so they defaulted to 0.15 seconds each.*
 
 ![animation-options](images/training-v2-08-animation-options.gif)
 
@@ -122,7 +124,7 @@ const viz = new carto.Viz(`
 * The @ symbol defines our variable. You can choose any name you want, just prepend the @ symbol to it.
 * Since `bird_name` is a string-type column, [ramp](https://carto.com/developers/carto-vl/reference/#cartoexpressionsramp) is automatically creating a category map by assigning each unique bird name to one of the colors in our [Bold qualitative CARTOColor palette](https://carto.com/carto-colors/).
 
-Now we can see which points represent each bird's journey:
+*Now we can see which points represent each bird's journey:*
 
 ![animation-categories](images/training-v2-08-animation-categories.gif)
 
@@ -160,7 +162,7 @@ const $playButton = document.getElementById('js-play-button');
 const $pauseButton = document.getElementById('js-pause-button');
 ```
 
-7. Paste the code below underneath what you added in Step 6. This code detects when the play or pause button is clicked on, then runs a function to either play the animation or pause it.
+Paste the code below underneath what you added in Step 6. This code detects when the play or pause button is clicked on, then runs a function to either play the animation or pause it.
 
 ```javascript
 $playButton.addEventListener('click', () => {
@@ -171,9 +173,9 @@ $pauseButton.addEventListener('click', () => {
 });
 ```
 
-Paste this code underneath what you added in Step 7. The `updateProgress` function detects how far the animation has progressed with the `getProgressPct` function, then uses that to update the slider. 
+Paste this code underneath what you added in the last step. The `updateProgress` function detects how far the animation has progressed with the `getProgressPct` function, then uses that to update the slider. 
 
-This progress check happens every 100 milliseconds, because that's how often we are running the updateProgress function according to the `setInterval` function beneath it.
+This progress check happens every 100 milliseconds, because that's how often we are running the `updateProgress` function according to the `setInterval` function beneath it.
 
 ```javascript
 function updateProgress() {
@@ -182,7 +184,7 @@ function updateProgress() {
 setInterval(updateProgress, 100);
 ```
 
-Now our map should look like this:
+*Now our map should look like this:*
 
 ![animation-controls](images/training-v2-08-animation-controls.gif)
 
@@ -202,6 +204,8 @@ Now we will only visualize where the birds were from March 30th to April 24th, 2
 color: ramp(@animation, Oryel)
 ```
 
-The `Oryel` palette swatches progress from light yellow to orange-red. Check out how the bird locations are mapped to those colors over time in our final animation:
+The `Oryel` palette swatches progress from light yellow to orange-red. 
+
+*Check out how the bird locations are mapped to those colors over time in our final animation:*
 
 ![animation-colors](images/training-v2-08-animation-colors.gif)

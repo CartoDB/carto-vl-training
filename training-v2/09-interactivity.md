@@ -108,7 +108,7 @@ We already defined `map` as the name of our map object.
 * [load](https://www.mapbox.com/mapbox-gl-js/api/#map.event:load) is a Mapbox GL function that will detect when the map loads in a browser.
 * [move](https://www.mapbox.com/mapbox-gl-js/api/#map.event:move) is a Mapbox GL function that will detect when a map user moves the map, for example by panning.
 
-When you save these changes and open index.html in a web browser your map should look like this. Notice how the overlay values change as we pan the map.
+*When you save these changes and open index.html in a web browser your map should look like this. Notice how the overlay values change as we pan the map.*
 
 ![map-events](images/training-v2-09-map-events.gif)
 
@@ -131,7 +131,7 @@ layer.on('loaded', function() {
 ```
 
 Once our map layer is finished loading, we are running a function that displays a new message in our overlay.
-* `.on('loaded'` is documented [here]](https://carto.com/developers/carto-vl/reference/#cartoon)
+* `.on('loaded'` is documented [here](https://carto.com/developers/carto-vl/reference/#cartoon)
 
 ![layer-loaded](images/training-v2-09-layer-loaded.gif)
 
@@ -158,7 +158,7 @@ layer.on('updated', function() {
 });
 ```
 
-Now when any update is made to our layer (like when we zoom in our out), the features within the viewport will found via `viewportFeatures`. Then those features will be counted by `viz.variables.currentFeatures.value.length`. We store the number of features in the `numberOfFeatures` const. Then we put that in a ${variable} so we can use it in text for our overlay. 
+Now when any update is made to our layer (like when we zoom in our out), the features within the viewport will be found via `viewportFeatures`. Then those features will be counted by `viz.variables.currentFeatures.value.length`. We store the number of features in the `numberOfFeatures` const. Then we put that in a `${variable}` so we can use it in text for our overlay. 
 
 ![layer-feature-count](images/training-v2-09-feature-count.gif)
 
@@ -178,7 +178,7 @@ const viz = new carto.Viz(`
 `);
 ```
 
-We have a column in our dataset that contains a maximum population number for each point: `pop_max`. `viewportSum` is finding the pop_max values for each point that falls inside the map's bounds, and adding those together. Replace your `layer.on('updated'` function with this:
+We have a column in our dataset that contains a maximum population number for each point: `pop_max`. `viewportSum` is finding the `pop_max` values for each point that falls inside the map's bounds, and adding those together. Replace your `layer.on('updated'` function with this:
 
 ```javascript
 layer.on('updated', function() {
@@ -186,7 +186,7 @@ layer.on('updated', function() {
 });
 ```
 
-When the layer gets updated (for example on zoom), we are using `viz.variables.total_pop.value` to get the total pop_max number and converting it to text with `toLocaleString()`. That way we can display it in our overlay's text.
+When the layer gets updated (for example on zoom), we are using `viz.variables.total_pop.value` to get the total `pop_max` number and converting it to text with `toLocaleString()`. That way we can display it in our overlay's text.
 
 ![layer-total-pop](images/training-v2-09-total-pop.gif)
 
@@ -311,7 +311,7 @@ When a point is clicked, the `featureEvent => {...}` function runs. It runs thro
 
 ![feature-click](images/training-v2-09-feature-click.gif)
 
-Reload you map and click on a point!
+Reload your map and click on a point!
 
 ## Adding Mapbox GL Pop-Ups
 
@@ -359,7 +359,7 @@ In addition to displaying useful information about a feature when a user interac
 
 For our last map we will use layer events that capture when a user rolls over a feature, and rolls out. Check out another example with an explanation [in this guide](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#interactive-based-styling).
 
-15. Under your `featureClick` code block, add this:
+Under your `featureClick` code block, add this:
 
 ```javascript
 interactivity.on('featureEnter', featureEvent => {
@@ -385,6 +385,6 @@ interactivity.on('featureLeave', featureEvent => {
 
 We don't need to use `blendTo` here and redefine the width and color to change back to. Instead we can just use [reset](https://carto.com/developers/carto-vl/reference/#feature).
 
-Here's what our final map looks like. Try rolling over features in your version.
+*Here's what our final map looks like. Try rolling over features in your version.*
 
 ![interactive-styles](images/training-v2-09-interactive-styles.gif)
