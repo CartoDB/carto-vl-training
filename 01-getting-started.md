@@ -12,7 +12,21 @@
   * [Sublime Text](https://www.sublimetext.com/)
   * [Atom](https://atom.io/)
 
-## Create a Basic HTML Template
+## Steps
+
+ 1. [Create a Basic HTML Template](#createTemplate)
+ 2. [Include Mapbox GL and CARTO VL Scripts](#includeMapbox)
+ 3. [Add a Map Container and Basic CSS](#addContainer)
+ 4. [Set Up a Basemap with carto.basemaps](#setBmap)
+ 5. [Define the User](#defineUser)
+ 6. [Define the Source](#defineSrc)
+ 7. [Define the Viz](#defineViz)
+ 8. [Define the Layer](#defineLayer)
+ 9. [Add the Layer to the Map](#addLayer)
+ 10. [Start Playing with the Visualization](#startViz)
+
+
+## <a name="createTemplate">Create a Basic HTML Template</a>
 
 Open a new document in your code editor, then paste this into it:
 
@@ -32,7 +46,7 @@ Open a new document in your code editor, then paste this into it:
 </html>
 ```
 
-## Include Mapbox GL and CARTO VL Scripts
+## <a name="includeMapbox">Include Mapbox GL and CARTO VL Scripts</a>
 
 We need to add JavaScript libraries to our HTML document in order to build our map. Add these lines of code nested in your `head` element, under `<meta charset="UTF-8">`:
 
@@ -53,7 +67,7 @@ We need to add JavaScript libraries to our HTML document in order to build our m
 * We will use CARTO VL code to add CARTO data layers over the basemap, but because the Mapbox GL libraries are included you also have the option to add native Mapbox data layers to your map.
 * CARTO VL expressions cannot be used for native Mapbox GL layers and vice versa.
 
-## Add a Map Container and Basic CSS
+## <a name="addContainer">Add a Map Container and Basic CSS</a>
 
 We need an HTML element for JavaScript to draw our map in. Add this line in between the `<body></body>` tags:
 
@@ -80,7 +94,7 @@ Define styles for the container by pasting this inside the `head` element. This 
 </style>
 ```
 
-## Set Up a Basemap with carto.basemaps
+## <a name="setBmap">Set Up a Basemap with carto.basemaps</a>
 
 Add this script element under your container `div`:
 
@@ -156,7 +170,7 @@ Save this file as `index.html` on your computer. At this point your code should 
 
 To see another example of the steps above, check [this Basic setup guide](https://carto.com/developers/carto-vl/guides/getting-started/#basic-setup).
 
-## Define the User
+## <a name="defineUser">Define the User</a>
 
 To add other layers on top of the basemap we need access to CARTO datasets. In this example we will use a CARTO account's [public](https://carto.com/help/building-maps/privacy-settings-for-protecting-maps-and-data/) dataset of Madrid rental listings.
 
@@ -175,7 +189,7 @@ carto.setDefaultAuth({
 * The `default_public` key gives a CARTO VL app access to all of an account's public datasets.
 * You can add a code block like this to your app more than once, so you can pull data from more than one CARTO account into the same map.
 
-## Define the Source
+## <a name="defineSrc">Define the Source</a>
 
 Now that we have access to a CARTO account we can use it's data in this map by [defining a `source`](https://carto.com/developers/carto-vl/guides/getting-started/#create-source). CARTO VL provides a few ways to bring data into your map that we will demonstrate in the next section. One of those methods gets an entire dataset by name. Add this line beneath the `setDefaultAuth` block:
 
@@ -186,7 +200,7 @@ const source = new carto.source.Dataset('madrid_listings');
 * You can add more than one source to a map.
 * Make sure to give each source `const` a unique name
 
-## Define the Viz
+## <a name="defineViz">Define the Viz</a>
 
 This data won't show up on the map until we tell the browser how to render it. We do that by defining style properties inside a [Viz object](https://carto.com/developers/carto-vl/reference/#cartoviz). Add this line beneath the source:
 
@@ -198,7 +212,7 @@ const viz = new carto.Viz();
 * If you are using multiple sources, you need to create a separate Viz object for each one.
   * Make sure the Viz object `const` are named uniquely.
 
-## Define the Layer
+## <a name="defineLayer">Define the Layer</a>
 
 Now we can [create a new map layer](https://carto.com/developers/carto-vl/guides/getting-started/#create-map-layer) using the data source and style definitions. Add this beneath the viz definition:
 
@@ -210,7 +224,7 @@ const layer = new carto.Layer('layer', source, viz);
 * The first function parameter defines a layer's name. You can use whatever name you'd like, here we're using `'layer'`
 * The second parameter is always the name of the source `const` you defined previously, and the third parameter is always the name of the Viz object `const`.
 
-## Add the Layer to the Map
+## <a name="addLayer">Add the Layer to the Map</a>
 
 [Add the layer](https://carto.com/developers/carto-vl/guides/getting-started/#add-map-layer) to the map object this way:
 
@@ -224,7 +238,7 @@ When you save these changes in your code editor and refresh your browser, the ma
 
 ![default-style](images/training-v2-01-defaultStyle.png)
 
-## Start Playing with the Visualization
+## <a name="startViz">Start Playing with the Visualization</a>
 
 Let's change the default style by [adding our own style rules](https://carto.com/developers/carto-vl/guides/getting-started/#defining-a-custom-style-for-the-viz-object). CARTO VL offers powerful data-driven styling with expressions, which we will cover later. For now we can make simple marker size and color changes by adding properties to the Viz object:
 

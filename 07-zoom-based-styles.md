@@ -6,7 +6,14 @@
 
 *We can make the points much easier to see at different zoom levels when we use CARTO VL's [scaled](https://carto.com/developers/carto-vl/reference/#cartoexpressionsscaled) expression. Learn more about why and how you should use it [in this guide](https://carto.com/developers/carto-vl/guides/zoom-based-styles/).*
 
-## Create a Basic Map
+## Steps
+
+ 1. [Create a Basic Map](#createTemplate7)
+ 2. [Scale the Symbol Size](#scaleSymbol)
+ 3. [Filter Based on Zoom and Properties](#zoomFilter)
+ 4. [Combine Zoom, Properties, and Ramp](#zoomPropRamp)
+
+## <a name="createTemplate7">Create a Basic Map</a>
 
 Let's continue with our Central Park map from the last section:
 
@@ -97,7 +104,7 @@ Let's continue with our Central Park map from the last section:
 </html>
 ```
 
-## Scale the Symbol Size
+## <a name="scaleSymbol">Scale the Symbol Size</a>
 
 We want to make sure our points stay legible and keep an appropriate size as we zoom in and out on this map. To see more about why that's important check [this guide section](https://carto.com/developers/carto-vl/guides/zoom-based-styles/#scale-symbol-size). Wrap your width expression in a `scaled` function, like this:
 
@@ -112,7 +119,7 @@ width: scaled(ramp(clusterSum($velocity)/clusterCount(), [0, 0.5]), 13)
 
 ![scaled-styles](images/training-v2-07-zoom-styles.gif)
 
-## Filter Based on Zoom and Properties
+## <a name="zoomFilter">Filter Based on Zoom and Properties</a>
 
 If you only want to make a map with a part of your data, you can always use a SQL query in your [source](https://carto.com/developers/carto-vl/reference/#cartosourcesql). You can also take care of that via your map's styles though, using a [filter expression](https://carto.com/developers/carto-vl/reference/#cartoexpressions). Let's see this in a new map. Replace your map object, source and style:
 
@@ -165,7 +172,7 @@ filter: zoom() > 3 or $pop_max > 1000000
 
 Learn more about setting feature visibility according to zoom level [in this guide](https://carto.com/developers/carto-vl/guides/zoom-based-styles/#set-feature-visibility-by-zoom).
 
-## Combine Zoom, Properties, and Ramp
+## <a name="zoomPropRamp">Combine Zoom, Properties, and Ramp</a>
 
 The filter we used is useful for showing certain information above one zoom level. What if we want to show different information at different zoom levels also? We can control feature visibility at various zoom levels using CARTO VL's [zoomrange](https://carto.com/developers/carto-vl/reference/#cartoexpressionszoomrange) expression. Change your `viz` to this:
 

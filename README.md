@@ -16,15 +16,15 @@ It relies on [Mapbox GL](https://www.mapbox.com/mapbox-gl-js/api) to render the 
 
 # Sections
 
- 1. Getting Started
- 2. Using Data in Your Visualization with Sources
- 3. Styling Properties Using Expressions
- 4. Introduction to Ramps and Data-Driven Visualizations
- 5. Using Legends
- 6. Aggregation
- 7. Zoom-Based Styles
- 8. Animation
- 9. Intro to Interactivity and Events
+ 1. [Getting Started](01-getting-started.md)
+ 2. [Using Data in Your Visualization with Sources](02-using-sources.md)
+ 3. [Styling Properties Using Expressions](03-style-with-expressions.md)
+ 4. [Introduction to Ramps and Data-Driven Visualizations](04-data-driven-styles.md)
+ 5. [Using Legends](05-legends.md)
+ 6. [Aggregation](06-cluster.md)
+ 7. [Zoom-Based Styles](07-zoom-based-styles.md)
+ 8. [Animation](08-animation.md)
+ 9. [Intro to Interactivity and Events](09-interactivity.md)
 
 ## How to use this repository
 

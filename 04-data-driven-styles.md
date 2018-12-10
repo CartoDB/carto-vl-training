@@ -4,7 +4,21 @@
 
 *CARTO VL offers functions that do the work of styling features by attribute behind-the-scenes. In this section we'll demonstrate how, but for more detailed information see our Data Driven Styling guides [Part 1](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/) and [Part 2](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-2/).*
 
-## Create a Basic Map
+## Steps
+
+ 1. [Create a Basic Map](#createTemplate4)
+ 2. [Ramp and Numeric Properties](#rampNumeric)
+ 3. [Improve the Style](#improveStyle)
+ 4. [Classify a Numeric Property for Better Perception](#classifyNumeric)
+ 5. [The `Others` Category](#others)
+ 6. [Find the Most Common Categories](#mostCommon)
+ 7. [Showing All Categories for Exploratory Analysis](#showCats)
+ 8. [CARTOColors](#cartoColors)
+ 9. [Create a Bubble Map](#bubbleMap)
+ 10. [Size Perception](#sizePerception)
+ 11. [Introducing Symbols and Images](#imageSymbols)
+
+## <a name="createTemplate4">Create a Basic Map</a>
 For this section let's start with a map of UK elections. Leave the `viz` object empty for this step:
 
 ```html
@@ -94,7 +108,7 @@ const viz = new carto.Viz(`
 
 Check [this guide](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#categorical-data) for more information about creating data-driven visualizations with categorical data.
 
-## Ramp and Numeric Properties
+## <a name="rampNumeric">Ramp and Numeric Properties</a>
 
 What happens if you want to color your features according to an attribute, but you have a large dataset and don't immediately know the range of values it's attribute column contains?
 
@@ -132,7 +146,7 @@ When we don't specify buckets, we're creating an *unclassed map*. Each point is 
 
 Check [this guide](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#numeric-data) for more information about using `ramp` with numeric data. We're using named colors in this expression, but you can use [other color formats for data-driven styling](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-2/#color-values).
 
-## Improve the Style
+## <a name="improveStyle">Improve the Style</a>
 
 Our points with low population density are hard to see, since they are close to the same color as the basemap. We can make them more legible by changing the first value in our color `ramp`. We can also make it easier to see the places with mid-range population density by defining a third color in our `ramp` (you can define as many colors as you'd like). Replace the color property in your `viz` with this:
 
@@ -145,7 +159,7 @@ color: ramp($dn, [green, yellow, red])
 ![pop-density-3](images/training-v2-04-density-ramp-3.png)
 
 
-## Classify a Numeric Property for Better Perception
+## <a name="classifyNumeric">Classify a Numeric Property for Better Perception</a>
 
 What if we do want to put our attribute values into buckets, but we also want to make sure they're bucketed by a statistical classification method? The `ramp` function can do that automatically for us too. Replace your `viz` with this:
 
@@ -170,7 +184,7 @@ const viz = new carto.Viz(`
 ![global-quantiles](images/training-v2-04-global-quantiles.png)
 
 
-## The `Others` Category
+## <a name="others">The `Others` Category</a>
 Sometimes you might only be interested in showing some categories, instead of all of them. CARTO VL lets you specify the categories you want, and bucket the rest into an "Other" category. "Other" is also helpful if you have some null values in your data. 
 
 Let's use the election data again to illustrate this. Change your map object's zoom and center, change your source, and apply the style we used previously:
@@ -202,7 +216,7 @@ color: ramp(buckets($winner, ["Conservative Party", "Labour Party"]), [blue, red
 ![other-category](images/training-v2-04-election-other.png)
 
 
-## Find the Most Common Categories
+## <a name="mostCommon">Find the Most Common Categories</a>
 
 CARTO VL also helps you find the most common categories in your attribute column. This is a quick way to explore data you're unfamiliar with, and a quick way to get valuable insight from it. For example it lets us easily find the most common type of accident in a USA railroad dataset. Change your map object and source:
 
@@ -239,7 +253,7 @@ We're not specifying categories by name here, since we don't know ahead of time 
 ![top-categories](images/training-v2-04-top-cat.png)
 
 
-## Showing All Categories for Exploratory Analysis
+## <a name="showCats">Showing All Categories for Exploratory Analysis</a>
 
 You can also use CARTO VL to explore all the categories that are in your attribute column, instead of just the top ones. Change your `color` property to this:
 
@@ -253,7 +267,7 @@ Notice we don't need to specify an accident type or the number of categories we 
 
 ![six-categories](images/training-v2-04-six-cat.png)
 
-## CARTOColors
+## <a name="cartoColors">CARTOColors</a>
 
 CARTO provides cartographer-designed color palettes called CARTOColors. They were optimized to work with a variety of data.
 * Sequential schemes for orderable or numeric data.
@@ -292,7 +306,7 @@ In this map it's highlighting places that have a mid-range population density wi
 
 ![cartocolors](images/training-v2-04-cartocolors.png)
 
-## Create a Bubble Map
+## <a name="bubbleMap">Create a Bubble Map</a>
 
 In addition to color, we can use size to illustrate a second attribute. Let's make a bubble map. Re-load the rail safety data:
 
@@ -334,7 +348,7 @@ We're using `ramp` again, but here it sizes each point by how much damage (in do
 
 Some of the accidents are a little hard to see. We can improve that in the next step.
 
-## Size Perception
+## <a name="sizePerception">Size Perception</a>
 
 Right now our circle sizes are scaling up linearly. 
 
@@ -355,7 +369,7 @@ width: sqrt(ramp($total_damage, [0, 50^2]))
 
 ![size-perception](images/training-v2-04-size-perception.png)
 
-## Introducing Symbols and Images
+## <a name="imageSymbols">Introducing Symbols and Images</a>
 
 Point markers don't need to be circles! You can use images instead. We have a guide for that [here](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-2/#image-values). Add a `symbol` property to your `viz` like this:
 

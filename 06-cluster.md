@@ -6,7 +6,16 @@
 
 *In this section we will create a map from a large dataset, to check how auto-aggregation works.*
 
-## Create a Basic Visualization with 350k Points
+## Steps
+
+ 1. [Create a Basic Visualization with 350k Points](#createTemplate6)
+ 2. [Calculate the Features ](#calculateFeatures)
+ 3. [Improve the Visualisation Using a Basic Style](#improveVis)
+ 4. [Controlling the Resolution](#controlRes)
+ 5. [Improve Using Cluster Method](#clusterMethod)
+ 6. [Check the Velocity with Another Attribute](#checkVelocity)
+
+## <a name="createTemplate6">Create a Basic Visualization with 350k Points</a>
 
 Let's create a new map that uses anonymized data from over a million people that walked through Central Park in New York City:
 
@@ -71,7 +80,7 @@ Let's create a new map that uses anonymized data from over a million people that
 
 Notice we've added an overlay that will show us how many features are being rendered. Right now it's blank, because we need to add a function to count the number of features.
 
-## Calculate the Features 
+## <a name="calculateFeatures">Calculate the Features</a>
 
 Add this under `layer.addTo(map);`:
 
@@ -95,7 +104,7 @@ Now this will show us how many features are being rendered. Save and refresh you
 
 ![auto-agg](images/training-v2-06-auto-aggregation.gif)
 
-## Improve the Visualisation Using a Basic Style
+## <a name="improveVis">Improve the Visualisation Using a Basic Style</a>
 
 We're still seeing a lot of overlapping points even using aggregation. Let's change the map style so we can see the points a little better. Change the map object's zoom level:
 
@@ -119,7 +128,7 @@ const viz = new carto.Viz(`
 
 ![point-style](images/training-v2-06-point-style.png)
 
-## Controlling the Resolution
+## <a name="controlRes">Controlling the Resolution</a>
 
 Picture an invisible grid laid over your map. If CARTO detects points in a grid cell it will create one marker for that grid cell. That represents an aggregation of the original points. 
 
@@ -137,7 +146,7 @@ resolution: 2
 
 To learn more about resolution check [this section of our guides](https://carto.com/developers/carto-vl/guides/aggregation-and-data-summaries/#resolution).
 
-## Improve Using Cluster Method
+## <a name="clusterMethod">Improve Using Cluster Method</a>
 
 When we aggregate points, we are "combining" them by location, or spatially aggregating them. 
 
@@ -163,7 +172,7 @@ const viz = new carto.Viz(`
 * Separately, `clusterCount` is figuring out how many original points are being represented by a single aggregated marker.
 * The final marker size is based on total velocity divided by the number of people (for each aggregated marker). The `ramp` function is creating a proportional symbol map by sizing these from 0 pixels wide to half a pixel wide based on the first parameter's result.
 
-## Check the Velocity with Another Attribute
+## <a name="checkVelocity">Check the Velocity with Another Attribute</a>
 
 We've sized points according to total velocity divided by the number of original points being aggregated. We can show even more information about the Central Park visitors though by changing marker color.
 

@@ -4,7 +4,18 @@
 
 *How you choose to style these has a big effect on how legible your map is. CARTO VL offers great flexibility for defining your styles, because it allows you to use expressions.*
 
-## Expressions
+## Steps
+
+ 1. [Expressions](#expressions)
+ 2. [Create a Basic Viz with Custom Styles](#createTemplate3)
+ 3. [Add an Expression Function](#expressionFunction)
+ 4. [Add a Color Expression Function](#addColorExp)
+ 5. [Opacity](#opacity)
+   5.A [Option A](#opacityA)
+   5.B [Option B](#opacityB)
+   5.C [Option C](#opacityC)
+
+## <a name="expressions">Expressions</a>
 Expressions can be static values, like `red` or `#63ECF0`.
 
 Expressions can also be functions. Functions take an input, use it in some kind of calculation or transformation, and output another value. This value is used to define your style. Some of these are math functions that you might have heard of before, like `sqrt()`.
@@ -19,7 +30,7 @@ Check [this guide](https://carto.com/developers/carto-vl/guides/style-with-expre
 
 In this section we're going to demonstrate a few kinds of expressions.
 
-## Create a Basic Viz with Custom Styles
+## <a name="createTemplate3">Create a Basic Viz with Custom Styles</a>
 Let's create a new map. Replace all of the code in your `index.html` file with this:
 
 ```html
@@ -88,7 +99,7 @@ If we used an empty `viz` like this: `const viz = new carto.Viz();` the map woul
 ![base-style](images/training-v2-03-base.png)
 
 
-## Add an Expression Function
+## <a name="expressionFunction">Add an Expression Function</a>
 
 Take a look at how width is defined in the `viz` object. It's telling our system to draw point markers that are 8 pixels wide. We can use an *expression function* here instead. Replace the current width property with this:
 
@@ -101,7 +112,7 @@ width: 8 + 16
 ![width-expression](images/training-v2-03-width-exp.png)
 
 
-## Add a Color Expression Function
+## <a name="addColorExp">Add a Color Expression Function</a>
 
 CARTO VL offers [a few ways to define color using different expressions](https://carto.com/developers/carto-vl/guides/style-with-expressions/#color-expressions). One type of expression is a `color constructor`, which is a function that defines a color by the components of its [color space](https://photo.stackexchange.com/questions/48984/what-is-the-difference-or-relation-between-a-color-model-and-a-color-space). 
 
@@ -120,11 +131,11 @@ The color channel values get added together, so the final result is `rgb(239, 23
 
 ![rgb-expression](images/training-v2-03-color-exp.png)
 
-## Opacity
+## <a name="opacity">Opacity</a>
 
 Sometimes you might want to make your map features semi-transparent, so overlapped features or basemap details can appear underneath. This is also possible with expressions. 
 
-### OPTION A
+### <a name="opacityA">OPTION A</a>
 
 One way is to use a color constructor that contains a value for the alpha channel, like this:
 
@@ -144,7 +155,7 @@ The fourth parameter defines how transparent the color is when it renders. A val
 
 ![opacity-a](images/training-v2-03-optA.png)
 
-### OPTION B
+### <a name="opacityB">OPTION B</a>
 
 We can get the same effect using a CARTO VL function: [opacity()](https://carto.com/developers/carto-vl/reference/#cartoexpressionsopacity). Comment out the code line you just implemented, and write this underneath:
 
@@ -155,7 +166,7 @@ color: opacity(rgb(255, 0, 0) 0.25)
 ![opacity-b](images/training-v2-03-optB.png)
 
 
-### OPTION C
+### <a name="opacityC">OPTION C</a>
 
 Another option is to use a CARTO VL property called [filter](https://carto.com/developers/carto-vl/reference/#cartoexpressions). Filter is a method we use to set a condition. In the example below it's being used to set the map layer's features to 25% opacity. Comment out the last code line and add the `color` and `filter` properties shown below:
     

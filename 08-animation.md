@@ -2,7 +2,16 @@
 
 *In this section we'll set up a basic animated map of points. We will also add controls so our viewers can play or pause the animation, and set it's duration.*
 
-## Create a Basic Map
+## Steps
+
+ 1. [Create a Basic Map](#createTemplate8)
+ 2. [Animate It](#animateMap)
+ 3. [Animation Options](#animOptions)
+ 4. [Improve the Visualisation](#improveVis8)
+ 5. [Control Your Animation](#controlAnim)
+ 6. [Advanced Animation](#advancedAnim)
+
+## <a name="createTemplate8">Create a Basic Map</a>
 
 Let's create a new map using bird migration data. We're animating points in this map, but one important feature of CARTO VL is that we can also animate polygons and lines. Paste this into your `index.html` document:
 
@@ -50,7 +59,7 @@ Let's create a new map using bird migration data. We're animating points in this
 </html>
 ```
 
-## Animate It
+## <a name="animateMap">Animate It</a>
 
 Add this line to your `viz`:
 
@@ -79,7 +88,7 @@ For a more detailed explanation see [this guide](https://carto.com/developers/ca
 
 ![basic-animation](images/training-v2-08-basic-animation.gif)
 
-## Animation Options
+## <a name="animOptions">Animation Options</a>
 
 In the last step we mentioned default duration time. The animation expression allows you two other parameters besides your input column:
 * duration
@@ -105,7 +114,7 @@ filter: animation($date_time, 10, fade(0, 0.5))
 
 ![animation-options](images/training-v2-08-animation-options.gif)
 
-## Improve the Visualisation
+## <a name="improveVis8">Improve the Visualisation</a>
 
 We can store our animation expression in a variable, and then use the variable as our filter definition. This can be useful later on, if we want to use more than one filter expression.
 
@@ -130,7 +139,7 @@ const viz = new carto.Viz(`
 
 Check [this section of our guides](https://carto.com/developers/carto-vl/guides/animated-visualizations/#style-and-configure-the-animation) for more details about the animation expression and it's options.
 
-## Control Your Animation
+## <a name="controlAnim">Control Your Animation</a>
 
 Let's add animation controls, so our map viewers can play or pause the animation. The control elements and their functionality are also explained [here](https://carto.com/developers/carto-vl/guides/animated-visualizations/#animation-controls). We will use the HTML elements below to create an overlay that contains buttons and a slider. Add this code block underneath `<div id="map"></div>`:
 
@@ -188,7 +197,7 @@ setInterval(updateProgress, 100);
 
 ![animation-controls](images/training-v2-08-animation-controls.gif)
 
-## Advanced Animation
+## <a name="advancedAnim">Advanced Animation</a>
 
 We've been using the `date_time` column's whole time range in this animation. We can use an expression as an input instead, to only animate a part of that time range. Check [this guide section](https://carto.com/developers/carto-vl/guides/animated-visualizations/#taking-it-further) for more details.
 
