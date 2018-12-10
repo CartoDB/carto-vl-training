@@ -11,9 +11,9 @@
  3. [Add an Expression Function](#expressionFunction)
  4. [Add a Color Expression Function](#addColorExp)
  5. [Opacity](#opacity)
-   5.A [Option A](#opacityA)
-   5.B [Option B](#opacityB)
-   5.C [Option C](#opacityC)
+     5.A [Option A](#opacityA)
+     5.B [Option B](#opacityB)
+     5.C [Option C](#opacityC)
 
 ## <a name="expressions">Expressions</a>
 Expressions can be static values, like `red` or `#63ECF0`.
