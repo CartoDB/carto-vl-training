@@ -4,7 +4,7 @@
 
 *How you choose to style these has a big effect on how legible your map is. CARTO VL offers great flexibility for defining your styles, because it allows you to use expressions.*
 
-## Steps
+## <a name="steps3">Steps</a>
 
  1. [Expressions](#expressions)
  2. [Create a Basic Viz with Custom Styles](#createTemplate3)
@@ -29,6 +29,8 @@ You can also combine expressions using *expression functions*.
 Check [this guide](https://carto.com/developers/carto-vl/guides/style-with-expressions/#what-is-an-expression) for a more detailed explanation of expressions. You can find a list of CARTO VL expressions and expression functions [here](https://carto.com/developers/carto-vl/reference/#cartoexpressions).
 
 In this section we're going to demonstrate a few kinds of expressions.
+
+[Back to Steps List ^](#steps3)
 
 ## <a name="createTemplate3">Create a Basic Viz with Custom Styles</a>
 Let's create a new map. Replace all of the code in your `index.html` file with this:
@@ -98,6 +100,7 @@ If we used an empty `viz` like this: `const viz = new carto.Viz();` the map woul
 
 ![base-style](images/training-v2-03-base.png)
 
+[Back to Steps List ^](#steps3)
 
 ## <a name="expressionFunction">Add an Expression Function</a>
 
@@ -111,6 +114,7 @@ width: 8 + 16
 
 ![width-expression](images/training-v2-03-width-exp.png)
 
+[Back to Steps List ^](#steps3)
 
 ## <a name="addColorExp">Add a Color Expression Function</a>
 
@@ -130,6 +134,8 @@ The color channel values get added together, so the final result is `rgb(239, 23
 *We zoomed into level 17 in this screenshot. Notice how the point size stays 24 pixels wide no matter which zoom level you're at.*
 
 ![rgb-expression](images/training-v2-03-color-exp.png)
+
+[Back to Steps List ^](#steps3)
 
 ## <a name="opacity">Opacity</a>
 
@@ -205,3 +211,5 @@ const viz = new carto.Viz(`
 ![rgba-filter](images/training-v2-03-rgba-filter.png)
 
 We'll learn more about styling features differently from each other in the next section.
+
+[Back to Steps List ^](#steps3)

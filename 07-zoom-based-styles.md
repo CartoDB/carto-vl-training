@@ -6,7 +6,7 @@
 
 *We can make the points much easier to see at different zoom levels when we use CARTO VL's [scaled](https://carto.com/developers/carto-vl/reference/#cartoexpressionsscaled) expression. Learn more about why and how you should use it [in this guide](https://carto.com/developers/carto-vl/guides/zoom-based-styles/).*
 
-## Steps
+## <a name="steps7">Steps</a>
 
  1. [Create a Basic Map](#createTemplate7)
  2. [Scale the Symbol Size](#scaleSymbol)
@@ -104,6 +104,8 @@ Let's continue with our Central Park map from the last section:
 </html>
 ```
 
+[Back to Steps List ^](#steps7)
+
 ## <a name="scaleSymbol">Scale the Symbol Size</a>
 
 We want to make sure our points stay legible and keep an appropriate size as we zoom in and out on this map. To see more about why that's important check [this guide section](https://carto.com/developers/carto-vl/guides/zoom-based-styles/#scale-symbol-size). Wrap your width expression in a `scaled` function, like this:
@@ -118,6 +120,8 @@ width: scaled(ramp(clusterSum($velocity)/clusterCount(), [0, 0.5]), 13)
 *Now check out how the map appears when we zoom in:*
 
 ![scaled-styles](images/training-v2-07-zoom-styles.gif)
+
+[Back to Steps List ^](#steps7)
 
 ## <a name="zoomFilter">Filter Based on Zoom and Properties</a>
 
@@ -172,6 +176,8 @@ filter: zoom() > 3 or $pop_max > 1000000
 
 Learn more about setting feature visibility according to zoom level [in this guide](https://carto.com/developers/carto-vl/guides/zoom-based-styles/#set-feature-visibility-by-zoom).
 
+[Back to Steps List ^](#steps7)
+
 ## <a name="zoomPropRamp">Combine Zoom, Properties, and Ramp</a>
 
 The filter we used is useful for showing certain information above one zoom level. What if we want to show different information at different zoom levels also? We can control feature visibility at various zoom levels using CARTO VL's [zoomrange](https://carto.com/developers/carto-vl/reference/#cartoexpressionszoomrange) expression. Change your `viz` to this:
@@ -198,3 +204,5 @@ Let's break down what the filter expression does:
 ![zoomrange](images/training-v2-07-zoomrange.gif)
 
 Features appear to "fade in" at zoom levels between 0 and 3, and between 3 and 6 because CARTO VL is interpolating between the values we've defined for those zoom levels.
+
+[Back to Steps List ^](#steps7)

@@ -2,7 +2,7 @@
 
 *There's one thing missing from our maps so far: legends. Every good map should use a legend that explains it's features at a glance.*
 
-## Steps
+## <a name="steps5">Steps</a>
 
  1. [Create a Basic Map](#createTemplate5)
  2. [Add a Legend](#addLegend)
@@ -77,6 +77,8 @@ Let's use our map from the last section, from the step before we added image sym
 
 ![image-icons](images/training-v2-04-image-icons.png)
 
+[Back to Steps List ^](#steps5)
+
 ## <a name="addLegend">Add a Legend</a>
 
 Add an HTML element that will contain our legend, by pasting this into your code under `<div id="map"></div>`:
@@ -135,6 +137,8 @@ layer.on('loaded', () => {
 ![legend-content](images/training-v2-05-legend-content.png)
 
 After the map layer's feature colors are retrieved using `getLegendData`, `rgbToHex()` converts them to [hexadecimal notation](https://developer.mozilla.org/en-US/docs/Web/HTML/Applying_color#RGB_values). The next function creates a legend item containing a color icon and a label. It uses the information retrieved by `getLegendData` to generate the proper color and label for each type of map feature.
+
+[Back to Steps List ^](#steps5)
 
 ## <a name="addHistogram">Add a Histogram using Airship</a>
 
@@ -327,6 +331,8 @@ At this point your code should look like this:
 
 ![airship-histogram](images/training-v2-05-histogram.png)
 
+[Back to Steps List ^](#steps5)
+
 ## <a name="filterOutliers">Filter Outliers for a Better Histogram</a>
 
 There's quite a lot of data in our Madrid listings `price` column. What if we're only interested in the smaller listings? We can visualize smaller values only using a CARTO VL [filter](https://carto.com/developers/carto-vl/reference/) expression. Add a `filter` line to your `viz` like this:
@@ -347,6 +353,8 @@ Notice when you refresh the map that the Histogram widget refreshes also.
 
 ![filter-histogram](images/training-v2-05-filter.png)
 
+[Back to Steps List ^](#steps5)
+
 ## <a name="updateHistogram">Update Histogram on Viewport Changes</a>
 
 Right now if you zoom in or out on the map, the Histogram widget won't change even though we're supposed to be taking into account only the data inside the viewport. 
@@ -360,6 +368,8 @@ layer.on('updated', drawHistogram);
 *Now when an update is detected in our layer we're re-running the function that draws our histogram. It will automatically re-draw using only the data in the viewport at that time.*
 
 ![histogram-update](images/training-v2-05-update.gif)
+
+[Back to Steps List ^](#steps5)
 
 ## <a name="categoryWidget">Create an Airship Category widget using a Histogram</a>
 
@@ -477,3 +487,5 @@ At this point your final code should look like this:
 ![category-widget](images/training-v2-05-category.gif)
 
 For more information about numeric Histogram widgets vs. Category histogram widgets check [this guide section](https://carto.com/developers/carto-vl/guides/add-widgets/#numeric-histograms-what-is-the-distribution-of-the-price).
+
+[Back to Steps List ^](#steps5)

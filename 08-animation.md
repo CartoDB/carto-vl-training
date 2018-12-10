@@ -2,7 +2,7 @@
 
 *In this section we'll set up a basic animated map of points. We will also add controls so our viewers can play or pause the animation, and set it's duration.*
 
-## Steps
+## <a name="steps8">Steps</a>
 
  1. [Create a Basic Map](#createTemplate8)
  2. [Animate It](#animateMap)
@@ -59,6 +59,8 @@ Let's create a new map using bird migration data. We're animating points in this
 </html>
 ```
 
+[Back to Steps List ^](#steps8)
+
 ## <a name="animateMap">Animate It</a>
 
 Add this line to your `viz`:
@@ -88,6 +90,8 @@ For a more detailed explanation see [this guide](https://carto.com/developers/ca
 
 ![basic-animation](images/training-v2-08-basic-animation.gif)
 
+[Back to Steps List ^](#steps8)
+
 ## <a name="animOptions">Animation Options</a>
 
 In the last step we mentioned default duration time. The animation expression allows you two other parameters besides your input column:
@@ -114,6 +118,8 @@ filter: animation($date_time, 10, fade(0, 0.5))
 
 ![animation-options](images/training-v2-08-animation-options.gif)
 
+[Back to Steps List ^](#steps8)
+
 ## <a name="improveVis8">Improve the Visualisation</a>
 
 We can store our animation expression in a variable, and then use the variable as our filter definition. This can be useful later on, if we want to use more than one filter expression.
@@ -138,6 +144,8 @@ const viz = new carto.Viz(`
 ![animation-categories](images/training-v2-08-animation-categories.gif)
 
 Check [this section of our guides](https://carto.com/developers/carto-vl/guides/animated-visualizations/#style-and-configure-the-animation) for more details about the animation expression and it's options.
+
+[Back to Steps List ^](#steps8)
 
 ## <a name="controlAnim">Control Your Animation</a>
 
@@ -197,6 +205,8 @@ setInterval(updateProgress, 100);
 
 ![animation-controls](images/training-v2-08-animation-controls.gif)
 
+[Back to Steps List ^](#steps8)
+
 ## <a name="advancedAnim">Advanced Animation</a>
 
 We've been using the `date_time` column's whole time range in this animation. We can use an expression as an input instead, to only animate a part of that time range. Check [this guide section](https://carto.com/developers/carto-vl/guides/animated-visualizations/#taking-it-further) for more details.
@@ -218,3 +228,5 @@ The `Oryel` palette swatches progress from light yellow to orange-red.
 *Check out how the bird locations are mapped to those colors over time in our final animation:*
 
 ![animation-colors](images/training-v2-08-animation-colors.gif)
+
+[Back to Steps List ^](#steps8)

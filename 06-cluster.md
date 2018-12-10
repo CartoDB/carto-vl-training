@@ -6,10 +6,10 @@
 
 *In this section we will create a map from a large dataset, to check how auto-aggregation works.*
 
-## Steps
+## <a name="steps6">Steps</a>
 
  1. [Create a Basic Visualization with 350k Points](#createTemplate6)
- 2. [Calculate the Features ](#calculateFeatures)
+ 2. [Calculate the Features](#calculateFeatures)
  3. [Improve the Visualisation Using a Basic Style](#improveVis)
  4. [Controlling the Resolution](#controlRes)
  5. [Improve Using Cluster Method](#clusterMethod)
@@ -80,6 +80,8 @@ Let's create a new map that uses anonymized data from over a million people that
 
 Notice we've added an overlay that will show us how many features are being rendered. Right now it's blank, because we need to add a function to count the number of features.
 
+[Back to Steps List ^](#steps6)
+
 ## <a name="calculateFeatures">Calculate the Features</a>
 
 Add this under `layer.addTo(map);`:
@@ -103,6 +105,8 @@ Now this will show us how many features are being rendered. Save and refresh you
 *Now zoom in and notice how the point count changes:*
 
 ![auto-agg](images/training-v2-06-auto-aggregation.gif)
+
+[Back to Steps List ^](#steps6)
 
 ## <a name="improveVis">Improve the Visualisation Using a Basic Style</a>
 
@@ -128,6 +132,8 @@ const viz = new carto.Viz(`
 
 ![point-style](images/training-v2-06-point-style.png)
 
+[Back to Steps List ^](#steps6)
+
 ## <a name="controlRes">Controlling the Resolution</a>
 
 Picture an invisible grid laid over your map. If CARTO detects points in a grid cell it will create one marker for that grid cell. That represents an aggregation of the original points. 
@@ -145,6 +151,8 @@ resolution: 2
 ![resolution](images/training-v2-06-resolution.gif)
 
 To learn more about resolution check [this section of our guides](https://carto.com/developers/carto-vl/guides/aggregation-and-data-summaries/#resolution).
+
+[Back to Steps List ^](#steps6)
 
 ## <a name="clusterMethod">Improve Using Cluster Method</a>
 
@@ -171,6 +179,8 @@ const viz = new carto.Viz(`
 * `clusterSum` is adding up the `velocity` for each original point it's aggregating. If we used this function only, each marker will contain a single number for total velocity.
 * Separately, `clusterCount` is figuring out how many original points are being represented by a single aggregated marker.
 * The final marker size is based on total velocity divided by the number of people (for each aggregated marker). The `ramp` function is creating a proportional symbol map by sizing these from 0 pixels wide to half a pixel wide based on the first parameter's result.
+
+[Back to Steps List ^](#steps6)
 
 ## <a name="checkVelocity">Check the Velocity with Another Attribute</a>
 
@@ -301,3 +311,5 @@ At this point your document should look like this:
 ```
 
 ![cluster-mode](images/training-v2-06-cluster-mode.png)
+
+[Back to Steps List ^](#steps6)

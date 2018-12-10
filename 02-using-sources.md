@@ -4,13 +4,12 @@
 
 *For more information check our [Add Data Sources guide](https://carto.com/developers/carto-vl/guides/add-data-sources/).*
 
-## Steps
+## <a name="steps2">Steps</a>
 
  1. [Create a Basic HTML Template](#createTemplate2)
  2. [Dataset Source with Custom Credentials](#datasetSrc)
  3. [Add a GeoJSON Source and Layer](#addGeoJSON)
  
-
 ## <a name="createTemplate2">Create a Basic HTML Template</a>
 
 Let's start with the map we made in the Getting Started section. Open it in your code editor.
@@ -74,6 +73,8 @@ Let's start with the map we made in the Getting Started section. Open it in your
 </html>
 ```
 
+[Back to Steps List ^](#steps2)
+
 ## <a name="datasetSrc">Dataset Source with Custom Credentials</a>
 One powerful feature of CARTO VL is that you can use data from a few different sources in the same map. Replace the existing `source` with a dataset from a different CARTO account:
 
@@ -93,6 +94,8 @@ Make sure to update the layer definition with the new source name:
 ```javascript
 const layer = new carto.Layer('layer', citiesSource, viz);`
 ```
+
+[Back to Steps List ^](#steps2)
 
 ##  <a name="addGeoJSON">Add a GeoJSON Source and Layer</a>
 
@@ -154,3 +157,4 @@ officeLayer.addTo(map);
 
 ![two-sources](images/training-v2-02-srcs.png)
 
+[Back to Steps List ^](#steps2)

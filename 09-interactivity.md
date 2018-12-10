@@ -4,7 +4,7 @@
 
 *In this section we will cover different types of interactivity and how you can use them to highlight your data. We also have a guide for this [here](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/).*
 
-## Steps
+## <a name="steps9">Steps</a>
 
  1. [Create a Basic Map](#createTemplate9)
  2. [Map Events](#mapEvents)
@@ -67,6 +67,8 @@ Let's create a new map using world population data. Paste this into your `index.
 
 The first step to making something happen when a user interacts with the map is detecting that user's action. In the following sections we will show you the ways CARTO VL "listens" for these events.
 
+[Back to Steps List ^](#steps9)
+
 ## <a name="mapEvents">Map Events</a>
 
 CARTO VL can detect events that happen in the map object. Add this under `<div id="map"></div>` to add an overlay box. We are setting this up to show basic information about our map, in the paragraph element with `desc` id.
@@ -125,6 +127,8 @@ We already defined `map` as the name of our map object.
 
 For more information about map events check [this section](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#map-events) of our *Add interactivity and events* guide.
 
+[Back to Steps List ^](#steps9)
+
 ## <a name="layerEvents">Basic Layer Events</a>
 
 Events that happen in certain layers in your map are also detectable. We use CARTO VL library functions for this, as opposed to Mapbox-specific functions. Add this line into your `<aside></aside>` block, underneath `<p id="desc"></p>`:
@@ -147,6 +151,8 @@ Once our map layer is finished loading, we are running a function that displays 
 ![layer-loaded](images/training-v2-09-layer-loaded.gif)
 
 Layer events are described in [this guide section](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#layer-events).
+
+[Back to Steps List ^](#steps9)
 
 ## <a name="useVariables">Exposing Properties and Features with Variables</a>
 
@@ -172,6 +178,8 @@ layer.on('updated', function() {
 Now when any update is made to our layer (like when we zoom in our out), the features within the viewport will be found via `viewportFeatures`. Then those features will be counted by `viz.variables.currentFeatures.value.length`. We store the number of features in the `numberOfFeatures` const. Then we put that in a `${variable}` so we can use it in text for our overlay. 
 
 ![layer-feature-count](images/training-v2-09-feature-count.gif)
+
+[Back to Steps List ^](#steps9)
 
 ## <a name="functionResults">Access Results from Functions</a>
 
@@ -200,6 +208,8 @@ layer.on('updated', function() {
 When the layer gets updated (for example on zoom), we are using `viz.variables.total_pop.value` to get the total `pop_max` number and converting it to text with `toLocaleString()`. That way we can display it in our overlay's text.
 
 ![layer-total-pop](images/training-v2-09-total-pop.gif)
+
+[Back to Steps List ^](#steps9)
 
 ## <a name="featureEvents">Feature Events</a>
 
@@ -324,6 +334,8 @@ When a point is clicked, the `featureEvent => {...}` function runs. It runs thro
 
 Reload your map and click on a point!
 
+[Back to Steps List ^](#steps9)
+
 ## <a name="addPopUps">Adding Mapbox GL Pop-Ups</a>
 
 We can use a feature event to open a Pop-Up window, to display useful information about that feature. Since we're using a Mapbox GL map object, we can use a [Mapbox GL Pop-Up](https://www.mapbox.com/mapbox-gl-js/api/#popup) for this. Review [this guide section](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#adding-pop-ups) for more information about adding Pop-Ups.
@@ -364,6 +376,8 @@ interactivity.on('featureClick', featureEvent => {
 
 ![click-popup](images/training-v2-09-click-popup.gif)
 
+[Back to Steps List ^](#steps9)
+
 ## <a name="interactiveStyles">Interactive Styling</a>
 
 In addition to displaying useful information about a feature when a user interacts with it, we can change what the feature looks like to highlight it.
@@ -399,3 +413,5 @@ We don't need to use `blendTo` here and redefine the width and color to change b
 *Here's what our final map looks like. Try rolling over features in your version.*
 
 ![interactive-styles](images/training-v2-09-interactive-styles.gif)
+
+[Back to Steps List ^](#steps9)

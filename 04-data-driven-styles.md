@@ -4,7 +4,7 @@
 
 *CARTO VL offers functions that do the work of styling features by attribute behind-the-scenes. In this section we'll demonstrate how, but for more detailed information see our Data Driven Styling guides [Part 1](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/) and [Part 2](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-2/).*
 
-## Steps
+## <a name="steps4">Steps</a>
 
  1. [Create a Basic Map](#createTemplate4)
  2. [Ramp and Numeric Properties](#rampNumeric)
@@ -108,6 +108,8 @@ const viz = new carto.Viz(`
 
 Check [this guide](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#categorical-data) for more information about creating data-driven visualizations with categorical data.
 
+[Back to Steps List ^](#steps4)
+
 ## <a name="rampNumeric">Ramp and Numeric Properties</a>
 
 What happens if you want to color your features according to an attribute, but you have a large dataset and don't immediately know the range of values it's attribute column contains?
@@ -146,6 +148,8 @@ When we don't specify buckets, we're creating an *unclassed map*. Each point is 
 
 Check [this guide](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#numeric-data) for more information about using `ramp` with numeric data. We're using named colors in this expression, but you can use [other color formats for data-driven styling](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-2/#color-values).
 
+[Back to Steps List ^](#steps4)
+
 ## <a name="improveStyle">Improve the Style</a>
 
 Our points with low population density are hard to see, since they are close to the same color as the basemap. We can make them more legible by changing the first value in our color `ramp`. We can also make it easier to see the places with mid-range population density by defining a third color in our `ramp` (you can define as many colors as you'd like). Replace the color property in your `viz` with this:
@@ -158,6 +162,7 @@ color: ramp($dn, [green, yellow, red])
 
 ![pop-density-3](images/training-v2-04-density-ramp-3.png)
 
+[Back to Steps List ^](#steps4)
 
 ## <a name="classifyNumeric">Classify a Numeric Property for Better Perception</a>
 
@@ -183,6 +188,7 @@ const viz = new carto.Viz(`
 
 ![global-quantiles](images/training-v2-04-global-quantiles.png)
 
+[Back to Steps List ^](#steps4)
 
 ## <a name="others">The `Others` Category</a>
 Sometimes you might only be interested in showing some categories, instead of all of them. CARTO VL lets you specify the categories you want, and bucket the rest into an "Other" category. "Other" is also helpful if you have some null values in your data. 
@@ -215,6 +221,7 @@ color: ramp(buckets($winner, ["Conservative Party", "Labour Party"]), [blue, red
 
 ![other-category](images/training-v2-04-election-other.png)
 
+[Back to Steps List ^](#steps4)
 
 ## <a name="mostCommon">Find the Most Common Categories</a>
 
@@ -252,6 +259,7 @@ We're not specifying categories by name here, since we don't know ahead of time 
 
 ![top-categories](images/training-v2-04-top-cat.png)
 
+[Back to Steps List ^](#steps4)
 
 ## <a name="showCats">Showing All Categories for Exploratory Analysis</a>
 
@@ -266,6 +274,8 @@ Notice we don't need to specify an accident type or the number of categories we 
 * These categories have no hierarchy. They are also not necessarily the most common.
 
 ![six-categories](images/training-v2-04-six-cat.png)
+
+[Back to Steps List ^](#steps4)
 
 ## <a name="cartoColors">CARTOColors</a>
 
@@ -305,6 +315,8 @@ const viz = new carto.Viz(`
 In this map it's highlighting places that have a mid-range population density with the color yellow. Places with lowest population density are blue-green. Places with highest population density are dark pink.
 
 ![cartocolors](images/training-v2-04-cartocolors.png)
+
+[Back to Steps List ^](#steps4)
 
 ## <a name="bubbleMap">Create a Bubble Map</a>
 
@@ -348,6 +360,8 @@ We're using `ramp` again, but here it sizes each point by how much damage (in do
 
 Some of the accidents are a little hard to see. We can improve that in the next step.
 
+[Back to Steps List ^](#steps4)
+
 ## <a name="sizePerception">Size Perception</a>
 
 Right now our circle sizes are scaling up linearly. 
@@ -368,6 +382,8 @@ width: sqrt(ramp($total_damage, [0, 50^2]))
 *Now the sizes appear more normalized:*
 
 ![size-perception](images/training-v2-04-size-perception.png)
+
+[Back to Steps List ^](#steps4)
 
 ## <a name="imageSymbols">Introducing Symbols and Images</a>
 
@@ -391,3 +407,5 @@ Instead of maki icon key words you can use custom image urls.
 *Here's what our map using maki icon key word symbols should look like (we zoomed into Montana):*
 
 ![image-icons](images/training-v2-04-image-icons.png)
+
+[Back to Steps List ^](#steps4)

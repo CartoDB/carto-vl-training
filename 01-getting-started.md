@@ -12,9 +12,9 @@
   * [Sublime Text](https://www.sublimetext.com/)
   * [Atom](https://atom.io/)
 
-## Steps
+## <a name="steps1">Steps</a>
 
- 1. [Create a Basic HTML Template](#createTemplate)
+ 1. [Create a Basic HTML Template](#createTemplate1)
  2. [Include Mapbox GL and CARTO VL Scripts](#includeMapbox)
  3. [Add a Map Container and Basic CSS](#addContainer)
  4. [Set Up a Basemap with carto.basemaps](#setBmap)
@@ -26,7 +26,7 @@
  10. [Start Playing with the Visualization](#startViz)
 
 
-## <a name="createTemplate">Create a Basic HTML Template</a>
+## <a name="createTemplate1">Create a Basic HTML Template</a>
 
 Open a new document in your code editor, then paste this into it:
 
@@ -45,6 +45,8 @@ Open a new document in your code editor, then paste this into it:
 
 </html>
 ```
+
+[Back to Steps List ^](#steps1)
 
 ## <a name="includeMapbox">Include Mapbox GL and CARTO VL Scripts</a>
 
@@ -66,6 +68,8 @@ We need to add JavaScript libraries to our HTML document in order to build our m
 * CARTO VL uses [Mapbox GL](https://www.mapbox.com/mapbox-gl-js/api/) to render basemaps.
 * We will use CARTO VL code to add CARTO data layers over the basemap, but because the Mapbox GL libraries are included you also have the option to add native Mapbox data layers to your map.
 * CARTO VL expressions cannot be used for native Mapbox GL layers and vice versa.
+
+[Back to Steps List ^](#steps1)
 
 ## <a name="addContainer">Add a Map Container and Basic CSS</a>
 
@@ -93,6 +97,8 @@ Define styles for the container by pasting this inside the `head` element. This 
   }
 </style>
 ```
+
+[Back to Steps List ^](#steps1)
 
 ## <a name="setBmap">Set Up a Basemap with carto.basemaps</a>
 
@@ -170,6 +176,8 @@ Save this file as `index.html` on your computer. At this point your code should 
 
 To see another example of the steps above, check [this Basic setup guide](https://carto.com/developers/carto-vl/guides/getting-started/#basic-setup).
 
+[Back to Steps List ^](#steps1)
+
 ## <a name="defineUser">Define the User</a>
 
 To add other layers on top of the basemap we need access to CARTO datasets. In this example we will use a CARTO account's [public](https://carto.com/help/building-maps/privacy-settings-for-protecting-maps-and-data/) dataset of Madrid rental listings.
@@ -189,6 +197,8 @@ carto.setDefaultAuth({
 * The `default_public` key gives a CARTO VL app access to all of an account's public datasets.
 * You can add a code block like this to your app more than once, so you can pull data from more than one CARTO account into the same map.
 
+[Back to Steps List ^](#steps1)
+
 ## <a name="defineSrc">Define the Source</a>
 
 Now that we have access to a CARTO account we can use it's data in this map by [defining a `source`](https://carto.com/developers/carto-vl/guides/getting-started/#create-source). CARTO VL provides a few ways to bring data into your map that we will demonstrate in the next section. One of those methods gets an entire dataset by name. Add this line beneath the `setDefaultAuth` block:
@@ -199,6 +209,8 @@ const source = new carto.source.Dataset('madrid_listings');
 
 * You can add more than one source to a map.
 * Make sure to give each source `const` a unique name
+
+[Back to Steps List ^](#steps1)
 
 ## <a name="defineViz">Define the Viz</a>
 
@@ -212,6 +224,8 @@ const viz = new carto.Viz();
 * If you are using multiple sources, you need to create a separate Viz object for each one.
   * Make sure the Viz object `const` are named uniquely.
 
+[Back to Steps List ^](#steps1)
+
 ## <a name="defineLayer">Define the Layer</a>
 
 Now we can [create a new map layer](https://carto.com/developers/carto-vl/guides/getting-started/#create-map-layer) using the data source and style definitions. Add this beneath the viz definition:
@@ -223,6 +237,8 @@ const layer = new carto.Layer('layer', source, viz);
 * There can only be one source and Viz object per layer, but you can create more than one layer. Just define a new carto.Layer `const` for each and make sure they are named uniquely.
 * The first function parameter defines a layer's name. You can use whatever name you'd like, here we're using `'layer'`
 * The second parameter is always the name of the source `const` you defined previously, and the third parameter is always the name of the Viz object `const`.
+
+[Back to Steps List ^](#steps1)
 
 ## <a name="addLayer">Add the Layer to the Map</a>
 
@@ -237,6 +253,8 @@ Notice we're using the `mapboxgl.Map` object's `const` name, not the containing 
 When you save these changes in your code editor and refresh your browser, the map should look like this:
 
 ![default-style](images/training-v2-01-defaultStyle.png)
+
+[Back to Steps List ^](#steps1)
 
 ## <a name="startViz">Start Playing with the Visualization</a>
 
@@ -331,3 +349,5 @@ Now when you save the latest changes and refresh, you should see larger green ma
 ![basic-style](images/training-v2-01-basicStyle.png)
 
 For another code example of a basic map, check [this section](https://carto.com/developers/carto-vl/guides/getting-started/#all-together) of our Developer Center guide.
+
+[Back to Steps List ^](#steps1)
