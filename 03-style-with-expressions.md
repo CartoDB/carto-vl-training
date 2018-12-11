@@ -11,11 +11,12 @@
  3. [Add an Expression Function](#expressionFunction)
  4. [Add a Color Expression Function](#addColorExp)
  5. [Opacity](#opacity)
- * 5.A [Option A](#opacityA)
- * 5.B [Option B](#opacityB)
- * 5.C [Option C](#opacityC)
+    * 5.A [Option A](#opacityA)
+    * 5.B [Option B](#opacityB)
+    * 5.C [Option C](#opacityC)
 
 ## <a name="expressions">Expressions</a>
+
 Expressions can be static values, like `red` or `#63ECF0`.
 
 Expressions can also be functions. Functions take an input, use it in some kind of calculation or transformation, and output another value. This value is used to define your style. Some of these are math functions that you might have heard of before, like `sqrt()`.
@@ -23,6 +24,7 @@ Expressions can also be functions. Functions take an input, use it in some kind 
 CARTO VL expressions can be other types of functions though, including ones that work with color values.
 
 You can also combine expressions using *expression functions*.
+
 * An expression example = `sqrt(9)`
 * An expression function example = `sqrt(9) + cos(10)`
 
@@ -33,6 +35,7 @@ In this section we're going to demonstrate a few kinds of expressions.
 [Back to Steps List ^](#steps3)
 
 ## <a name="createTemplate3">Create a Basic Viz with Custom Styles</a>
+
 Let's create a new map. Replace all of the code in your `index.html` file with this:
 
 ```html
@@ -118,9 +121,10 @@ width: 8 + 16
 
 ## <a name="addColorExp">Add a Color Expression Function</a>
 
-CARTO VL offers [a few ways to define color using different expressions](https://carto.com/developers/carto-vl/guides/style-with-expressions/#color-expressions). One type of expression is a `color constructor`, which is a function that defines a color by the components of its [color space](https://photo.stackexchange.com/questions/48984/what-is-the-difference-or-relation-between-a-color-model-and-a-color-space). 
+CARTO VL offers [a few ways to define color using different expressions](https://carto.com/developers/carto-vl/guides/style-with-expressions/#color-expressions). One type of expression is a `color constructor`, which is a function that defines a color by the components of its [color space](https://photo.stackexchange.com/questions/48984/what-is-the-difference-or-relation-between-a-color-model-and-a-color-space).
 
-For example, this [RGB](https://carto.com/developers/carto-vl/reference/#cartoexpressionsrgb) color constructor specifies values for red, green and blue color channels that result in the color <span style="color:#885cff">purple</span>: `rgb(136, 92, 255)`. 
+For example, this [RGB](https://carto.com/developers/carto-vl/reference/#cartoexpressionsrgb) color constructor specifies values for red, green and blue color channels that result in the color <span style="color:#885cff">purple</span>: `rgb(136, 92, 255)`.
+
 * You can find constructors for other color spaces in [our documentation](https://carto.com/developers/carto-vl/reference/), like [CIELab](https://carto.com/developers/carto-vl/reference/#cartoexpressionscielab) and [HSL](https://carto.com/developers/carto-vl/reference/#cartoexpressionshsl).
 
 Just like with other expressions, we can combine `color constructor` expressions together with an `expression function`. Replace your `viz` object's current color property with this:
@@ -139,7 +143,7 @@ The color channel values get added together, so the final result is `rgb(239, 23
 
 ## <a name="opacity">Opacity</a>
 
-Sometimes you might want to make your map features semi-transparent, so overlapped features or basemap details can appear underneath. This is also possible with expressions. 
+Sometimes you might want to make your map features semi-transparent, so overlapped features or basemap details can appear underneath. This is also possible with expressions.
 
 ### <a name="opacityA">OPTION A</a>
 
@@ -171,21 +175,20 @@ color: opacity(rgb(255, 0, 0) 0.25)
 
 ![opacity-b](images/training-v2-03-optB.png)
 
-
 ### <a name="opacityC">OPTION C</a>
 
 Another option is to use a CARTO VL property called [filter](https://carto.com/developers/carto-vl/reference/#cartoexpressions). Filter is a method we use to set a condition. In the example below it's being used to set the map layer's features to 25% opacity. Comment out the last code line and add the `color` and `filter` properties shown below:
-    
+
 ```javascript
 const viz = new carto.Viz(`
   width: 8 + 16
-            
+
   // Option A
   color: rgba(255, 0, 0, 0.25)
-            
+
   // Option B
   // color: opacity(rgb(255, 0, 0) 0.25)
-            
+
   // Option C
   color: red
   filter: 0.25
@@ -194,9 +197,10 @@ const viz = new carto.Viz(`
 
 ![opacity-c](images/training-v2-03-optC.png)
 
-What's the difference between using `filter` and the other opacity methods? 
-* Filter changes opacity for the whole layer. 
-* The opacity function or a color expression alpha channel can do that too, but they can also be applied to specific features. That means for example you can have the whole layer at 80% opacity, but at the same time you can make a point marker's fill color less transparent than it's stroke color. 
+What's the difference between using `filter` and the other opacity methods?
+
+* Filter changes opacity for the whole layer.
+* The opacity function or a color expression alpha channel can do that too, but they can also be applied to specific features. That means for example you can have the whole layer at 80% opacity, but at the same time you can make a point marker's fill color less transparent than it's stroke color.
 
 ```javascript
 const viz = new carto.Viz(`

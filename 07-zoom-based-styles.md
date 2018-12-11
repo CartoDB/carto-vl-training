@@ -158,7 +158,7 @@ Let's say we'd like to focus on just the larger cities in this map. We can add a
 filter: $pop_max > 1000000
 ```
 
-* [filter](https://carto.com/developers/carto-vl/reference/#cartoexpressions) sets up a condition. If any features don't meet that condition they will not be included in the visualization. In this case, any cities with max populations of one million people or less will not show up in our map. 
+* [filter](https://carto.com/developers/carto-vl/reference/#cartoexpressions) sets up a condition. If any features don't meet that condition they will not be included in the visualization. In this case, any cities with max populations of one million people or less will not show up in our map.
 
 *Notice the classification has been recalculated to just include the features with max populations over 1,000,000.*
 
@@ -192,6 +192,7 @@ const viz = new carto.Viz(`
 ```
 
 Let's break down what the filter expression does:
+
 * [ramp](https://carto.com/developers/carto-vl/reference/#cartoexpressionsramp) is taking two input parameters.
 * The first parameter is [zoomrange](https://carto.com/developers/carto-vl/reference/#cartoexpressionszoomrange), which is defining the zoom levels we want to see certain data at.
 * The second parameter is defining what we want to see at each of those zoom levels.

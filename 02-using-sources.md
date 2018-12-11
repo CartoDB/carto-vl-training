@@ -9,7 +9,7 @@
  1. [Create a Basic HTML Template](#createTemplate2)
  2. [Dataset Source with Custom Credentials](#datasetSrc)
  3. [Add a GeoJSON Source and Layer](#addGeoJSON)
- 
+
 ## <a name="createTemplate2">Create a Basic HTML Template</a>
 
 Let's start with the map we made in the Getting Started section. Open it in your code editor.
@@ -76,6 +76,7 @@ Let's start with the map we made in the Getting Started section. Open it in your
 [Back to Steps List ^](#steps2)
 
 ## <a name="datasetSrc">Dataset Source with Custom Credentials</a>
+
 One powerful feature of CARTO VL is that you can use data from a few different sources in the same map. Replace the existing `source` with a dataset from a different CARTO account:
 
 ```javascript
@@ -83,9 +84,9 @@ const citiesSource = new carto.source.Dataset('populated_places', {
   username: 'documentation',
   apiKey: 'default_public'
 });
-``` 
+```
 
-* Notice we're still using the Dataset source, but this time we're using an optional second parameter. 
+* Notice we're still using the Dataset source, but this time we're using an optional second parameter.
 * We have already defined default authorization in the `setDefaultAuth` function, but this second parameter authorizes this map to use the `populated_places` dataset from a different CARTO account.
 * The Dataset source actually accepts three parameters, find out more [here](https://carto.com/developers/carto-vl/reference/#cartosourcedataset).
 
@@ -97,7 +98,7 @@ const layer = new carto.Layer('layer', citiesSource, viz);`
 
 [Back to Steps List ^](#steps2)
 
-##  <a name="addGeoJSON">Add a GeoJSON Source and Layer</a>
+## <a name="addGeoJSON">Add a GeoJSON Source and Layer</a>
 
 CARTO VL also provides other ways to pull in source data. For example you can use a [SQL source](https://carto.com/developers/carto-vl/reference/#cartosourcesql) like this:
 
@@ -109,6 +110,7 @@ const citiesSource = new carto.source.SQL('SELECT * FROM populated_places WHERE 
 ```
 
 This is useful if:
+
 * you only want to use part of a dataset.
 * you want to manipulate the original data with [PostgreSQL](https://carto.com/help/working-with-data/easy-sql/) or [PostGIS](https://carto.com/help/diy/postgis/) and use the results in your map.
 
@@ -132,7 +134,7 @@ const office = {
     }
   ]
 };
-``` 
+```
 
 We've put the GeoJSON into a `const` variable. Now we can use it as a source when we add code like this:
 

@@ -71,7 +71,7 @@ Let's create a new map that uses anonymized data from over a million people that
     const layer = new carto.Layer('layer', source, viz);
 
     layer.addTo(map);
- 
+
   </script>
 </body>
 
@@ -136,7 +136,7 @@ const viz = new carto.Viz(`
 
 ## <a name="controlRes">Controlling the Resolution</a>
 
-Picture an invisible grid laid over your map. If CARTO detects points in a grid cell it will create one marker for that grid cell. That represents an aggregation of the original points. 
+Picture an invisible grid laid over your map. If CARTO detects points in a grid cell it will create one marker for that grid cell. That represents an aggregation of the original points.
 
 That's also why you see more points appear as you zoom in. As you zoom, the points "spread out" on the map, so less of the original points fall in the same cell grid cell.
 
@@ -156,7 +156,7 @@ To learn more about resolution check [this section of our guides](https://carto.
 
 ## <a name="clusterMethod">Improve Using Cluster Method</a>
 
-When we aggregate points, we are "combining" them by location, or spatially aggregating them. 
+When we aggregate points, we are "combining" them by location, or spatially aggregating them.
 
 If we want to visualize another attribute besides location, we need to decide how it gets aggregated. For example, if we had a `spend` column representing how much each person spent on their walk, when we aggregate points we can use [SUM](https://www.postgresql.org/docs/8.2/functions-aggregate.html) to add up how much each person spent. Or, if we just want to figure how many original points are being represented by the single aggregated marker, we would use a [COUNT](https://www.postgresql.org/docs/8.2/functions-aggregate.html) for that.
 
@@ -196,6 +196,7 @@ const viz = new carto.Viz(`
   resolution: 0.25
 `);
 ```
+
 * [clusterMode](https://carto.com/developers/carto-vl/reference/#cartoexpressionsclustermode) finds the most common values in each set of points that are getting aggregated into a single marker. Here it's finding the most common travel mode.
 * We are using a CARTOColors palette to map our common categories to a unique color: [Bold](https://carto.com/carto-colors/). We're making sure to use a Qualitative palette, since there's no hierarchy to these categories.
 

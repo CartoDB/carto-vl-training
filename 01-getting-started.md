@@ -25,7 +25,6 @@
  9. [Add the Layer to the Map](#addLayer)
  10. [Start Playing with the Visualization](#startViz)
 
-
 ## <a name="createTemplate1">Create a Basic HTML Template</a>
 
 Open a new document in your code editor, then paste this into it:
