@@ -63,12 +63,14 @@ const viz = new carto.Viz(`
 We learned in the last section that [filter](https://carto.com/developers/carto-vl/reference/#cartoexpressions) sets a condition. If your data does not meet that condition, it will not appear in your map.
 
 When we use an [animation expression](https://carto.com/developers/carto-vl/reference/#cartoexpressionsanimation) for filter, CARTO detects the lowest and highest values in the column you're applying the expression to.
-* For a timestamp-type column like `date_time`, CARTO will automatically detect the earliest date and latest date. 
+
+* For a timestamp-type column like `date_time`, CARTO will automatically detect the earliest date and latest date.
 * If we used a number-type column instead, CARTO will automatically detect the lowest number and highest number.
 
 The animation will progress from the earliest value in `date_time` to the latest value.
 
-How CARTO knows which points to show at which time: 
+How CARTO knows which points to show at which time:
+
 * CARTO calculates the entire range between the lowest and highest values in our column. In this case it's recognizing the entire time span between our earliest date and latest date as one block of time.
 * Then CARTO plots that entire range of time across a certain duration. This animation's duration will be 10 seconds. That's the default duration unless you define another.
 * CARTO starts the animation and steps through the entire `date_time` range during that 10 seconds. During this progression, when a point's `date_time` timestamp matches the time range step the animation is currently at, that point appears on the map.
@@ -82,6 +84,7 @@ For a more detailed explanation see [this guide](https://carto.com/developers/ca
 ## Animation Options
 
 In the last step we mentioned default duration time. The animation expression allows you two other parameters besides your input column:
+
 * duration
 * fade
 
@@ -173,7 +176,7 @@ $pauseButton.addEventListener('click', () => {
 });
 ```
 
-Paste this code underneath what you added in the last step. The `updateProgress` function detects how far the animation has progressed with the `getProgressPct` function, then uses that to update the slider. 
+Paste this code underneath what you added in the last step. The `updateProgress` function detects how far the animation has progressed with the `getProgressPct` function, then uses that to update the slider.
 
 This progress check happens every 100 milliseconds, because that's how often we are running the `updateProgress` function according to the `setInterval` function beneath it.
 
@@ -204,7 +207,7 @@ Now we will only visualize where the birds were from March 30th to April 24th, 2
 color: ramp(@animation, Oryel)
 ```
 
-The `Oryel` palette swatches progress from light yellow to orange-red. 
+The `Oryel` palette swatches progress from light yellow to orange-red.
 
 *Check out how the bird locations are mapped to those colors over time in our final animation:*
 

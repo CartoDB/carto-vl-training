@@ -3,6 +3,7 @@
 *There's one thing missing from our maps so far: legends. Every good map should use a legend that explains it's features at a glance.*
 
 ## Create a Basic Map
+
 Let's use our map from the last section, from the step before we added image symbols:
 
 ```html
@@ -93,10 +94,11 @@ Add an HTML element that will contain our legend, by pasting this into your code
 ![legend-container](images/training-v2-05-legend-container.png)
 
 Notice there's not much content related to the actual map features yet. At this point we're just setting up a container.
+
 * [`aside`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside) is an HTML element used as a container for content that's considered separate from the page's main content.
 * We're also using a CARTO-specific `box` class to define styles for the legend container...basically making it a white box with round edges.
 * The [`header` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header) is where we're storing our legend title. We're using default [`h1`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements) tags to define the font style for our title. You can modify this to use other [section heading elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements) or text styles as needed.
-* [`section`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section) is an HTML element that's used to group content. 
+* [`section`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section) is an HTML element that's used to group content.
 * Find out more about the footer element [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer).
 
 One of the great things about CARTO VL is that it provides a function to auto-detect our map layer's data and styles: [`getLegendData()`](https://carto.com/developers/carto-vl/reference/#expressionsrampgetlegenddata). We can use that to create our legend elements. Paste this under `layer.addTo(map);`:
@@ -131,7 +133,7 @@ After the map layer's feature colors are retrieved using `getLegendData`, `rgbTo
 
 Another way to explain your visualization is to use a widget. Legends explain the attributes you're already highlighting via feature styles, but widgets can show additional attributes.
 
-For example, we previously created a Madrid rental listings map that styled points according to room price. We can add a Histogram widget to show more information about the prices overall. 
+For example, we previously created a Madrid rental listings map that styled points according to room price. We can add a Histogram widget to show more information about the prices overall.
 
 CARTO's [Airship](https://carto.com/developers/airship/) library already provides an interface component we can customize for this widget. In this step we will add links to Airship's libraries. Make sure the code between your `<head></head>` elements looks like this:
 
@@ -214,6 +216,7 @@ function drawHistogram() {
 ```
 
 Notice we've added `@histogram: viewportHistogram($price, 5, 1)` to our `viz`.
+
 * [viewportHistogram](https://carto.com/developers/carto-vl/reference/) means we are only using the data that is inside the map view bounds.
 * `$price` is the attribute we are illustrating in this histogram. It is a number-type column in our dataset.
 * `viewportHistogram` can also take an expression as it's first parameter.
@@ -221,9 +224,10 @@ Notice we've added `@histogram: viewportHistogram($price, 5, 1)` to our `viz`.
 * The second parameter is used to weight each occurrence differently based on the number you define here. `1` means this is an unweighted count. This is also an optional parameter. We're defining `1` for demonstration purposes, but `1` is also actually the default so it doesn't need to be specified.
 
 This line defines our histogram, but we still have to draw it. That happens inside the `drawHistogram` function we just added.
+
 * The `var histogramwidget` line creates an Airship histogram widget.
 * The `const histogram` line reads values from the `viewportHistogram` function in our `viz`.
-* The `histogramwidget.data` line maps the values to our histogram. 
+* The `histogramwidget.data` line maps the values to our histogram.
 
 For more details about how Airship Histogram widget Components work, see [this documentation](https://carto.com/developers/airship/reference/#/components/histogram-widget). Check [this guide section](https://carto.com/developers/carto-vl/guides/add-widgets/#scalars-what-is-the-total-of--what-is-the-average-of--what-is-the-maximum-) to learn more about how to find averages, totals, min, max or percentiles for your entire dataset vs. features in your map's viewport.
 
@@ -332,7 +336,7 @@ const viz = new carto.Viz(`
 `);
 ```
 
-Notice when you refresh the map that the Histogram widget refreshes also. 
+Notice when you refresh the map that the Histogram widget refreshes also.
 
 *Now we're only looking at values less than 500:*
 
@@ -340,7 +344,7 @@ Notice when you refresh the map that the Histogram widget refreshes also.
 
 ## Update Histogram on Viewport Changes
 
-Right now if you zoom in or out on the map, the Histogram widget won't change even though we're supposed to be taking into account only the data inside the viewport. 
+Right now if you zoom in or out on the map, the Histogram widget won't change even though we're supposed to be taking into account only the data inside the viewport.
 
 The reason the widget isn't changing is because it's not aware that the amount of data in the viewport is changing when we zoom. We can detect the change though and then update the widget with another line of code. Paste this into your code, underneath the `layer.on('loaded', drawHistogram);` line:
 
@@ -378,7 +382,7 @@ function drawHistogram() {
 }
 ```
 
-The Category widget is [another kind of Airship Component](https://carto.com/developers/airship/reference/#/components/category-widget). We are still taking the data from our `viz` `viewportHistogram` function, but now it's working with strings instead of numbers. 
+The Category widget is [another kind of Airship Component](https://carto.com/developers/airship/reference/#/components/category-widget). We are still taking the data from our `viz` `viewportHistogram` function, but now it's working with strings instead of numbers.
 
 At this point your final code should look like this:
 

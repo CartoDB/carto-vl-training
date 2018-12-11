@@ -1,6 +1,6 @@
 # Intro to Interactivity and Events
 
-*One of the most useful features of CARTO maps is that they're interactive. When users click on a map, or pan it, or hover over it's features, we can cause another action to happen in the map. For example, we can open a Pop-Up window, or change the color of a feature to highlight it.* 
+*One of the most useful features of CARTO maps is that they're interactive. When users click on a map, or pan it, or hover over it's features, we can cause another action to happen in the map. For example, we can open a Pop-Up window, or change the color of a feature to highlight it.*
 
 *In this section we will cover different types of interactivity and how you can use them to highlight your data. We also have a guide for this [here](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/).*
 
@@ -87,6 +87,7 @@ function desc() {
 ```
 
 The functions we're using to define these variables come from Mapbox GL. We can use them since our CARTO VL map is based on a Mapbox GL map object.
+
 * `center` will contain the coordinates of the map's center point, based on it's bounding box.
   * [getCenter](https://www.mapbox.com/mapbox-gl-js/api/#lnglatbounds#getcenter)
 * `longitude` will contain the `center` longitude.
@@ -104,7 +105,8 @@ map.on('load', desc);
 map.on('move', desc);
 ```
 
-We already defined `map` as the name of our map object. 
+We already defined `map` as the name of our map object.
+
 * [load](https://www.mapbox.com/mapbox-gl-js/api/#map.event:load) is a Mapbox GL function that will detect when the map loads in a browser.
 * [move](https://www.mapbox.com/mapbox-gl-js/api/#map.event:move) is a Mapbox GL function that will detect when a map user moves the map, for example by panning.
 
@@ -131,6 +133,7 @@ layer.on('loaded', function() {
 ```
 
 Once our map layer is finished loading, we are running a function that displays a new message in our overlay.
+
 * `.on('loaded'` is documented [here](https://carto.com/developers/carto-vl/reference/#cartoon)
 
 ![layer-loaded](images/training-v2-09-layer-loaded.gif)
@@ -158,7 +161,7 @@ layer.on('updated', function() {
 });
 ```
 
-Now when any update is made to our layer (like when we zoom in our out), the features within the viewport will be found via `viewportFeatures`. Then those features will be counted by `viz.variables.currentFeatures.value.length`. We store the number of features in the `numberOfFeatures` const. Then we put that in a `${variable}` so we can use it in text for our overlay. 
+Now when any update is made to our layer (like when we zoom in our out), the features within the viewport will be found via `viewportFeatures`. Then those features will be counted by `viz.variables.currentFeatures.value.length`. We store the number of features in the `numberOfFeatures` const. Then we put that in a `${variable}` so we can use it in text for our overlay.
 
 ![layer-feature-count](images/training-v2-09-feature-count.gif)
 
@@ -194,13 +197,13 @@ When the layer gets updated (for example on zoom), we are using `viz.variables.t
 
 So far we've listened for events from our map, and from it's layer. We can also listen for events related a layer's features. For example, we can detect when a user clicks on a point, or hovers over it.
 
-The first step to using feature events is to enable your map layer to capture user actions. We do that in CARTO VL by adding an [interactivity object](https://carto.com/developers/carto-vl/reference/#cartointeractivity). 
+The first step to using feature events is to enable your map layer to capture user actions. We do that in CARTO VL by adding an [interactivity object](https://carto.com/developers/carto-vl/reference/#cartointeractivity).
 
 Find a list of Feature Events you can use [here](https://carto.com/developers/carto-vl/guides/add-interactivity-and-events/#feature-events). Paste this underneath `const layer = new carto.Layer('layer', source, viz);`:
 
 ```javascript
 const interactivity = new carto.Interactivity(layer);
-``` 
+```
 
 * an interactivity object can be added to a single map layer or to an array of multiple layers.
 
@@ -307,6 +310,7 @@ interactivity.on('featureClick', featureEvent => {
 ```
 
 When a point is clicked, the `featureEvent => {...}` function runs. It runs through each feature and detects which one was clicked in the `forEach` function. Then it finds the `name` and `pop_max` variable values for that feature and displays them in our overlay.
+
 * Read more about [featureClick](https://carto.com/developers/carto-vl/reference/#cartointeractivityfeatureclick) in our documentation.
 
 ![feature-click](images/training-v2-09-feature-click.gif)

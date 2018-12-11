@@ -5,6 +5,7 @@
 *CARTO VL offers functions that do the work of styling features by attribute behind-the-scenes. In this section we'll demonstrate how, but for more detailed information see our Data Driven Styling guides [Part 1](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/) and [Part 2](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-2/).*
 
 ## Create a Basic Map
+
 For this section let's start with a map of UK elections. Leave the `viz` object empty for this step:
 
 ```html
@@ -36,7 +37,7 @@ For this section let's start with a map of UK elections. Leave the `viz` object 
   </style>
 </head>
 
-<body>  
+<body>
   <div id="map"></div>
 
   <script>
@@ -71,7 +72,7 @@ This is election data, and we'd like to show which party won the election in eac
 
 Since we know the names of the parties in that column, we can use them as categories. To show our map viewers who won, we can make [a *categorical* map](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#categorical-data): define a bucket (or bin) for each category. Then we can classify each polygon according to the bucket it belongs to.
 
-CARTO VL offers [a ramp() function](https://carto.com/developers/carto-vl/reference/#cartoexpressionsramp) that will assign colors to categories for us. We just need to define the categories and colors first, using the [buckets() function](https://carto.com/developers/carto-vl/reference/#cartoexpressionsbuckets). Then we can use both functions inside an expression to define our map layer's color property. For a more detailed explanation of `ramp` check [this guide](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#what-is-a-ramp). 
+CARTO VL offers [a ramp() function](https://carto.com/developers/carto-vl/reference/#cartoexpressionsramp) that will assign colors to categories for us. We just need to define the categories and colors first, using the [buckets() function](https://carto.com/developers/carto-vl/reference/#cartoexpressionsbuckets). Then we can use both functions inside an expression to define our map layer's color property. For a more detailed explanation of `ramp` check [this guide](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#what-is-a-ramp).
 
 Add a color and strokeColor to your `viz`:
 
@@ -84,9 +85,9 @@ const viz = new carto.Viz(`
 
 * The first parameter in the `buckets` function is the name of the column containing our categories. [It needs to be prepended with a $](https://carto.com/developers/carto-vl/guides/style-with-expressions/#access-dataset-feature-properties).
 * The second `buckets` parameter is an array of unique category names that are found in that column. Since we're working with text values they need to be enclosed in quotes.
-* The `ramp` function takes the whole `buckets` function as it's first parameter. 
+* The `ramp` function takes the whole `buckets` function as it's first parameter.
 * The second `ramp` parameter is an array of colors. Their order corresponds with the order of our bucket categories, so `Conservative Party` polygons will be blue.
-* We don't need quotes around [named colors](https://htmlcolorcodes.com/color-names/). 
+* We don't need quotes around [named colors](https://htmlcolorcodes.com/color-names/).
 
 *Now our map should look like this:*
 
@@ -121,14 +122,14 @@ const viz = new carto.Viz(`
 `);
 ```
 
-Notice how we don't need to specify buckets in the color property's expression. 
+Notice how we don't need to specify buckets in the color property's expression.
 
 When we don't specify buckets, we're creating an *unclassed map*. Each point is colored according to how much of an attribute it contains, instead of being put into a discrete category and given that category's assigned color.
 
 ![pop-density-2](images/training-v2-04-density-ramp.png)
-  
+
 * The points with lowest population density are colored black, and the points with highest population density are colored yellow.
-* But since this is an unclassed map, most points have values that fall between the lowest number and highest number. They are assigned a color that falls on a gradient between black and yellow. That's why we see gray points, and dark yellow points. 
+* But since this is an unclassed map, most points have values that fall between the lowest number and highest number. They are assigned a color that falls on a gradient between black and yellow. That's why we see gray points, and dark yellow points.
 
 Check [this guide](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-1/#numeric-data) for more information about using `ramp` with numeric data. We're using named colors in this expression, but you can use [other color formats for data-driven styling](https://carto.com/developers/carto-vl/guides/data-driven-visualizations-part-2/#color-values).
 
@@ -143,7 +144,6 @@ color: ramp($dn, [green, yellow, red])
 *Notice the difference:*
 
 ![pop-density-3](images/training-v2-04-density-ramp-3.png)
-
 
 ## Classify a Numeric Property for Better Perception
 
@@ -160,8 +160,8 @@ const viz = new carto.Viz(`
 * Notice we're using a function for the `ramp` function's first parameter: `globalQuantiles($dn, 3)`
   * check our documentation for other available classification types, like Standard Deviation: [globalStandardDev](https://carto.com/developers/carto-vl/reference/#cartoexpressionsglobalstandarddev)
 * The [globalQuantiles function](https://carto.com/developers/carto-vl/reference/#cartoexpressionsglobalquantiles) takes two parameters: the column containing the data, and the number of buckets you want to divide the data into.
-* `global` is important here. That means all of the data in this map is being considered during the classification calculation. That's different than [viewportQuantiles](https://carto.com/developers/carto-vl/reference/#cartoexpressionsviewportquantiles). 
-* The `viewportQuantiles` function only uses a subset of your data. 
+* `global` is important here. That means all of the data in this map is being considered during the classification calculation. That's different than [viewportQuantiles](https://carto.com/developers/carto-vl/reference/#cartoexpressionsviewportquantiles).
+* The `viewportQuantiles` function only uses a subset of your data.
   * The subset can be all of the data in your map's viewport. That means your data gets re-bucketed as you zoom in and out of the map, because on zoom more or less data is contained in the viewport.
   * You can also define the subset of data using [filter](https://carto.com/developers/carto-vl/reference/#cartoexpressionsclustertime).
 
@@ -169,9 +169,9 @@ const viz = new carto.Viz(`
 
 ![global-quantiles](images/training-v2-04-global-quantiles.png)
 
-
 ## The `Others` Category
-Sometimes you might only be interested in showing some categories, instead of all of them. CARTO VL lets you specify the categories you want, and bucket the rest into an "Other" category. "Other" is also helpful if you have some null values in your data. 
+
+Sometimes you might only be interested in showing some categories, instead of all of them. CARTO VL lets you specify the categories you want, and bucket the rest into an "Other" category. "Other" is also helpful if you have some null values in your data.
 
 Let's use the election data again to illustrate this. Change your map object's zoom and center, change your source, and apply the style we used previously:
 
@@ -191,7 +191,7 @@ const viz = new carto.Viz(`
 `);
 ```
 
-Notice that we've only specified blue and red colors in the `color` expression. That works for identifying the polygons where the Labour Party or the Conservative Party won, but we have some polygons where neither of those parties won (or there wasn't any winning party data). 
+Notice that we've only specified blue and red colors in the `color` expression. That works for identifying the polygons where the Labour Party or the Conservative Party won, but we have some polygons where neither of those parties won (or there wasn't any winning party data).
 
 Our system categorizes these polygons as "Other", and automatically gives them a gray color. We can change that though. You can use an optional third parameter in the buckets function to pick a color for the "Other" category, like white. Update the `color` property to this:
 
@@ -200,7 +200,6 @@ color: ramp(buckets($winner, ["Conservative Party", "Labour Party"]), [blue, red
 ```
 
 ![other-category](images/training-v2-04-election-other.png)
-
 
 ## Find the Most Common Categories
 
@@ -228,16 +227,16 @@ const viz = new carto.Viz(`
 ```
 
 We're not specifying categories by name here, since we don't know ahead of time what types of accidents are in this dataset. We don't need to! The top function takes two parameters:
+
 * The name of the column containing our categories, prepended with a `$`.
 * The number of top categories we want to find. Here we're finding the top 3 most common railroad accidents.
-* The `ramp` function takes the `top` function as it's first parameter. The other two `ramp` function parameters are ones we saw earlier: 
+* The `ramp` function takes the `top` function as it's first parameter. The other two `ramp` function parameters are ones we saw earlier:
   * An array of colors, one for each of our 3 categories
   * A color for our "Other" category. All categories that are not one of the top 3 are considered "Other".
 
 *Here's how the top 3 categories are visualized according to our color expression (we've zoomed into the NorthWest):*
 
 ![top-categories](images/training-v2-04-top-cat.png)
-
 
 ## Showing All Categories for Exploratory Analysis
 
@@ -247,8 +246,9 @@ You can also use CARTO VL to explore all the categories that are in your attribu
 color: ramp($accident_type, [#7F3C8D, #11A579, #3969AC, #F2B701, #E73F74, #80BA5A])
 ```
 
-Notice we don't need to specify an accident type or the number of categories we want to visualize. The number of categories is taken from the number of colors we define in the `ramp` function's second parameter. This will detect the six categories, and any others will be bucketed into "Other". 
-* We haven't defined a color for "Other", so it will be gray by default. 
+Notice we don't need to specify an accident type or the number of categories we want to visualize. The number of categories is taken from the number of colors we define in the `ramp` function's second parameter. This will detect the six categories, and any others will be bucketed into "Other".
+
+* We haven't defined a color for "Other", so it will be gray by default.
 * These categories have no hierarchy. They are also not necessarily the most common.
 
 ![six-categories](images/training-v2-04-six-cat.png)
@@ -256,6 +256,7 @@ Notice we don't need to specify an accident type or the number of categories we 
 ## CARTOColors
 
 CARTO provides cartographer-designed color palettes called CARTOColors. They were optimized to work with a variety of data.
+
 * Sequential schemes for orderable or numeric data.
 * Diverging schemes to highlight a midpoint in your data, and show a hierarchy for values below and above that.
 * Qualitative schemes to show categories, while making sure that they have equal importance.
@@ -324,7 +325,8 @@ width: ramp($total_damage, [0, 50])
 
 There's a number-type column named `total_damage` in the rail safety dataset. It contains the amount of damage the accident caused in dollars.
 
-We're using `ramp` again, but here it sizes each point by how much damage (in dollars) it's accident caused. The more costly the damage the larger the point will be. The `ramp` function's second parameter is an array that defines our range of point sizes. 
+We're using `ramp` again, but here it sizes each point by how much damage (in dollars) it's accident caused. The more costly the damage the larger the point will be. The `ramp` function's second parameter is an array that defines our range of point sizes.
+
 * Accidents with the lowest amount of damage get a marker width of 0 pixels.
 * Accidents with the highest amount of damage get a marker width of 50 pixels.
 
@@ -336,9 +338,9 @@ Some of the accidents are a little hard to see. We can improve that in the next 
 
 ## Size Perception
 
-Right now our circle sizes are scaling up linearly. 
+Right now our circle sizes are scaling up linearly.
 
-For example, let's say we have another dataset where the lowest `total_damage` is $0, and the highest is $100, a point with `total_damage` of $50 is halfway between them. 
+For example, let's say we have another dataset where the lowest `total_damage` is $0, and the highest is $100, a point with `total_damage` of $50 is halfway between them.
 
 Since lowest-damage points get a width of 0 and highest-damage points get a width of 50, the point with `total_damage` exactly halfway between those gets a width halfway between 0 and 50, or 25.
 
@@ -368,9 +370,10 @@ const viz = new carto.Viz(`
 `);
 ```
 
-Just like in the other `ramp` functions we saw, the second parameter is an array of values. This time instead of colors we are using key words for [maki icons](https://www.mapbox.com/maki-icons/). 
+Just like in the other `ramp` functions we saw, the second parameter is an array of values. This time instead of colors we are using key words for [maki icons](https://www.mapbox.com/maki-icons/).
 
-Instead of maki icon key words you can use custom image urls. 
+Instead of maki icon key words you can use custom image urls.
+
 * The url needs to point to a publicly available .jpg, .png or .svg file.
 * Put each url inside quotes.
 
