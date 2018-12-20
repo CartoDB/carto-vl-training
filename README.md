@@ -1,6 +1,11 @@
 # CARTO VL training
 
-Welcome to the CARTO VL training. This repository will support a training session covering several CARTO VL topics. It will lead you from the basics of creating a map to advanced techniques for developing powerful interactive visualizations. After reading this guide, you will be able to create your first CARTO VL map. We also link to the [CARTO VL documentation](https://carto.com/developers/carto-vl/) and [guides](https://carto.com/developers/carto-vl/guides/introduction/) throughout, so you have resources for further information. After you go through the training, please send us your feedback about the session so we can improve the documentation and guides.
+Welcome to the CARTO VL training. This repository will support a training session covering several CARTO VL topics. It will lead you from the basics of creating a map to advanced techniques for developing powerful interactive visualizations. 
+
+We recommend reviewing these slides first for a quick overview of how and why CARTO VL is useful for you: [http://bit.ly/carto-vl-training](http://bit.ly/carto-vl-training)
+
+
+After completing these training modules, you will be able to create your first CARTO VL map. We also link to the [CARTO VL documentation](https://carto.com/developers/carto-vl/) and [guides](https://carto.com/developers/carto-vl/guides/introduction/) throughout, so you have resources for further information. After you go through the training, please send us your feedback about the session so we can improve the documentation and guides.
 
 ## What is CARTO VL?
 
